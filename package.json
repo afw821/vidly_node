@@ -1,0 +1,22 @@
+{
+  "name": "vidly_node",
+  "version": "1.0.0",
+  "description": "A video rental app using node.js for the backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afw821/vidly_node.git"
+  },
+  "author": "Alex Watkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afw821/vidly_node/issues"
+  },
+  "homepage": "https://github.com/afw821/vidly_node#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
