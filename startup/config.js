@@ -1,6 +1,7 @@
 const config = require('config');
 
 module.exports = function () {
+    
     //have to set this environment variable first
     //if it doesn't exist then exit the program
     //export vidly_jwtPrivateKey=mySecureKey

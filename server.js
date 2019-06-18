@@ -3,11 +3,13 @@ const app = express();
 
 require('./startup/routes')(app);
 require('./startup/db')();
-require('./startup/config');
+require('./startup/config')();
 
-const port = process.env.PORT || 8888;
-const server = app.listen(port, function () {
-    console.log(`App listening on PORT: ${port}`);
+const PORT = process.env.PORT || 8888;
+const environment = `Environment: ${process.env.NODE_ENV}`;
+console.log(environment);
+const server = app.listen(PORT, function () {
+    console.log(`App listening on PORT: ${PORT}`);
 });
 
 module.exports = server;
