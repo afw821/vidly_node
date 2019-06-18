@@ -21,3 +21,7 @@ function validateGenre(genre) {
     };
     return Joi.validate(genre, schema);
 }
+//export and use obj destructuring to require
+module.exports.Genre = Genre;
+module.exports.genreSchema = genreSchema;
+module.exports.validate = validateGenre;
