@@ -11,7 +11,7 @@ router.get('/', async function (req, res) {
     res.send(rentals);
 });
 //post a rental AKA checkout or BUYING PRODUCTS
-router.post('/', async function(req,res) {
+router.post('/', async function (req, res) {
     //validate the request client sends
     const result = validate(req.body);
     //if error return 400 bad request to the client
@@ -25,4 +25,26 @@ router.post('/', async function(req,res) {
     if (!movie) return res.status(400).send('Invalid movie.');
     //check to see if movie is in stock if not return not in stock to the client
     if (movie.numberInStock === 0) return res.status(400).send('Movie not in stock.');
+    //create a new rental object
+
+    let rental = new Rental({
+        customer: {
+            //keys here are NEW
+            //Values are from the retrieved customer object
+            _id: customer._id,
+            name: customer.name,
+            phone: customer.phone
+        },
+        movie: {
+            _id: movie._id,
+            title: movie.title,
+            dailyRentalRate: movie.dailyRentalRate
+        }
+    });
+    rental = await rental.save();
+    //decrease the  number of movies in stock by 1
+    movie.numberInStock--;
+    movie.save();
+
+    res.send(rental);
 });
