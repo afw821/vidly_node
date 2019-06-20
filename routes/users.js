@@ -6,7 +6,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 
 //get information about the current user
-router.get('/me', async function (req, res) {
+router.get('/me', auth, async function (req, res) {
     //more secure than passing id as a parameter
     //exclude password property
     const user = await User.findById(req.user._id).select('-password');

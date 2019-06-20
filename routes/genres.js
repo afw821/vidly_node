@@ -1,7 +1,8 @@
 const { Genre, validate } = require('../models/genre');
 const express = require('express');
 const router = express.Router();
-
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 //get all genres
 router.get('/', async function (req, res) {
     try{
@@ -23,7 +24,7 @@ router.get('/:id', async function (req, res) {
     res.send(genre);
 });
 //post a genre
-router.post('/', async function (req, res) {
+router.post('/', auth, async function (req, res) {
     //validate the req.body object
     const result = validate(req.body);
     //if invalid return a 404 error to the client
@@ -39,7 +40,7 @@ router.post('/', async function (req, res) {
     res.send(genre);
 });
 //put(replace) route
-router.put('/:id', async function (req, res) {
+router.put('/:id', auth,  async function (req, res) {
     //validate user input
     const result = validate(req.body);
     //if invalid return 400 bad request
@@ -58,7 +59,7 @@ router.put('/:id', async function (req, res) {
     //send response to the client
     res.send(genre);
 });
-router.delete('/:id', async function (req, res) {
+router.delete('/:id', [auth,admin] , async function (req, res) {
     const genre = await Genre.findByIdAndRemove( req.params.id);
     //if genre doesn't exist send 404 error to the client
     if (!genre) {
