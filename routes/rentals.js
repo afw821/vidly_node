@@ -48,3 +48,13 @@ router.post('/', async function (req, res) {
 
     res.send(rental);
 });
+//get a rental by the id
+router.get('/:id', async (req, res) => {
+    const rental = await Rental.findById(req.params.id);
+
+    if (!rental) return res.status(404).send('The rental with the given ID was not found.');
+
+    res.send(rental);
+});
+
+module.exports = router;
