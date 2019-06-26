@@ -3,8 +3,13 @@ const express = require('express');
 const router = express.Router();
 //get all genres
 router.get('/', async function (req, res) {
-    const customers = await Customer.find();
-    res.send(customers);
+    try{
+        const customers = await Customer.find();
+        res.send(customers);
+    }catch(ex) {
+        console.log('FATAL ERROR::', ex);
+    }
+   
 });
 //post a course
 router.post('/', async function (req, res) {
