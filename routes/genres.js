@@ -1,6 +1,6 @@
-const { Genre, validate } = require('../models/genre');
 const express = require('express');
 const router = express.Router();
+const { Genre, validate } = require('../models/genre');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 //get all genres
@@ -24,7 +24,7 @@ router.get('/:id', async function (req, res) {
     res.send(genre);
 });
 //post a genre
-router.post('/', auth, async function (req, res) {
+router.post('/',auth, async function (req, res) {
     //validate the req.body object
     const result = validate(req.body);
     //if invalid return a 404 error to the client
@@ -33,7 +33,7 @@ router.post('/', auth, async function (req, res) {
         return;
     }
     //define the object that you want to post(push to array)
-    let genre = new Genre({ name: req.body.name })
+    let genre = new Genre({name: req.body.name})
     //else push the course object to the course array
     genre = await genre.save();
     //send the response back to the client

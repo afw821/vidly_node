@@ -7,12 +7,12 @@ const rentals = require('../routes/rentals');
 const users = require('../routes/users');
 const auth = require('../routes/auth');
 module.exports = function (app) {
+    app.use(express.json());
+    app.use(express.static(path.join(__dirname, 'public')));
     app.use('/api/auth', auth);
     app.use('/api/users', users);
     app.use('/api/rentals', rentals);
     app.use('/api/genres', genres);
     app.use('/api/movies', movies);
     app.use('/api/customers', customers);
-    app.use(express.json());
-    app.use(express.static(path.join(__dirname, 'public')));
 }
