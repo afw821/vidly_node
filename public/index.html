@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
+        crossorigin="anonymous" />
+    <title>Hello World!</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="user-email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" id="user-name" placeholder="Enter Name">
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="first-password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Re-Enter Password</label>
+                <input type="password" class="form-control verify-password" id="user-password" placeholder="Confirm Password">
+            </div>
+            <button type="button" id="register" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#register').on('click', async function () {
+                try {
+                    const firstPassword = $('#first-password').val().trim();
+                    const password = $('#user-password').val().trim();
+                    const email = $('#user-email').val().trim();
+                    const name = $('#user-name').val().trim();
+                    const isAdmin = false;
+                    console.log(email);
+                    console.log(name);
+                    //alert('register clicked');
+                    let doesPasswordMatch = firstPassword === password;
+
+                    if (!doesPasswordMatch) {
+                        alert("Passwords do not match");
+                        return;
+                    }
+
+                    const result = await $.ajax({
+                        url: '/api/users',
+                        method: 'POST',
+                        data: {
+                            name: name,
+                            email: email,
+                            password: password,
+                            isAdmin: isAdmin
+                        }
+                    });
+                    console.log(result);
+                } catch (ex) {
+                    console.log('Fatal Error::', ex);
+                }
+
+
+
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

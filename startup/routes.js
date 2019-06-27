@@ -6,7 +6,9 @@ const movies = require('../routes/movies');
 const rentals = require('../routes/rentals');
 const users = require('../routes/users');
 const auth = require('../routes/auth');
+//const html = require('../routes/html');
 module.exports = function (app) {
+    app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
     app.use(express.static(path.join(__dirname, 'public')));
     app.use('/api/auth', auth);

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 //authorization--user has permission to access resource or not
 const auth = require('../middleware/auth');
+const path = require('path');
 
 //get information about the current user
 router.get('/me', auth, async function (req, res) {
@@ -14,9 +15,12 @@ router.get('/me', auth, async function (req, res) {
 });
 //register a new user
 router.post('/', async function (req, res) {
+    console.log(req.body);
     //validate the user input
     const result = validate(req.body);
+    console.log(result);
     if (result.error) {
+        console.log('made it here');
         res.status(404).send(result.error.details[0].message);
         return;
     }
@@ -41,10 +45,7 @@ router.post('/', async function (req, res) {
     const token = user.generateAuthToken();
     //after generating the token set it to the response header
     //exclude the password from being sent
-    res.header('x-auth-token', token).send({
-        name: user.name,
-        email: user.email
-    });
+    res.header('x-auth-token', token).sendFile(path.join(__dirname, '../public/home.html'))
 });
 
 module.exports = router;
