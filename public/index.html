@@ -7,19 +7,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
         crossorigin="anonymous" />
-    <title>Hello World!</title>
+    <title>Vidly</title>
 
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Vidly</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active registration" href="#">Register</a>
+                <a class="nav-item nav-link login" href="#">Login</a>
+
+            </div>
+        </div>
+    </nav>
     <div class="container">
-        <form>
+        <form class="account-register-form">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="user-email" aria-describedby="emailHelp" placeholder="Enter email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 <small id="email-validation" class="form-text email-validation" style="opacity:0.0; color:red;">Account
                     Already Registered With This Email!</small>
+                <small id="email-format-validation" class="form-text email-format-validation" style="opacity:0.0; color:red;">Email
+                    Address Must Be Valid!</small>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
@@ -58,18 +74,18 @@
                     const email = $('#user-email').val().trim();
                     const name = $('#user-name').val().trim();
                     const isAdmin = false;
-                    console.log(firstPassword.length);
-                    console.log(email);
-                    console.log(name);
-                    //alert('register clicked');
                     let doesPasswordMatch = firstPassword === password;
 
+                    if (firstPassword.length < 5 || password.length < 5) {
+                        $('.password-length-validation').css('opacity', '1.0');
+                        setTimeout(function () { $('.password-length-validation').css('opacity', '0.0'); }, 4000);
+                        return;
+                    }
                     if (!doesPasswordMatch) {
                         $('.password-match-validation').css('opacity', '1.0');
                         setTimeout(function () { $('.password-match-validation').css('opacity', '0.0'); }, 4000);
                         return;
                     }
-
                     const result = await $.ajax({
                         url: '/api/users',
                         method: 'POST',
@@ -81,9 +97,11 @@
                         }
                     });
                     console.log(result);
+                    if (result) {
+                        alert('Account Successfully Created!');
+                    }
                 } catch (ex) {
                     console.log('Fatal Error::', ex);
-
                     if (ex.responseText === 'User already registered') {
                         $('.email-validation').css('opacity', '1.0');
                         setTimeout(function () { $('.email-validation').css('opacity', '0.0'); }, 4000);
@@ -92,6 +110,12 @@
                     if (ex.responseText === '"name" length must be at least 5 characters long') {
                         $('.name-length-validation').css('opacity', '1.0');
                         setTimeout(function () { $('.name-length-validation').css('opacity', '0.0'); }, 4000);
+                        return;
+                    }
+                    if (ex.responseText === '"email" must be a valid email') {
+
+                        $('.email-format-validation').css('opacity', '1.0');
+                        setTimeout(function () { $('.email-format-validation').css('opacity', '0.0'); }, 4000);
                         return;
                     }
                 }
