@@ -15,10 +15,8 @@ router.get('/me', auth, async function (req, res) {
 });
 //register a new user
 router.post('/', async function (req, res) {
-    console.log(req.body);
     //validate the user input
     const result = validate(req.body);
-    console.log(result);
     if (result.error) {
         console.log('made it here');
         res.status(404).send(result.error.details[0].message);
@@ -45,7 +43,7 @@ router.post('/', async function (req, res) {
     const token = user.generateAuthToken();
     //after generating the token set it to the response header
     //exclude the password from being sent
-    res.header('x-auth-token', token).sendFile(path.join(__dirname, '../public/home.html'))
+    res.header('x-auth-token', token);
 });
 
 module.exports = router;

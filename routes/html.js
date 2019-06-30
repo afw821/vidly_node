@@ -1,9 +1,10 @@
 const path = require('path');
+const auth = require('../middleware/auth');
 module.exports = function(app) {
-    app.get('/login', (req, res) => {
+    app.get('/login', function (req, res) {
         res.sendFile(path.join(__dirname, '../public/index.html'));
     });
-    // app.get('/alexsoutdoor', (req, res) => {
-    //     res.sendFile(path.join(__dirname, '../public/home.html'));
-    // });
+    app.get('/homepage/:token', auth, function (req, res) {
+        res.sendFile(path.join(__dirname, '../public/home.html'));
+    });
 };

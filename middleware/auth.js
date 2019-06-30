@@ -3,8 +3,14 @@ const config = require('config');
 //this middleware function protects certain routes
 //In this case post genre route
 function auth(req, res, next) {
+    console.log('req body', req.body);
+    console.log(req.params);
+    console.log(req.params.token)
+    //console.log('auth req', req);  
     //set token to the request header
-    const token = req.header('x-auth-token');
+    //const token = req.header('x-auth-token');
+    const token = req.params.token
+    console.log(token);
     //if the JWT doesn't exist send unauthorized
     if (!token) return res.status(401).send('Access denied. No token provided');
 

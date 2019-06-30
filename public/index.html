@@ -27,6 +27,7 @@
         </div>
     </nav>
     <div class="container">
+        <!-- Register Form -->
         <form class="account-register-form">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -56,6 +57,25 @@
                     Must Match!</small>
             </div>
             <button type="button" id="register" class="btn btn-primary">Register</button>
+        </form>
+        <!-- Login Form -->
+        <form class="account-login-form" style="display:none;">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="user-email-login" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp-login" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="first-password-login" placeholder="Password">
+                <small id="invalid-email-password" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
+                    Invalid Email or Password!</small>
+                <small id="password-length-login" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
+                    Password Must Be 5 Characters In Length!</small>
+                <small id="valid-email-login" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
+                    Email Must Be A Valid Email!</small>
+            </div>
+            <button type="button" id="login-user" class="btn btn-primary">Login</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -117,6 +137,49 @@
                         $('.email-format-validation').css('opacity', '1.0');
                         setTimeout(function () { $('.email-format-validation').css('opacity', '0.0'); }, 4000);
                         return;
+                    }
+                }
+            });
+
+            //switch to the login screen
+            $('.login').on('click', function () {
+                $('.account-register-form').hide();
+                $('.account-login-form').show();
+            });
+
+            $('#login-user').on('click', async function () {
+                const email = $('#user-email-login').val();
+                const password = $('#first-password-login').val();
+                try {
+                    const token = await $.ajax({
+                        url: '/api/auth',
+                        method: 'POST',
+                        data: {
+                            email: email,
+                            password: password
+                        }
+                    });
+
+                    if (token) {
+                        localStorage.setItem('token', token)
+                        window.location.href = `/homepage/${token}`;
+                    }
+                } catch (ex) {
+                    console.log('Fatal Error::', ex.responseText);
+                    switch (ex.responseText) {
+                        case 'invalid email or password':
+                            //alert('invalid email or password');
+                            $('#invalid-email-password').css('opacity', '1.0');
+                            setTimeout(function () { $('#invalid-email-password').css('opacity', '0.0'); }, 4000);
+                            break;
+                        case '"password" length must be at least 5 characters long':
+                            //alert('password must be at least 5 characters long');
+                            $('#password-length-login').css('opacity', '1.0');
+                            setTimeout(function () { $('#password-length-login').css('opacity', '0.0'); }, 4000);
+                            break;
+                        case '"email" must be a valid email':
+                            $('#valid-email-login').css('opacity', '1.0');
+                            setTimeout(function () { $('#valid-email-login').css('opacity', '0.0'); }, 4000);
                     }
                 }
             });
