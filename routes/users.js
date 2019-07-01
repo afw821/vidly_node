@@ -43,7 +43,8 @@ router.post('/', async function (req, res) {
     const token = user.generateAuthToken();
     //after generating the token set it to the response header
     //exclude the password from being sent
-    res.header('x-auth-token', token);
+    //res.header('x-auth-token', token);
+    res.send(user);
 });
 
 module.exports = router;
