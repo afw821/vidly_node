@@ -20,6 +20,7 @@ function auth(req, res, next) {
         //ABOVE WILL BE DECODED PAYLOAD
         //Decoded user object from Sign method
         req.user = decoded;
+        res.token = token
         //pass control to the next middleware function
         next();
     } catch (ex) {

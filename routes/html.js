@@ -5,7 +5,17 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, '../public/index.html'));
     });
     app.get('/homepage', auth, function (req, res) {
-        res.sendFile(path.join(__dirname, '../public/home.html'));
+    
+        const token = res.token;
+    
+        var options = {
+            headers: { 'x-auth-token' : token }
+        }
+        res.sendFile(path.join(__dirname, '../public/home.html'), options, function(err) {
+            if(err) {
+                console.log(err);
+            }
+        });
         //res.redirect('/login');
     });
 };

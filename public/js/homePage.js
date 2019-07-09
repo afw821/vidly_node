@@ -1,4 +1,4 @@
-console.log(StateManager.GetData('UserName'));
+
 $(document).ready(async function () {
     
     

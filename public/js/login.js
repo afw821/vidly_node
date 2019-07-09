@@ -78,7 +78,7 @@ $(document).ready(function () {
                     const user = await $.ajax({
                         url: '/api/users/me',
                         method: 'GET',
-                        beforeSend: function (xhr) { xhr.setRequestHeader('x-auth-token', token); },
+                        headers: { 'x-auth-token': token }
                     });
                     var userId = user._id;
                     var userName = user.name;
@@ -90,7 +90,7 @@ $(document).ready(function () {
                     const moviePage = await $.ajax({
                         url: '/homepage',
                         method: 'GET',
-                        beforeSend: function (xhr) { xhr.setRequestHeader('x-auth-token', token); },
+                        headers: { 'x-auth-token': token }
                     });
                     //console.log('result', result);
                     //window.location.href = '/homepage'
