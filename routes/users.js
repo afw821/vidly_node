@@ -18,7 +18,7 @@ router.post('/', async function (req, res) {
     //validate the user input
     const result = validate(req.body);
     if (result.error) {
-        console.log('made it here');
+       
         res.status(404).send(result.error.details[0].message);
         return;
     }

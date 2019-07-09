@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    console.log('login js working');
     $('#register').on('click', async function () {
         try {
             const firstPassword = $('#first-password').val().trim();
@@ -74,8 +73,32 @@ $(document).ready(function () {
             });
 
             if (token) {
-                localStorage.setItem('token', token)
-                window.location.href = `/homepage/${token}`;
+
+                try {
+                    const user = await $.ajax({
+                        url: '/api/users/me',
+                        method: 'GET',
+                        beforeSend: function (xhr) { xhr.setRequestHeader('x-auth-token', token); },
+                    });
+                    var userId = user._id;
+                    var userName = user.name;
+                    var userEmail = user.email;
+                    var isUserAdmin = user.isAdmin;
+
+                    StateManager.SetData('UserName', 'Alex');
+
+                    const moviePage = await $.ajax({
+                        url: '/homepage',
+                        method: 'GET',
+                        beforeSend: function (xhr) { xhr.setRequestHeader('x-auth-token', token); },
+                    });
+                    //console.log('result', result);
+                    //window.location.href = '/homepage'
+                    $('.login-body').replaceWith(moviePage);
+                } catch (ex) {
+                    console.log(ex);
+                }
+
             }
         } catch (ex) {
             console.log('Fatal Error::', ex.responseText);

@@ -1,15 +1,18 @@
+console.log(StateManager.GetData('UserName'));
 $(document).ready(async function () {
-    console.log('home page js');
+    
+    
+
     const movies = await $.ajax({
         url: '/api/movies',
         method: 'GET'
     });
-    console.log(movies);
+    //console.log(movies);
     $(movies).each(function (i, e) {
         const dailyRentalRate = movies[i].dailyRentalRate;
         const numberInStock = movies[i].numberInStock;
         const movieName = movies[i].title;
-        console.log(dailyRentalRate);
+        //console.log(dailyRentalRate);
         const movieCard = $('<div>', {
             class: 'movie-card card',
             style: 'width: 18rem;',

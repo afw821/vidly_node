@@ -1,4 +1,4 @@
-const StateManager = {
+var StateManager = {
     _data:{},
     SetData: function (key, value) {
         this._data[key] = value
