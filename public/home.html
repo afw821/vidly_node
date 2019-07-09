@@ -27,17 +27,8 @@
         </div>
     </nav>
     <div class="container">
-        <div class="movie-container">
-            <div class="movie-card card" style="width: 18rem;">
-                <div class="movie-card-body card-body">
-                    <h5 class="movie-card-title card-title">Movie Name</h5>
-                    <p class="card-text">Only 5 Left In Stock</p>
-                    <p class="card-text">$1.09 / Day</p>
-                    
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
+        <div class="movie-container"></div>
+
 
 
 
@@ -48,60 +39,54 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
         crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(async function () {
+    <script src="./js/StateManager.js"></script>
+    <script src="./js/homePage.js">
+        // $(document).ready(async function () {
 
-            const movies = await $.ajax({
-                url: '/api/movies',
-                method: 'GET'
-            });
-            console.log(movies);
-            $(movies).each(function (i, e) {
-                const dailyRentalRate = movies[i].dailyRentalRate;
-                const numberInStock = movies[i].numberInStock;
-                const movieName = movies[i].title;
-                console.log(dailyRentalRate);
-                // <div class="movie-container">
-                //     <div class="movie-card card" style="width: 18rem;">
-                //         <div class="movie-card-body card-body">
-                //             <h5 class="movie-card-title card-title">Movie Name</h5>
-                //             <p class="card-text">Only 5 Left In Stock</p>
-                //             <p class="card-text">$1.09 / Day</p>
+        //     const movies = await $.ajax({
+        //         url: '/api/movies',
+        //         method: 'GET'
+        //     });
+        //     console.log(movies);
+        //     $(movies).each(function (i, e) {
+        //         const dailyRentalRate = movies[i].dailyRentalRate;
+        //         const numberInStock = movies[i].numberInStock;
+        //         const movieName = movies[i].title;
+        //         console.log(dailyRentalRate);
+        //         const movieCard = $('<div>', {
+        //             class: 'movie-card card',
+        //             style: 'width: 18rem;',
+        //         });
+        //         const movieCardBody = $('<div>', {
+        //             class: 'movie-card-body card-body',
+        //             appendTo: movieCard
+        //         });
+        //         const h5 = $('<h5>', {
+        //             class: 'movie-card-title card-title',
+        //             text: movieName,
+        //             appendTo: movieCardBody
+        //         });
+        //         const inStock = $('<p>', {
+        //             class: 'card-text',
+        //             text: `Only ${numberInStock} Left In Stock!`,
+        //             appendTo: h5
+        //         });
+        //         const price = $('<div>', {
+        //             class: 'card-text',
+        //             text: `$${dailyRentalRate} / Day`,
+        //             appendTo: h5
+        //         });
+        //         const button = $('<a>', {
+        //             class: 'btn btn-primary',
+        //             text: 'Add To Cart',
+        //             appendTo: h5
+        //         });
+        //         $('.movie-container').append(movieCard);
+        //     });
 
-                //             <a href="#" class="btn btn-primary">Add To Cart</a>
-                //         </div>
-                //     </div>
-                const movieCard = $('<div>', {
-                    class: 'movie-card card',
-                    style: 'width: 18rem;',                   
-                });
-                const movieCardBody = $('<div>', {
-                    class: 'movie-card-body card-body',
-                    appendTo: movieCard
-                });
-                const h5 = $('<h5>', {
-                    class: 'movie-card-title card-title',
-                    text: movieName,
-                    appendTo: movieCardBody
-                });
-                const inStock = $('<p>', {
-                    class:'card-text',
-                    text: `Only ${numberInStock} Left In Stock!`,
-                    appendTo: h5
-                });
-                const price = $('<div>', {
-                    class: 'card-text',
-                    text: `$${dailyRentalRate} / Day`,
-                    appendTo: h5
-                });
-                const button = $('<a>', {
-                    class: 'btn btn-primary',
-                });
-                $('.movie-container').append(movieCard);
-            });
-        
-                });
+        // });
     </script>
+
 </body>
 
 </html>
