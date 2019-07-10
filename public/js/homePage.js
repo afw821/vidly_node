@@ -1,18 +1,35 @@
 
 $(document).ready(async function () {
-    
-    
+    const token = localStorage.getItem('x-auth-token');
 
+    //---------------------------------------------------------//
+    //GET CURRENT USER
+    //--------------------------------------------------------//
+
+    const user = await $.ajax({
+        url: '/api/users/me',
+        method: 'GET',
+        headers: { 'x-auth-token': token }
+    });
+    console.log(user);
+    var userId = user._id;
+    var userName = user.name;
+    var userEmail = user.email;
+    var isUserAdmin = user.isAdmin;
+    
+    //---------------------------------------------------------//
+    //GET ALL MOVIES FROM THE DB AND BUILD OUT THE GRID
+    //--------------------------------------------------------//
     const movies = await $.ajax({
         url: '/api/movies',
         method: 'GET'
     });
-    //console.log(movies);
+
     $(movies).each(function (i, e) {
         const dailyRentalRate = movies[i].dailyRentalRate;
         const numberInStock = movies[i].numberInStock;
         const movieName = movies[i].title;
-        //console.log(dailyRentalRate);
+
         const movieCard = $('<div>', {
             class: 'movie-card card',
             style: 'width: 18rem;',
