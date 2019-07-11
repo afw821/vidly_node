@@ -16,7 +16,7 @@ $(document).ready(async function () {
     var userName = user.name;
     var userEmail = user.email;
     var isUserAdmin = user.isAdmin;
-    
+    $('.welcome-label').text(`Welcome ${userName}!`);
     //---------------------------------------------------------//
     //GET ALL MOVIES FROM THE DB AND BUILD OUT THE GRID
     //--------------------------------------------------------//
@@ -61,4 +61,12 @@ $(document).ready(async function () {
         $('.movie-container').append(movieCard);
     });
 
+    //---------------------------------------------------------//
+    //LOGOUT A USER
+    //--------------------------------------------------------//
+
+    $('.logout-user').on('click', function () {
+        localStorage.removeItem('x-auth-token');
+        window.location.href = '/login';
+    });
 });

@@ -67,6 +67,15 @@ $(document).ready(function () {
     $('.login').on('click', function () {
         $('.account-register-form').hide();
         $('.account-login-form').show();
+        $(this).addClass('active');
+        $('.registration').removeClass('active');
+    });
+
+    $('.registration').on('click', function() {
+        $('.account-register-form').show();
+        $('.account-login-form').hide();
+        $(this).addClass('active');
+        $('.login').removeClass('active');
     });
     //-----------------------------------------//
         //ON CLICK FOR USER TO LOGIN//
@@ -94,7 +103,6 @@ $(document).ready(function () {
                         method: 'GET',
                         headers: { 'x-auth-token': token }
                     });
-                    //sessionStorage.setItem('x-auth-token', token);
                     localStorage.setItem('x-auth-token', token);
                     //console.log('result', result);
                     //window.location.href = '/homepage'

@@ -7,6 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
         crossorigin="anonymous" />
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/css/mdb.min.css" rel="stylesheet">
     <title>Vidly</title>
 
 </head>
@@ -26,9 +34,9 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container d-flex justify-content-center mt-5">
         <!-- Register Form -->
-        <form class="account-register-form">
+        <!-- <form class="account-register-form">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="user-email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -57,9 +65,57 @@
                     Must Match!</small>
             </div>
             <button type="button" id="register" class="btn btn-primary">Register</button>
+        </form> -->
+
+
+        <!-- Default form register -->
+        <form class="text-center border border-light p-5 account-register-form" style="width:600px; height:620px;">
+
+            <p class="h4 mb-4">Sign up</p>
+
+            <div class="form-row mb-4">
+                <div class="col-12">
+                    <!-- First name -->
+                    <input type="text" id="user-name" class="form-control" placeholder="Name">
+                    <small id="name-length-validation" class="form-text name-length-validation" style="opacity:0.0; color:red;">Name
+                        Must Be At Least 5 Characters In Length!</small>
+                </div>
+            </div>
+
+            <!-- E-mail -->
+            <input type="email" id="user-email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+            <small id="email-validation" class="form-text email-validation" style="opacity:0.0; color:red;">Account
+                Already Registered With This Email!</small>
+            <small id="email-format-validation" class="form-text email-format-validation" style="opacity:0.0; color:red;">Email
+                Address Must Be Valid!</small>
+
+            <!-- Password -->
+            <input type="password" id="first-password" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+            <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                At least 5 characters
+            </small>
+
+            <!-- Re Enter password -->
+            <input type="password" id="user-password" class="form-control verify-password" placeholder="Re-Enter Password"
+                aria-describedby="defaultRegisterFormPasswordHelpBlock">
+            <small id="password-length-validation" class="form-text password-length-validation" style="opacity:0.0; color:red;">Password
+                Must Be At Least 5 Characters In Length!</small>
+            <small id="password-match-validation" class="form-text password-match-validation" style="opacity:0.0; color:red;">Passwords
+                Must Match!</small>
+
+            <!-- Register -->
+            <button class="btn btn-info my-4 btn-block" type="button" id="register">Register</button>
+            <p>Already Have an Account?
+                <a href="">Login</a>
+            </p>
+
+
         </form>
+
+
+
         <!-- Login Form -->
-        <form class="account-login-form" style="display:none;">
+        <!-- <form class="account-login-form" style="display:none;">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="user-email-login" aria-describedby="emailHelp" placeholder="Enter email">
@@ -76,14 +132,73 @@
                     Email Must Be A Valid Email!</small>
             </div>
             <button type="button" id="login-user" class="btn btn-primary">Login</button>
+        </form> -->
+
+
+
+
+        <!-- Default form login -->
+        <form class="text-center border border-light p-5 account-login-form" style="display:none; width:600px;">
+
+            <p class="h4 mb-4">Sign in</p>
+
+            <!-- Email -->
+            <input type="email" id="user-email-login" class="form-control mb-4" placeholder="E-mail">
+
+
+            <!-- Password -->
+            <input type="password" id="first-password-login" class="form-control mb-4" placeholder="Password">
+
+            <!-- Sign in button -->
+            <button class="btn btn-info btn-block my-4" type="button" id="login-user">Sign in</button>
+            <small id="invalid-email-password" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
+                Invalid Email or Password!</small>
+            <small id="password-length-login" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
+                Password Must Be 5 Characters In Length!</small>
+            <small id="valid-email-login" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
+                Email Must Be A Valid Email!</small>
+
+            <!-- Register -->
+            <p>Not a member?
+                <a href="">Register</a>
+            </p>
+
         </form>
+        <!-- Default form login -->
+
+
     </div>
+    <footer class="page-footer font-small mt-3" style="background-color:#2E2E2E;">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href=""> Vidly.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/js/mdb.min.js"></script>
+
+
+
+
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
         crossorigin="anonymous"></script>
-    <script src="./js/StateManager.js"></script> 
+    <script src="./js/StateManager.js"></script>
     <script src="./js/login.js">  </script>
 </body>
 
