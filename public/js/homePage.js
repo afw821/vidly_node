@@ -69,4 +69,8 @@ $(document).ready(async function () {
         localStorage.removeItem('x-auth-token');
         window.location.href = '/login';
     });
+
+    $('.check-out-user').on('click', function () {
+        window.location.href = '/homepage/checkout';
+    });
 });

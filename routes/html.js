@@ -18,4 +18,8 @@ module.exports = function(app) {
         });
         //res.redirect('/login');
     });
+
+    app.get('/homepage/checkout', function (req, res) {
+        res.sendFile(path.join(__dirname, '../public/checkout.html'));
+    });
 };
