@@ -36,7 +36,7 @@ router.post('/', async function (req, res) {
 });
 //update route
 router.put('/:id', async function (req, res) {
-    try{
+    try {
         //validating the request body because we are sending a new movie object to update a current one
 
         const result = validate(req.body);
@@ -63,23 +63,37 @@ router.put('/:id', async function (req, res) {
         if (!movie) return res.status(404).send('The movie with the given ID was not found.');
         //else send movie to the client 
         res.send(movie);
-    }catch(ex) {
+    } catch (ex) {
         console.log('FATAL ERROR:::', ex);
     }
-    
+
+});
+//get movie by id
+router.get('/:id', async function (req, res) {
+    try {
+        const movie = await Movie.findById(req.params.id);
+
+        if (!movie) return res.status(404).send('The movie with thr requested id was not found!!');
+
+        res.send(movie);
+    } catch (ex) {
+        res.send(ex);
+        console.log('FATAL ERROR::', ex);
+    }
+
 });
 //delete route
 router.delete('/:id', async function (req, res) {
-    try{
+    try {
         const movie = await Movie.findByIdAndRemove(req.params.id);
         console.log(movie);
         if (!movie) return res.status(404).send('The movie with the given ID was not found.');
         console.log('Movie exists');
         res.send(movie);
-    }catch(ex) {
+    } catch (ex) {
         console.log('FATAL ERROR::', ex);
     }
- 
+
 });
 
 module.exports = router;
