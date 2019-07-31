@@ -62,7 +62,7 @@ $(document).ready(async function () {
       appendTo: h5
     });
     $(".movie-container").append(movieCard);
-
+    //Adding to Card we are setting the item in local staorage to be able to get it on checkout page
     $(`#${movieId}`).on("click", function () {
       const movieid = $(this).attr("data-movieId");
       const userid = $(this).attr("data-user-id");
@@ -85,7 +85,9 @@ $(document).ready(async function () {
   $(".check-out-user").on("click", function () {
     window.location.href = "/checkout";
   });
-
+  //---------------------------------------------------------//
+  //ADD MOVIES TO CART (SESSION STORAGE)
+  //--------------------------------------------------------//
   $('.add-to-cart').each(function (i, e) {
     console.log('this', this);
     $(this).on('click', function () {

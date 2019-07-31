@@ -1,12 +1,13 @@
 $(document).ready(async function () {
   const moviesInDBArray = [];
   const userSelectedMovies = [];
+  const movieObject = [];
   //get all movies to push their names into an array to match with items set in session storage
   const movies = await $.ajax({
     url: '/api/movies',
     method: 'GET'
   });
-  //loop through all ovies and push into array
+  //loop through all Movies and push into array
   $(movies).each(function (i, e) {
     const movieName = movies[i].title;
     moviesInDBArray.push(movieName);
@@ -26,8 +27,7 @@ $(document).ready(async function () {
 
   });
 
-  console.log('theses are the movies the user has selected to checkout', userSelectedMovies);
-
+  //console.log('theses are the movies the user has selected to checkout', userSelectedMovies);
   userSelectedMovies.forEach(async function (movie) {
     const movieIdForCheckout = sessionStorage.getItem(movie);
 
@@ -38,9 +38,34 @@ $(document).ready(async function () {
       url: `/api/movies/${movieIdForCheckout}`,
       method: 'GET'
     });
-    console.log('Movie Object', getMovieById);
+    //console.log('Movie Object', getMovieById);
+    const getMovieForCheckoutId = getMovieById._id;
+    const getMovieForCheckoutName = getMovieById.title;
+    const getMovieForCheckoutPrice = getMovieById.dailyRentalRate;
+    // console.log('id', getMovieForCheckoutId);
+    // console.log('name', getMovieForCheckoutName);
+    // console.log('price', getMovieForCheckoutPrice);
 
+
+    const movieGrid = `<div class="plan-selection">
+        <div class="plan-data">
+            <input id="question1" name="question" type="radio" class="with-font" value="sel" />
+            <label>${getMovieForCheckoutName}</label>
+            <p class="plan-text">
+                Genre: Action</p>
+            <span class="plan-price">${getMovieForCheckoutPrice}</span>
+        </div>
+    </div>`
+    $('.movie-grid-container').append(movieGrid);
   });
+
+
+
+
+
+
+
+
 
 
 
