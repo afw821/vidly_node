@@ -38,24 +38,47 @@ $(document).ready(async function () {
       url: `/api/movies/${movieIdForCheckout}`,
       method: 'GET'
     });
-    //console.log('Movie Object', getMovieById);
+
     const getMovieForCheckoutId = getMovieById._id;
     const getMovieForCheckoutName = getMovieById.title;
     const getMovieForCheckoutPrice = getMovieById.dailyRentalRate;
-    // console.log('id', getMovieForCheckoutId);
-    // console.log('name', getMovieForCheckoutName);
-    // console.log('price', getMovieForCheckoutPrice);
 
+    const movieGrid = $('<div>', {
+      class: 'plan-selection'
+    });
 
-    const movieGrid = `<div class="plan-selection">
-        <div class="plan-data">
-            <input id="question1" name="question" type="radio" class="with-font" value="sel" />
-            <label>${getMovieForCheckoutName}</label>
-            <p class="plan-text">
-                Genre: Action</p>
-            <span class="plan-price">${getMovieForCheckoutPrice}</span>
-        </div>
-    </div>`
+    const childDiv = $('<div>', {
+      class: 'plan-data',
+      appendTo: movieGrid
+    });
+
+    const h2 = $('<h2>', {
+      id: 'question2',
+      name: 'question',
+      // type: 'radio',
+      class: 'width-font',
+      value: 'sel',
+      appendTo: childDiv
+    });
+
+    const label = $('<label>', {
+      for: 'question2',
+      text: getMovieForCheckoutName,
+      appendTo: childDiv
+    });
+
+    const p = $('<p>', {
+      class: 'plan-text',
+      text: 'Genre: Action',
+      appendTo: childDiv
+    });
+
+    const span = $('<span>', {
+      class: 'plan-price',
+      text: `$${getMovieForCheckoutPrice}.99`,
+      appendTo: childDiv
+    });
+
     $('.movie-grid-container').append(movieGrid);
   });
 
