@@ -1,7 +1,6 @@
 $(document).ready(async function () {
   const moviesInDBArray = [];
   const userSelectedMovies = [];
-  const movieObject = [];
   //get all movies to push their names into an array to match with items set in session storage
   const movies = await $.ajax({
     url: '/api/movies',
@@ -38,7 +37,7 @@ $(document).ready(async function () {
       url: `/api/movies/${movieIdForCheckout}`,
       method: 'GET'
     });
-
+    const genre = getMovieById.genre.name;
     const getMovieForCheckoutId = getMovieById._id;
     const getMovieForCheckoutName = getMovieById.title;
     const getMovieForCheckoutPrice = getMovieById.dailyRentalRate;
@@ -55,7 +54,6 @@ $(document).ready(async function () {
     const h2 = $('<h2>', {
       id: 'question2',
       name: 'question',
-      // type: 'radio',
       class: 'width-font',
       value: 'sel',
       appendTo: childDiv
@@ -69,27 +67,17 @@ $(document).ready(async function () {
 
     const p = $('<p>', {
       class: 'plan-text',
-      text: 'Genre: Action',
+      text: `Genre: ${genre}`,
       appendTo: childDiv
     });
 
     const span = $('<span>', {
       class: 'plan-price',
-      text: `$${getMovieForCheckoutPrice}.99`,
+      text: `$${getMovieForCheckoutPrice}`,
       appendTo: childDiv
     });
 
     $('.movie-grid-container').append(movieGrid);
   });
-
-
-
-
-
-
-
-
-
-
 
 });

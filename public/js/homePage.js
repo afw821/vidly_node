@@ -30,7 +30,7 @@ $(document).ready(async function () {
     const movieId = movies[i]._id;
 
     const movieCard = $("<div>", {
-      class: "movie-card card",
+      class: "movie-card card mb-4",
       style: "width: 18rem;"
     });
     const movieCardBody = $("<div>", {
@@ -61,6 +61,13 @@ $(document).ready(async function () {
       text: "Add To Cart",
       appendTo: h5
     });
+    const alertText = $('<small>', {
+      id: movieId,
+      class: 'added-to-cart form-text',
+      style: 'opacity:0.0; color:green',
+      text: 'Successfully Added To Cart!!',
+      appendTo: h5
+    });
     $(".movie-container").append(movieCard);
     //Adding to Card we are setting the item in local staorage to be able to get it on checkout page
     $(`#${movieId}`).on("click", function () {
@@ -79,6 +86,7 @@ $(document).ready(async function () {
 
   $(".logout-user").on("click", function () {
     localStorage.removeItem("x-auth-token");
+    sessionStorage.clear();
     window.location.href = "/login";
   });
 
@@ -91,9 +99,9 @@ $(document).ready(async function () {
   $('.add-to-cart').each(function (i, e) {
     console.log('this', this);
     $(this).on('click', function () {
-      console.log(this);
+      $(this).next().css('opacity', '1.0');
+      setTimeout(function () { $('.add-to-cart').next().css('opacity', '0.0') }, 1000);
       const name = $(this).attr('data-movie-name');
-      console.log(name);
       const id = $(this).attr('data-movieId')
       sessionStorage.setItem(name, id);
     })
