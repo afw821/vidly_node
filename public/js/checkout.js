@@ -1,6 +1,7 @@
 $(document).ready(async function () {
   const moviesInDBArray = [];
   const userSelectedMovies = [];
+  const priceArray = [];
   //get all movies to push their names into an array to match with items set in session storage
   const movies = await $.ajax({
     url: '/api/movies',
@@ -76,8 +77,68 @@ $(document).ready(async function () {
       text: `$${getMovieForCheckoutPrice}`,
       appendTo: childDiv
     });
-
+    priceArray.push(getMovieForCheckoutPrice);
     $('.movie-grid-container').append(movieGrid);
   });
 
+  // <div class="widget">
+  //   <h4 class="widget-title">Order Summary</h4>
+  //   <div class="summary-block">
+  //     <div class="summary-content">
+  //       <div class="summary-head">
+  //         <h5 class="summary-title">Total</h5>
+  //       </div>
+  //       <div class="summary-price">
+  //         <p class="summary-text total-amount-summary">$258 / mo</p>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>
+
+  const summaryContainer = $('<div>', {
+    class: 'widget',
+  });
+
+  const h4 = $('<h4>', {
+    class: 'widget-title',
+    text: 'Order Summary',
+    appendTo: summaryContainer
+  });
+
+  const summaryBlock = $('<div>', {
+    class: 'summary-block',
+    appendTo: summaryContainer
+  });
+
+  const summaryContent = $('<div>', {
+    class: 'summary-content',
+    appendTo: summaryBlock
+  });
+
+  const summaryHead = $('<div>', {
+    class: 'summary-head',
+    appendTo: summaryContent
+  });
+
+  const h5 = $('<h5>', {
+    class: 'summary-title',
+    text: 'Total',
+    appendTo: summaryHead
+  });
+
+  const summaryPrice = $('<div>', {
+    class: 'summary-price',
+    appendTo: summaryContent
+  });
+
+  const priceP = $('<p>', {
+    class: 'summary-text total-amount-summary',
+    text: '$258',
+    appendTo: summaryPrice
+  });
+  console.log('price array', priceArray, priceArray.length);
+  $('.order-summary-container').html(summaryContainer);
+
+  const numberOfMovies = $('.plan-price').length;
+  console.log(numberOfMovies);
 });
