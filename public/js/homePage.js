@@ -106,4 +106,16 @@ $(document).ready(async function () {
       sessionStorage.setItem(name, id);
     })
   });
+  //---------------------------------------------------------//
+  //Quick View Cart
+  //--------------------------------------------------------//
+  $('.cart-items').on('mouseenter', function () {
+
+    $('.quick-view-cart').removeClass('hide');
+  });
+  $('.cart-items').on('mouseleave', function () {
+
+    $('.quick-view-cart').addClass('hide');
+  });
+
 });

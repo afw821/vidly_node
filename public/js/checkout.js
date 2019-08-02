@@ -138,7 +138,4 @@ $(document).ready(async function () {
   });
   console.log('price array', priceArray, priceArray.length);
   $('.order-summary-container').html(summaryContainer);
-
-  const numberOfMovies = $('.plan-price').length;
-  console.log(numberOfMovies);
 });
