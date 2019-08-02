@@ -97,7 +97,6 @@ $(document).ready(async function () {
   //ADD MOVIES TO CART (SESSION STORAGE)
   //--------------------------------------------------------//
   $('.add-to-cart').each(function (i, e) {
-    console.log('this', this);
     $(this).on('click', function () {
       $(this).next().css('opacity', '1.0');
       setTimeout(function () { $('.add-to-cart').next().css('opacity', '0.0') }, 1000);
