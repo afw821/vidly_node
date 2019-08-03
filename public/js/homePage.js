@@ -147,10 +147,13 @@ $(document).ready(async function () {
         type: 'button',
         'data-dismiss': 'modal',
         'aria-label': 'Close',
+        'data-movie-name': name,
         appendTo: col1,
         click: function () {
           $(this).parents('.movie-row').remove();
           //also need to remove the item from session storage
+          //so it wont appear on checkout page
+          sessionStorage.removeItem(name);
         }
       });
       const span = $('<span>', {

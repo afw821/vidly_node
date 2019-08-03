@@ -7,12 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
         crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/css/mdb.min.css" rel="stylesheet">
+    <style>
+        .ff{
+            font-family: 'Archivo Black', sans-serif;
+
+        }
+    </style>
     <title>Vidly</title>
 
 </head>
@@ -21,77 +28,59 @@
     <button type="button" style="display:none;" id="btnAcct" class="btn btn-primary" data-toggle="modal" data-target="#accountCreated">
     </button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Vidly</a>
+        <a class="navbar-brand ff" href="#">Vidly</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active registration" href="#">Register</a>
-                <a class="nav-item nav-link login" href="#">Login</a>
+                <a class="nav-item nav-link active registration ff" href="#">Register</a>
+                <a class="nav-item nav-link login ff" href="#">Login</a>
 
             </div>
         </div>
     </nav>
     <div class="container d-flex justify-content-center mt-5">
-
-        <!-- Default form register -->
         <form class="text-center border border-light p-5 account-register-form" style="width:600px; height:620px;">
 
-            <p class="h4 mb-4">Sign up</p>
+            <p class="h4 mb-4 ff">Sign up</p>
 
             <div class="form-row mb-4">
                 <div class="col-12">
-                    <!-- First name -->
                     <input type="text" id="user-name" class="form-control" placeholder="Name">
                     <small id="name-length-validation" class="form-text name-length-validation" style="opacity:0.0; color:red;">Name
                         Must Be At Least 5 Characters In Length!</small>
                 </div>
             </div>
-
-            <!-- E-mail -->
             <input type="email" id="user-email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
             <small id="email-validation" class="form-text email-validation" style="opacity:0.0; color:red;">Account
                 Already Registered With This Email!</small>
             <small id="email-format-validation" class="form-text email-format-validation" style="opacity:0.0; color:red;">Email
                 Address Must Be Valid!</small>
-
-            <!-- Password -->
             <input type="password" id="first-password" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
             <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
                 At least 5 characters
             </small>
 
-            <!-- Re Enter password -->
             <input type="password" id="user-password" class="form-control verify-password" placeholder="Re-Enter Password"
                 aria-describedby="defaultRegisterFormPasswordHelpBlock">
             <small id="password-length-validation" class="form-text password-length-validation" style="opacity:0.0; color:red;">Password
                 Must Be At Least 5 Characters In Length!</small>
             <small id="password-match-validation" class="form-text password-match-validation" style="opacity:0.0; color:red;">Passwords
                 Must Match!</small>
-
-            <!-- Register -->
             <button class="btn btn-info my-4 btn-block" type="button" id="register">Register</button>
             <p>Already Have an Account?
-                <a href="">Login</a>
+                <a href="#" class="login">Login</a>
             </p>
 
 
         </form>
-        <!-- Default form login -->
-        <form class="text-center border border-light p-5 account-login-form" style="display:none; width:600px;">
+        <form class="text-center border border-light p-5 account-login-form" style="display:none; width:600px; height:620px;">
 
             <p class="h4 mb-4">Sign in</p>
-
-            <!-- Email -->
             <input type="email" id="user-email-login" class="form-control mb-4" placeholder="E-mail">
-
-
-            <!-- Password -->
             <input type="password" id="first-password-login" class="form-control mb-4" placeholder="Password">
-
-            <!-- Sign in button -->
             <button class="btn btn-info btn-block my-4" type="button" id="login-user">Sign in</button>
             <small id="invalid-email-password" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
                 Invalid Email or Password!</small>
@@ -100,35 +89,28 @@
             <small id="valid-email-login" class="form-text email-format-validation-login" style="opacity:0.0; color:red;">
                 Email Must Be A Valid Email!</small>
 
-            <!-- Register -->
             <p>Not a member?
                 <a href="">Register</a>
             </p>
 
         </form>
         <!-- MODAL -->
-        <!-- Button trigger modal -->
-        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button> -->
-
-        <!-- Modal -->
         <div class="modal fade" id="accountCreated" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Vidly</h5>
+                        <h5 class="modal-title ff" id="exampleModalLabel">Vidly</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body ff">
                         Account Successfully Created
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Login</button>
+                        <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary ff login" data-dismiss="modal">Login</button>
                     </div>
                 </div>
             </div>
@@ -137,32 +119,10 @@
 
     </div>
     <footer class="page-footer font-small mt-3" style="background-color:#2E2E2E;">
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <div class="footer-copyright text-center py-3 ff">© 2018 Copyright:
             <a href=""> Vidly.com</a>
         </div>
-
-
     </footer>
-
-
-
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/js/mdb.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
-        crossorigin="anonymous"></script>
-    <script src="./js/StateManager.js"></script>
-    <script src="./js/login.js">  </script> -->
 </body>
 
 </html>

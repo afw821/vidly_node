@@ -50,7 +50,7 @@ $(document).ready(function () {
 
       //ALERT IF ACCOUNT IS SUCESSFULLY CREATED//
       if (result) {
-        //alert("Account Successfully Created!");
+        //Launch modal if account successfully created
         $('#btnAcct').click();
       }
     } catch (ex) {

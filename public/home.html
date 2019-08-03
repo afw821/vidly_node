@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
         crossorigin="anonymous" />
 
-
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -31,22 +31,25 @@
         .header-div{
             border-bottom:1px solid lightgray;
         }
+        .ff{
+            font-family: 'Archivo Black', sans-serif;
+        }
     </style>
     <title>Movie Page</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-        <a class="navbar-brand" href="#">Vidly</a>
+        <a class="navbar-brand ff" href="#">Vidly</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active registration" href="#">Movies</a>
-                <a class="nav-item nav-link check-out-user" href="#">Checkout</a>
-                <a class="nav-item nav-link logout-user" href="#">Logout</a>
+                <a class="nav-item nav-link active registration ff" href="#">Movies</a>
+                <a class="nav-item nav-link check-out-user ff" href="#">Checkout</a>
+                <a class="nav-item nav-link logout-user ff" href="#">Logout</a>
 
             </div>
             <div class="navbar-nav">
@@ -55,7 +58,7 @@
                 </h5>
             </div>
             <div class="navbar-nav">
-                <h5 class="nav-item nav-link cart-items">
+                <h5 class="nav-item nav-link cart-items ff">
                     Items In Cart:
                 </h5>
             </div>
@@ -64,7 +67,7 @@
                     <div class="card card-width">
                         <div class="card-body">
                             <div class="h5-div d-flex justify-content-between">
-                                <h5 class="card-title">Your Items</h5>
+                                <h5 class="card-title ff">Your Items</h5>
                                 <button type="button" class="close quick-cart-close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -87,7 +90,7 @@
                             </div>
 
 
-                            <a href="#" class="btn btn-primary">Checkout</a>
+                            <a href="#" class="btn btn-primary check-out-user">Checkout</a>
                         </div>
                     </div>
 
@@ -102,26 +105,6 @@
 
 
     </div>
-
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-   
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
-        crossorigin="anonymous"></script>
-    <script src="./js/StateManager.js"></script>
-    <script src="./js/homePage.js"> </script>
-    <script src="./js/login.js"></script> -->
-
-
 </body>
 
 </html>
