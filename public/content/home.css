@@ -1,0 +1,16 @@
+.quick-view-cart{
+    width: 400px;
+    height: 200px;
+    z-index:200000000;
+    background-color: transparent;
+    position:absolute;
+    left:400px;
+    top:60px;
+   
+}
+.hide{
+    display: none;
+}
+.header-div{
+    border-bottom:1px solid lightgray;
+}
