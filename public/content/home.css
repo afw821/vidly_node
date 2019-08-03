@@ -4,8 +4,8 @@
     z-index:200000000;
     background-color: transparent;
     position:absolute;
-    left:400px;
-    top:60px;
+    left:975px;
+    top:67px;
    
 }
 .hide{
@@ -13,4 +13,18 @@
 }
 .header-div{
     border-bottom:1px solid lightgray;
+}
+.cart-margin{
+    margin-left:300px;
+}
+.welcome-label-margin{
+    margin-left:300px;
+}
+body{
+    /* background-color:rgb(80, 152, 180);  */
+    background-image: url("./assests/wp2252568.jpg");
+    background-repeat:no-repeat;
+    background-size: cover; 
+    opacity:0.9;
+    width:100%;
 }
