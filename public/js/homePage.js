@@ -58,6 +58,7 @@ $(document).ready(async function () {
       "data-user-id": userId,
       "data-movie-name": movieName,
       "data-movieId": movieId,
+      "data-price": dailyRentalRate,
       text: "Add To Cart",
       appendTo: h5
     });
@@ -98,12 +99,29 @@ $(document).ready(async function () {
   //--------------------------------------------------------//
   $('.add-to-cart').each(function (i, e) {
     $(this).on('click', function () {
+      //text alerting added
       $(this).next().css('opacity', '1.0');
       setTimeout(function () { $('.add-to-cart').next().css('opacity', '0.0') }, 1000);
+      //adding movie to session storage
       const name = $(this).attr('data-movie-name');
-      const id = $(this).attr('data-movieId')
+      const id = $(this).attr('data-movieId');
+      const price = $(this).attr('data-price');
       sessionStorage.setItem(name, id);
-    })
+      //create quick cart grid on click and append it
+      const quickCartGrid = `<div class="row mb-3">
+      <div class="col-4">
+          <h3 class="card-text">${name}</h3>
+      </div>
+      <div class="col-4">
+          <h3 class="card-text">1</h3>
+      </div>
+      <div class="col-4">
+          <h3 class="card-text">$${price}</h3>
+      </div>
+
+  </div>`
+      $('.movie-grid-container').append(quickCartGrid);
+    });
   });
   //---------------------------------------------------------//
   //Quick View Cart
