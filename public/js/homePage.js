@@ -107,25 +107,55 @@ $(document).ready(async function () {
       const id = $(this).attr('data-movieId');
       const price = $(this).attr('data-price');
       sessionStorage.setItem(name, id);
-      //create quick cart grid on click and append it
-      const quickCartGrid = `<div class="row mb-3">
-      <div class="col-6">
-          <h3 class="card-text">${name}</h3>
-      </div>
-      <div class="col-2">
-          <h3 class="card-text">1</h3>
-      </div>
-      <div class="col-3">
-          <h3 class="card-text">$${price}</h3>
-      </div>
-      <div class="col-1">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-  </div>`
-      $('.movie-grid-container').append(quickCartGrid);
+      //build out the quick cart grid
+      const movieRow = $('<div>', {
+        class: 'row mb-3',
+      });
+      const col6 = $('<div>', {
+        class: 'col-6',
+        appendTo: movieRow
+      });
+      const h3 = $('<h3>', {
+        class: 'card-text',
+        text: name,
+        appendTo: col6
+      });
+      const col2 = $('<div>', {
+        class: 'col-2',
+        appendTo: movieRow
+      });
+      const quantity = $('<h3>', {
+        class: 'card-text',
+        text: "1",
+        appendTo: col2
+      });
+      const col3 = $('<div>', {
+        class: 'col-3',
+        appendTo: movieRow
+      });
+      const priceQc = $('<h3>', {
+        class: 'card-text',
+        text: price,
+        appendTo: col3
+      });
+      const col1 = $('<div>', {
+        class: 'col-1',
+        appendTo: movieRow
+      });
+      const button = $('<button>', {
+        class: 'close',
+        type: 'button',
+        'data-dismiss': 'modal',
+        'aria-label': 'Close',
+        appendTo: col1
+      });
+      const span = $('<span>', {
+        class: 'close',
+        'aria-hidden': 'true',
+        html: '&times;',
+        appendTo: button
+      });
+      $('.movie-grid-container').append(movieRow);
     });
   });
   //---------------------------------------------------------//
