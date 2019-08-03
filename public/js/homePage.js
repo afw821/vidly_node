@@ -109,7 +109,7 @@ $(document).ready(async function () {
       sessionStorage.setItem(name, id);
       //build out the quick cart grid
       const movieRow = $('<div>', {
-        class: 'row mb-3',
+        class: 'row mb-3 movie-row',
       });
       const col6 = $('<div>', {
         class: 'col-6',
@@ -147,7 +147,11 @@ $(document).ready(async function () {
         type: 'button',
         'data-dismiss': 'modal',
         'aria-label': 'Close',
-        appendTo: col1
+        appendTo: col1,
+        click: function () {
+          $(this).parents('.movie-row').remove();
+          //also need to remove the item from session storage
+        }
       });
       const span = $('<span>', {
         class: 'close',
