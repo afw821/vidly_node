@@ -109,14 +109,19 @@ $(document).ready(async function () {
       sessionStorage.setItem(name, id);
       //create quick cart grid on click and append it
       const quickCartGrid = `<div class="row mb-3">
-      <div class="col-4">
+      <div class="col-3">
           <h3 class="card-text">${name}</h3>
       </div>
-      <div class="col-4">
+      <div class="col-3">
           <h3 class="card-text">1</h3>
       </div>
-      <div class="col-4">
+      <div class="col-3">
           <h3 class="card-text">$${price}</h3>
+      </div>
+      <div class="col-3">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
 
   </div>`
@@ -124,7 +129,7 @@ $(document).ready(async function () {
     });
   });
   //---------------------------------------------------------//
-  //Quick View Cart
+  //Quick View Cart Toggle
   //--------------------------------------------------------//
   $('.cart-items').on('mouseenter', function () {
 

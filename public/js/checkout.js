@@ -81,20 +81,6 @@ $(document).ready(async function () {
     $('.movie-grid-container').append(movieGrid);
   });
 
-  // <div class="widget">
-  //   <h4 class="widget-title">Order Summary</h4>
-  //   <div class="summary-block">
-  //     <div class="summary-content">
-  //       <div class="summary-head">
-  //         <h5 class="summary-title">Total</h5>
-  //       </div>
-  //       <div class="summary-price">
-  //         <p class="summary-text total-amount-summary">$258 / mo</p>
-  //       </div>
-  //     </div>
-  //   </div>
-  // </div>
-
   const summaryContainer = $('<div>', {
     class: 'widget',
   });
