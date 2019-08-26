@@ -1,3 +1,11 @@
+body{
+    /* background-color:rgb(80, 152, 180);  */
+    background-image: url("./assests/ecommerce-website-design.png");
+    background-repeat:no-repeat;
+    background-size: cover; 
+    opacity:0.9;
+    width:100%;
+}
 .quick-view-cart{
     width: 400px;
     height: 200px;
@@ -19,12 +27,4 @@
 }
 .welcome-label-margin{
     margin-left:300px;
-}
-body{
-    /* background-color:rgb(80, 152, 180);  */
-    background-image: url("./assests/wp2252568.jpg");
-    background-repeat:no-repeat;
-    background-size: cover; 
-    opacity:0.9;
-    width:100%;
 }

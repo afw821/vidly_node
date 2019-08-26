@@ -128,7 +128,7 @@ $(document).ready(function () {
           //window.location.href = '/homepage'
           $(".login-body").replaceWith(moviePage);
         } catch (ex) {
-          console.log(ex);
+          console.log(ex, 'ex');
         }
       }
     } catch (ex) {

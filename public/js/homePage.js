@@ -1,4 +1,4 @@
-$(document).ready(async function () {
+$(document).ready(async function() {
   const token = localStorage.getItem("x-auth-token");
 
   //---------------------------------------------------------//
@@ -23,7 +23,7 @@ $(document).ready(async function () {
     url: "/api/movies",
     method: "GET"
   });
-  $(movies).each(function (i, e) {
+  $(movies).each(function(i, e) {
     const dailyRentalRate = movies[i].dailyRentalRate;
     const numberInStock = movies[i].numberInStock;
     const movieName = movies[i].title;
@@ -62,120 +62,124 @@ $(document).ready(async function () {
       text: "Add To Cart",
       appendTo: h5
     });
-    const alertText = $('<small>', {
+    const alertText = $("<small>", {
       id: movieId,
-      class: 'added-to-cart form-text',
-      style: 'opacity:0.0; color:green',
-      text: 'Successfully Added To Cart!!',
+      class: "added-to-cart form-text",
+      style: "opacity:0.0; color:green",
+      text: "Successfully Added To Cart!!",
       appendTo: h5
     });
     $(".movie-container").append(movieCard);
     //Adding to Card we are setting the item in local staorage to be able to get it on checkout page
-    $(`#${movieId}`).on("click", function () {
+    $(`#${movieId}`).on("click", function() {
       const movieid = $(this).attr("data-movieId");
       const userid = $(this).attr("data-user-id");
       localStorage.setItem("Movie", movieid);
       localStorage.setItem("User", userid);
-
     });
-
   });
 
   //---------------------------------------------------------//
   //LOGOUT A USER
   //--------------------------------------------------------//
 
-  $(".logout-user").on("click", function () {
+  $(".logout-user").on("click", function() {
     localStorage.removeItem("x-auth-token");
     sessionStorage.clear();
     window.location.href = "/login";
   });
 
-  $(".check-out-user").on("click", function () {
+  $(".check-out-user").on("click", function() {
+    console.log("clicked");
     window.location.href = "/checkout";
   });
   //---------------------------------------------------------//
   //ADD MOVIES TO CART (SESSION STORAGE)
   //--------------------------------------------------------//
-  $('.add-to-cart').each(function (i, e) {
-    $(this).on('click', function () {
+  $(".add-to-cart").each(function(i, e) {
+    $(this).on("click", function() {
       //text alerting added
-      $(this).next().css('opacity', '1.0');
-      setTimeout(function () { $('.add-to-cart').next().css('opacity', '0.0') }, 1000);
+      $(this)
+        .next()
+        .css("opacity", "1.0");
+      setTimeout(function() {
+        $(".add-to-cart")
+          .next()
+          .css("opacity", "0.0");
+      }, 1000);
       //adding movie to session storage
-      const name = $(this).attr('data-movie-name');
-      const id = $(this).attr('data-movieId');
-      const price = $(this).attr('data-price');
+      const name = $(this).attr("data-movie-name");
+      const id = $(this).attr("data-movieId");
+      const price = $(this).attr("data-price");
       sessionStorage.setItem(name, id);
       //build out the quick cart grid
-      const movieRow = $('<div>', {
-        class: 'row mb-3 movie-row',
+      const movieRow = $("<div>", {
+        class: "row mb-3 movie-row"
       });
-      const col6 = $('<div>', {
-        class: 'col-6',
+      const col6 = $("<div>", {
+        class: "col-6",
         appendTo: movieRow
       });
-      const h3 = $('<h3>', {
-        class: 'card-text',
+      const h3 = $("<h3>", {
+        class: "card-text",
         text: name,
         appendTo: col6
       });
-      const col2 = $('<div>', {
-        class: 'col-2',
+      const col2 = $("<div>", {
+        class: "col-2",
         appendTo: movieRow
       });
-      const quantity = $('<h3>', {
-        class: 'card-text',
+      const quantity = $("<h3>", {
+        class: "card-text",
         text: "1",
         appendTo: col2
       });
-      const col3 = $('<div>', {
-        class: 'col-3',
+      const col3 = $("<div>", {
+        class: "col-3",
         appendTo: movieRow
       });
-      const priceQc = $('<h3>', {
-        class: 'card-text',
+      const priceQc = $("<h3>", {
+        class: "card-text",
         text: price,
         appendTo: col3
       });
-      const col1 = $('<div>', {
-        class: 'col-1',
+      const col1 = $("<div>", {
+        class: "col-1",
         appendTo: movieRow
       });
-      const button = $('<button>', {
-        class: 'close',
-        type: 'button',
-        'data-dismiss': 'modal',
-        'aria-label': 'Close',
-        'data-movie-name': name,
+      const button = $("<button>", {
+        class: "close",
+        type: "button",
+        "data-dismiss": "modal",
+        "aria-label": "Close",
+        "data-movie-name": name,
         appendTo: col1,
-        click: function () {
-          $(this).parents('.movie-row').remove();
+        click: function() {
+          $(this)
+            .parents(".movie-row")
+            .remove();
           //also need to remove the item from session storage
           //so it wont appear on checkout page
           sessionStorage.removeItem(name);
         }
       });
-      const span = $('<span>', {
-        class: 'close',
-        'aria-hidden': 'true',
-        html: '&times;',
+      const span = $("<span>", {
+        class: "close",
+        "aria-hidden": "true",
+        html: "&times;",
         appendTo: button
       });
-      $('.movie-grid-container').append(movieRow);
+      $(".movie-grid-container").append(movieRow);
     });
   });
   //---------------------------------------------------------//
   //Quick View Cart Toggle
   //--------------------------------------------------------//
-  $('.cart-items').on('mouseenter', function () {
-
-    $('.quick-view-cart').removeClass('hide');
-    $('.quick-view-cart').slideDown();
+  $(".cart-items").on("mouseenter", function() {
+    $(".quick-view-cart").removeClass("hide");
+    $(".quick-view-cart").slideDown();
   });
-  $('.quick-cart-close').on('click', function () {
-
-    $('.quick-view-cart').slideUp();
+  $(".quick-cart-close").on("click", function() {
+    $(".quick-view-cart").slideUp();
   });
-
 });
