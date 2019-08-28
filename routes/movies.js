@@ -2,14 +2,14 @@ const { Movie, validate } = require('../models/movie');
 const { Genre } = require('../models/genre');
 const express = require('express');
 const router = express.Router();
-
+const auth = require('../middleware/auth');
 //get all movies
-router.get('/', async function (req, res) {
+router.get('/', auth, async function (req, res) {
     const movies = await Movie.find();
     res.send(movies);
 });
 //post a new movie to DB
-router.post('/', async function (req, res) {
+router.post('/', auth, async function (req, res) {
     //validate the req.body from the client
     const result = validate(req.body);
     //if error res to client 400 bad request
@@ -35,7 +35,7 @@ router.post('/', async function (req, res) {
     res.send(movie);
 });
 //update route
-router.put('/:id', async function (req, res) {
+router.put('/:id', auth, async function (req, res) {
     try {
         //validating the request body because we are sending a new movie object to update a current one
 

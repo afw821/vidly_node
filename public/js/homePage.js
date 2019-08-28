@@ -1,6 +1,6 @@
-$(document).ready(async function() {
+$(document).ready(async function () {
   const token = localStorage.getItem("x-auth-token");
-
+  console.log('hp token', token);
   //---------------------------------------------------------//
   //GET CURRENT USER
   //--------------------------------------------------------//
@@ -23,7 +23,7 @@ $(document).ready(async function() {
     url: "/api/movies",
     method: "GET"
   });
-  $(movies).each(function(i, e) {
+  $(movies).each(function (i, e) {
     const dailyRentalRate = movies[i].dailyRentalRate;
     const numberInStock = movies[i].numberInStock;
     const movieName = movies[i].title;
@@ -71,7 +71,7 @@ $(document).ready(async function() {
     });
     $(".movie-container").append(movieCard);
     //Adding to Card we are setting the item in local staorage to be able to get it on checkout page
-    $(`#${movieId}`).on("click", function() {
+    $(`#${movieId}`).on("click", function () {
       const movieid = $(this).attr("data-movieId");
       const userid = $(this).attr("data-user-id");
       localStorage.setItem("Movie", movieid);
@@ -83,26 +83,26 @@ $(document).ready(async function() {
   //LOGOUT A USER
   //--------------------------------------------------------//
 
-  $(".logout-user").on("click", function() {
+  $(".logout-user").on("click", function () {
     localStorage.removeItem("x-auth-token");
     sessionStorage.clear();
     window.location.href = "/login";
   });
 
-  $(".check-out-user").on("click", function() {
+  $(".check-out-user").on("click", function () {
     console.log("clicked");
     window.location.href = "/checkout";
   });
   //---------------------------------------------------------//
   //ADD MOVIES TO CART (SESSION STORAGE)
   //--------------------------------------------------------//
-  $(".add-to-cart").each(function(i, e) {
-    $(this).on("click", function() {
+  $(".add-to-cart").each(function (i, e) {
+    $(this).on("click", function () {
       //text alerting added
       $(this)
         .next()
         .css("opacity", "1.0");
-      setTimeout(function() {
+      setTimeout(function () {
         $(".add-to-cart")
           .next()
           .css("opacity", "0.0");
@@ -154,7 +154,7 @@ $(document).ready(async function() {
         "aria-label": "Close",
         "data-movie-name": name,
         appendTo: col1,
-        click: function() {
+        click: function () {
           $(this)
             .parents(".movie-row")
             .remove();
@@ -175,11 +175,11 @@ $(document).ready(async function() {
   //---------------------------------------------------------//
   //Quick View Cart Toggle
   //--------------------------------------------------------//
-  $(".cart-items").on("mouseenter", function() {
+  $(".cart-items").on("mouseenter", function () {
     $(".quick-view-cart").removeClass("hide");
     $(".quick-view-cart").slideDown();
   });
-  $(".quick-cart-close").on("click", function() {
+  $(".quick-cart-close").on("click", function () {
     $(".quick-view-cart").slideUp();
   });
 });

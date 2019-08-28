@@ -117,16 +117,11 @@ $(document).ready(function () {
       //IF VALID USER (THEY HAVE A VALID JWT)
       if (token) {
         try {
-          //GET MOVIE PAGE FILE
-          const moviePage = await $.ajax({
-            url: "/homepage",
-            method: "GET",
-            headers: { "x-auth-token": token }
-          });
-          localStorage.setItem("x-auth-token", token);
-          //console.log('result', result);
-          //window.location.href = '/homepage'
-          $(".login-body").replaceWith(moviePage);
+
+          window.location.href = '/homepage';
+
+          sessionStorage.setItem("x-auth-token", token);
+
         } catch (ex) {
           console.log(ex, 'ex');
         }

@@ -1,16 +1,12 @@
 const path = require("path");
 const auth = require("../middleware/auth");
-module.exports = function(app) {
-  app.get("/login", function(req, res) {
+module.exports = function (app) {
+  app.get("/login", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
-  app.get("/homepage", auth, function(req, res) {
-    const token = res.token;
+  app.get("/homepage", function (req, res) {
 
-    var options = {
-      headers: { "x-auth-token": token }
-    };
-    res.sendFile(path.join(__dirname, "../public/home.html"), options, function(
+    res.sendFile(path.join(__dirname, "../public/home.html"), function (
       err
     ) {
       if (err) {
@@ -21,7 +17,7 @@ module.exports = function(app) {
     //res.redirect('/login');
   });
 
-  app.get("/checkout", function(req, res) {
+  app.get("/checkout", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/checkout.html"));
     //res.redirect('/login');
   });
