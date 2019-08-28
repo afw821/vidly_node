@@ -1,5 +1,6 @@
 $(document).ready(async function () {
-  const token = localStorage.getItem("x-auth-token");
+  //const token = localStorage.getItem("x-auth-token");
+  const token = sessionStorage.getItem("x-auth-token");
   console.log('hp token', token);
   //---------------------------------------------------------//
   //GET CURRENT USER
@@ -21,7 +22,8 @@ $(document).ready(async function () {
   //--------------------------------------------------------//
   const movies = await $.ajax({
     url: "/api/movies",
-    method: "GET"
+    method: "GET",
+    headers: { "x-auth-token": token }
   });
   $(movies).each(function (i, e) {
     const dailyRentalRate = movies[i].dailyRentalRate;
@@ -90,7 +92,7 @@ $(document).ready(async function () {
   });
 
   $(".check-out-user").on("click", function () {
-    console.log("clicked");
+
     window.location.href = "/checkout";
   });
   //---------------------------------------------------------//

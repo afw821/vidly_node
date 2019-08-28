@@ -118,9 +118,8 @@ $(document).ready(function () {
       if (token) {
         try {
 
-          window.location.href = '/homepage';
-
           sessionStorage.setItem("x-auth-token", token);
+          window.location.href = '/homepage';
 
         } catch (ex) {
           console.log(ex, 'ex');
