@@ -2,6 +2,11 @@ $(document).ready(async function () {
   //const token = localStorage.getItem("x-auth-token");
   const token = sessionStorage.getItem("x-auth-token");
   console.log('hp token', token);
+  if (!token) {
+    window.location.href = '/login';
+
+    alert('Only logged in users can see this Page!!!');
+  }
   //---------------------------------------------------------//
   //GET CURRENT USER
   //--------------------------------------------------------//
@@ -35,7 +40,7 @@ $(document).ready(async function () {
 
     const movieCard = $("<div>", {
       class: "movie-card card mb-4",
-      style: "width: 18rem;"
+      style: "width: 18rem; background-color: lightgray;"
     });
     const movieCardBody = $("<div>", {
       class: "movie-card-body card-body",
