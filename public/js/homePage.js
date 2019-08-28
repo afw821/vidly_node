@@ -11,7 +11,8 @@ $(document).ready(async function () {
     method: "GET",
     headers: { "x-auth-token": token }
   });
-
+  console.log('Me User', user);
+  if (!user) alert('No user so error');
   var userId = user._id;
   var userName = user.name;
   var userEmail = user.email;
@@ -25,6 +26,7 @@ $(document).ready(async function () {
     method: "GET",
     headers: { "x-auth-token": token }
   });
+
   $(movies).each(function (i, e) {
     const dailyRentalRate = movies[i].dailyRentalRate;
     const numberInStock = movies[i].numberInStock;

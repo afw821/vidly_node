@@ -8,24 +8,29 @@ const path = require('path');
 
 //get information about the current user
 router.get('/me', auth, async function (req, res) {
-    //more secure than passing id as a parameter
-    //exclude password property
-    const user = await User.findById(req.user._id).select('-password');
-    res.send(user);
+    try {
+        //more secure than passing id as a parameter
+        //exclude password property
+        const user = await User.findById(req.user._id).select('-password');
+        res.send(user);
+    } catch (ex) {
+        console.log('error', ex);
+    }
+
 });
 //register a new user
 router.post('/', async function (req, res) {
     //validate the user input
     const result = validate(req.body);
     if (result.error) {
-       
+
         res.status(404).send(result.error.details[0].message);
         return;
     }
     //lookup user by email and if the exist return 400
     let user = await User.findOne({ email: req.body.email });
     //if user already exists in the database by email then return
-    if(user) return res.status(400).send('User already registered');
+    if (user) return res.status(400).send('User already registered');
     //else create the new user
     user = new User({
         name: req.body.name,

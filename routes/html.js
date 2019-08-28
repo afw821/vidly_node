@@ -6,15 +6,8 @@ module.exports = function (app) {
   });
   app.get("/homepage", function (req, res) {
 
-    res.sendFile(path.join(__dirname, "../public/home.html"), function (
-      err
-    ) {
-      if (err) {
-        console.log(err);
-        res.redirect("back");
-      }
-    });
-    //res.redirect('/login');
+    res.sendFile(path.join(__dirname, "../public/home.html"));
+
   });
 
   app.get("/checkout", function (req, res) {

@@ -6,6 +6,7 @@ function auth(req, res, next) {
 
     //set token to the request header
     const token = req.header('x-auth-token');
+    console.log('auth token', token);
     //if the JWT doesn't exist send unauthorized
     if (!token) return res.status(401).send('Access denied. No token provided');
 
@@ -19,7 +20,7 @@ function auth(req, res, next) {
         // //pass control to the next middleware function
         next();
     } catch (ex) {
-        console.log('Exception', ex);
+        console.log('auth Exception', ex);
         res.status(400).send('Invalid token');
     }
 }

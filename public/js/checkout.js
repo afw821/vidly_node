@@ -3,9 +3,11 @@ $(document).ready(async function () {
   const userSelectedMovies = [];
   const priceArray = [];
   //get all movies to push their names into an array to match with items set in session storage
+  const token = sessionStorage.getItem("x-auth-token");
   const movies = await $.ajax({
     url: '/api/movies',
-    method: 'GET'
+    method: 'GET',
+    headers: { "x-auth-token": token }
   });
   //loop through all Movies and push into array
   $(movies).each(function (i, e) {
