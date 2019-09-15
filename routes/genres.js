@@ -29,7 +29,7 @@ router.get('/:id', async function (req, res) {
 
 });
 //post a genre
-router.post('/', auth, async function (req, res) {
+router.post('/', async function (req, res) {
     try {
         //validate the req.body object
         const result = validate(req.body);
