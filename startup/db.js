@@ -5,10 +5,10 @@ module.exports = function () {
     if (process.env.MONGODB_URI) {
         mongoose.connect(process.env.MONGODB_URI);
     } else {
-        const db = config.get('db')
-        mongoose.connect(config.get('db'), { useNewUrlParser: true })
+        //const db = config.get('db')
+        mongoose.connect("mongodb://localhost/vidly_node", { useNewUrlParser: true })
             .then(function () {
-                console.log(`Connected to MongoDB: ${db}`)
+                console.log(`Connected to MongoDB!!!!!`)
             }).catch(function (ex) {
                 console.log('Error connecting to MongoDB');
             });
