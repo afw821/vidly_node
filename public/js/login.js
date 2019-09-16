@@ -47,7 +47,7 @@ $(document).ready(function () {
           isAdmin: isAdmin
         }
       });
-
+      console.log('result', result);
       //ALERT IF ACCOUNT IS SUCESSFULLY CREATED//
       if (result) {
         //Launch modal if account successfully created
