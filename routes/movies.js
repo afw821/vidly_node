@@ -5,8 +5,13 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 //get all movies
 router.get('/', auth, async function (req, res) {
-    const movies = await Movie.find();
-    res.send(movies);
+    try {
+        const movies = await Movie.find();
+        res.send(movies);
+    } catch (ex) {
+        console.log('ex', ex);
+    }
+
 });
 //post a new movie to DB
 router.post('/', auth, async function (req, res) {

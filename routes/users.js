@@ -52,4 +52,14 @@ router.post('/', async function (req, res) {
     res.send(user);
 });
 
+router.get('/', async function (req, res) {
+    try {
+        const users = await User.find();
+        res.send(users);
+    } catch (ex) {
+        console.log('ex:', ex);
+    }
+
+});
+
 module.exports = router;
