@@ -32,7 +32,7 @@ router.post('/', async function (req, res) {
     // //if user already exists in the database by email then return
     // if (user) return res.status(400).send('User already registered');
     //else create the new user
-    user = new User({
+    const user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
