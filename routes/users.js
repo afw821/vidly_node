@@ -21,18 +21,18 @@ router.get('/me', auth, async function (req, res) {
 //register a new user
 router.post('/', async function (req, res) {
     //validate the user input
-    // const result = validate(req.body);
-    // if (result.error) {
+    const result = validate(req.body);
+    if (result.error) {
 
-    //     res.status(404).send(result.error.details[0].message);
-    //     return;
-    // }
-    // //lookup user by email and if the exist return 400
-    // let user = await User.findOne({ email: req.body.email });
-    // //if user already exists in the database by email then return
-    // if (user) return res.status(400).send('User already registered');
+        res.status(404).send(result.error.details[0].message);
+        return;
+    }
+    //lookup user by email and if the exist return 400
+    let user = await User.findOne({ email: req.body.email });
+    //if user already exists in the database by email then return
+    if (user) return res.status(400).send('User already registered');
     //else create the new user
-    const user = new User({
+    user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
