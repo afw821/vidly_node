@@ -2,15 +2,33 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
+
+
+const customers = require('./routes/customers');
+const genres = require('./routes/genres');
+const movies = require('./routes/movies');
+const rentals = require('./routes/rentals');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
+
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-require('./startup/routes')(app);
+// require('./startup/routes')(app);
 require('./routes/html')(app);
 // require('./startup/db')();
 require('./startup/config')();
 console.log('mongo db ui', process.env);
 
+
+app.use('/api/auth', auth);
+app.use('/api/users', users);
+app.use('/api/rentals', rentals);
+app.use('/api/genres', genres);
+app.use('/api/movies', movies);
+app.use('/api/customers', customers);
 
 if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI);
