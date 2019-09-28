@@ -20,6 +20,7 @@ router.get('/me', auth, async function (req, res) {
 });
 //register a new user
 router.post('/', async function (req, res) {
+    console.log('post user req body', req.body);
     //validate the user input
     const result = validate(req.body);
     if (result.error) {
