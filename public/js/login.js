@@ -36,6 +36,10 @@ $(document).ready(function () {
         }, 4000);
         return;
       }
+      console.log('name', name);
+      console.log('email', email);
+      console.log('password', password);
+      console.log('is admin', isAdmin);
       //POSTING A NEW USER//
       const result = await $.ajax({
         url: "/api/users",
