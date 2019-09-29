@@ -30,18 +30,28 @@ app.use('/api/genres', genres);
 app.use('/api/movies', movies);
 app.use('/api/customers', customers);
 
+const MONGODB_URI = 'mongodb://<dbuser>:<dbpassword>@ds353007.mlab.com:53007/heroku_ts7csbwm';
 
-if (process.env.MONGODB_URI) {
-    mongoose.connect(process.env.MONGODB_URI);
-} else {
-    //const db = config.get('db')
-    mongoose.connect("mongodb://localhost/vidly_node", { useNewUrlParser: true })
-        .then(function () {
-            console.log(`Connected to MongoDB!!!!!`)
-        }).catch(function (ex) {
-            console.log('Error connecting to MongoDB');
-        });
-}
+const TEST_URI = "mongodb://localhost/vidly_node";
+
+mongoose.connect(MONGODB_URI || TEST_URI).then(function () {
+    console.log('Connected to MongoDB!!');
+})
+    .catch(function () {
+        console.log('Error connecting to MongoDB');
+    });
+
+// if (process.env.MONGODB_URI) {
+//     mongoose.connect(process.env.MONGODB_URI);
+// } else {
+//     //const db = config.get('db')
+//     mongoose.connect("mongodb://localhost/vidly_node", { useNewUrlParser: true })
+//         .then(function () {
+//             console.log(`Connected to MongoDB!!!!!`)
+//         }).catch(function (ex) {
+//             console.log('Error connecting to MongoDB');
+//         });
+// }
 
 
 
