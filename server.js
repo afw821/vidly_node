@@ -30,6 +30,7 @@ app.use('/api/genres', genres);
 app.use('/api/movies', movies);
 app.use('/api/customers', customers);
 
+
 if (process.env.MONGOLAB_URI) {
     mongoose.connect(process.env.MONGOLAB_URI);
 } else {
