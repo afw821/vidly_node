@@ -4,6 +4,19 @@ const { Genre, validate } = require('../models/genre');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 //get all genres
+router.get('/fakegenre', function (req, res) {
+    const genres = [
+        {
+            id: '3D123we8945',
+            name: "Thriller"
+        },
+        {
+            id: '3BNGF38348',
+            name: "Comedy"
+        },
+    ];
+    res.send(genres);
+});
 router.get('/', async function (req, res) {
     try {
         const genres = await Genre.find();
