@@ -20,7 +20,6 @@ app.use(express.json());
 require('./routes/html')(app);
 // require('./startup/db')();
 require('./startup/config')();
-console.log('mongo db ui', process.env);
 
 
 app.use('/api/auth', auth);
@@ -34,12 +33,14 @@ const MONGODB_URI = 'mongodb://<dbuser>:<dbpassword>@ds353007.mlab.com:53007/her
 
 const TEST_URI = "mongodb://localhost/vidly_node";
 
-mongoose.connect(MONGODB_URI || TEST_URI).then(function () {
-    console.log('Connected to MongoDB!!');
-})
-    .catch(function () {
-        console.log('Error connecting to MongoDB');
-    });
+// mongoose.connect(MONGODB_URI || TEST_URI, { useNewUrlParser: true }).then(function () {
+//     console.log('Connected to MongoDB!!');
+// })
+//     .catch(function () {
+//         console.log('Error connecting to MongoDB');
+//     });
+
+mongoose.connect(MONGODB_URI);
 
 // if (process.env.MONGODB_URI) {
 //     mongoose.connect(process.env.MONGODB_URI);
