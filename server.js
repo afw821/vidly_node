@@ -31,8 +31,8 @@ app.use('/api/movies', movies);
 app.use('/api/customers', customers);
 
 
-if (process.env.MONGOLAB_URI) {
-    mongoose.connect(process.env.MONGOLAB_URI);
+if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);
 } else {
     //const db = config.get('db')
     mongoose.connect("mongodb://localhost/vidly_node", { useNewUrlParser: true })
