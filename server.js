@@ -37,7 +37,7 @@ const TEST_URI = "mongodb://localhost/vidly_node";
 //     .catch(function () {
 //         console.log('Error connecting to MongoDB');
 //     });
-mongoose.connect('mongodb://heroku_ts7csbwm:6rjkom7bics89mcfqtdbi3h1gj@ds353007.mlab.com:53007/heroku_ts7csbwm');
+mongoose.connect(process.env.MONGODB_URI);
 
 // if (process.env.MONGODB_URI) {
 //     mongoose.connect(process.env.MONGODB_URI);
