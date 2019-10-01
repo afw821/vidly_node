@@ -29,7 +29,7 @@ app.use('/api/genres', genres);
 app.use('/api/movies', movies);
 app.use('/api/customers', customers);
 
-const MONGODB_URI = ' mongodb://heroku_ts7csbwm:6rjkom7bics89mcfqtdbi3h1gj@ds353007.mlab.com:53007/heroku_ts7csbwm';
+process.env.MONGODB_URI = ' mongodb://heroku_ts7csbwm:6rjkom7bics89mcfqtdbi3h1gj@ds353007.mlab.com:53007/heroku_ts7csbwm';
 
 const TEST_URI = "mongodb://localhost/vidly_node";
 
@@ -39,8 +39,8 @@ const TEST_URI = "mongodb://localhost/vidly_node";
 //     .catch(function () {
 //         console.log('Error connecting to MongoDB');
 //     });
-
-mongoose.connect(MONGODB_URI);
+console.log('mongo uri', process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI);
 
 // if (process.env.MONGODB_URI) {
 //     mongoose.connect(process.env.MONGODB_URI);
