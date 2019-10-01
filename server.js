@@ -20,7 +20,7 @@ app.use(express.json());
 require('./routes/html')(app);
 // require('./startup/db')();
 require('./startup/config')();
-
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use('/api/auth', auth);
 app.use('/api/users', users);
@@ -37,7 +37,7 @@ const TEST_URI = "mongodb://localhost/vidly_node";
 //     .catch(function () {
 //         console.log('Error connecting to MongoDB');
 //     });
-mongoose.connect(process.env.MONGODB_URI);
+
 
 // if (process.env.MONGODB_URI) {
 //     mongoose.connect(process.env.MONGODB_URI);
