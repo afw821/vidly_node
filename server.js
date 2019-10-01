@@ -29,8 +29,6 @@ app.use('/api/genres', genres);
 app.use('/api/movies', movies);
 app.use('/api/customers', customers);
 
-process.env.MONGODB_URI = ' mongodb://heroku_ts7csbwm:6rjkom7bics89mcfqtdbi3h1gj@ds353007.mlab.com:53007/heroku_ts7csbwm';
-
 const TEST_URI = "mongodb://localhost/vidly_node";
 
 // mongoose.connect(MONGODB_URI || TEST_URI, { useNewUrlParser: true }).then(function () {
@@ -39,8 +37,7 @@ const TEST_URI = "mongodb://localhost/vidly_node";
 //     .catch(function () {
 //         console.log('Error connecting to MongoDB');
 //     });
-console.log('mongo uri', process.env.MONGODB_URI)
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://heroku_ts7csbwm:6rjkom7bics89mcfqtdbi3h1gj@ds353007.mlab.com:53007/heroku_ts7csbwm');
 
 // if (process.env.MONGODB_URI) {
 //     mongoose.connect(process.env.MONGODB_URI);
@@ -57,8 +54,8 @@ mongoose.connect(process.env.MONGODB_URI);
 
 
 const PORT = process.env.PORT || 8888;
-const environment = `Environment: ${process.env.NODE_ENV}`;
-console.log(environment);
+// const environment = `Environment: ${process.env.NODE_ENV}`;
+// console.log(environment);
 const server = app.listen(PORT, function () {
     console.log(`App listening on PORT: ${PORT}`);
 });
