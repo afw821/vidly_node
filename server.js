@@ -29,7 +29,7 @@ app.use('/api/genres', genres);
 app.use('/api/movies', movies);
 app.use('/api/customers', customers);
 
-const MONGODB_URI = 'mongodb://<dbuser>:<dbpassword>@ds353007.mlab.com:53007/heroku_ts7csbwm';
+const MONGODB_URI = ' mongodb://heroku_ts7csbwm:6rjkom7bics89mcfqtdbi3h1gj@ds353007.mlab.com:53007/heroku_ts7csbwm';
 
 const TEST_URI = "mongodb://localhost/vidly_node";
 
