@@ -152,6 +152,7 @@ $(document).ready(function () {
           $("#valid-email-login").css("opacity", "1.0");
           setTimeout(function () {
             $("#valid-email-login").css("opacity", "0.0");
+            $('#user-email').css('background-color', 'red');
           }, 4000);
       }
     }
