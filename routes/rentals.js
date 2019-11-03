@@ -1,6 +1,6 @@
 const { Rental, validate } = require('../models/rental');
 const { Movie } = require('../models/movie');
-const { Customer } = require('../models/customer');
+const { User } = require('../models/user');
 const express = require('express');
 const router = express.Router();
 
@@ -17,9 +17,9 @@ router.post('/', async function (req, res) {
     //if error return 400 bad request to the client
     if (result.error) return res.status(400).send(error.details[0].message);
     //find customer by id
-    const customer = await Customer.findById(req.body.customerId);
+    const user = await User.findById(req.body.userId);
     //if customer doesn't exist then return 400 to client
-    if (!customer) return res.status(400).send('Invalid customer.');
+    if (!user) return res.status(400).send('Invalid User');
     //same logic as ablove but for MOVIE
     const movie = await Movie.findById(req.body.movieId);
     if (!movie) return res.status(400).send('Invalid movie.');
@@ -28,12 +28,12 @@ router.post('/', async function (req, res) {
     //create a new rental object
 
     let rental = new Rental({
-        customer: {
+        user: {
             //keys here are NEW
             //Values are from the retrieved customer object
-            _id: customer._id,
-            name: customer.name,
-            phone: customer.phone
+            _id: user._id,
+            name: user.name,
+            email: user.email
         },
         movie: {
             _id: movie._id,
@@ -49,7 +49,7 @@ router.post('/', async function (req, res) {
     res.send(rental);
 });
 //get a rental by the id
-router.get('/:id', async function(req, res) {
+router.get('/:id', async function (req, res) {
     const rental = await Rental.findById(req.params.id);
 
     if (!rental) return res.status(404).send('The rental with the given ID was not found.');
