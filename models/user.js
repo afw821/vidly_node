@@ -31,7 +31,7 @@ userSchema.methods.generateAuthToken = function () {
     //JWT 1st-payload/ 2nd is secret key hard coded
     //we are generating the token here
     //THE SIGN METHOD IS WHAT IS GOING TO BE OUR PAYLOAD
-    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('jwtPrivateKey'));
+    const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, 'jwtPrivateKey');
     return token;
 }
 
