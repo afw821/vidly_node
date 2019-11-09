@@ -74,6 +74,13 @@ $(document).ready(async function () {
       appendTo: childDiv
     });
 
+    const checkOutBtn = $('<a>', {
+      href: '#',
+      class: 'btn btn-primary btn-lg mb30',
+      text: 'Checkout',
+      appendTo: childDiv
+    });
+
     const span = $('<span>', {
       class: 'plan-price',
       text: `$${getMovieForCheckoutPrice}`,
@@ -83,47 +90,49 @@ $(document).ready(async function () {
     $('.movie-grid-container').append(movieGrid);
   });
 
-  const summaryContainer = $('<div>', {
-    class: 'widget',
-  });
 
-  const h4 = $('<h4>', {
-    class: 'widget-title',
-    text: 'Order Summary',
-    appendTo: summaryContainer
-  });
 
-  const summaryBlock = $('<div>', {
-    class: 'summary-block',
-    appendTo: summaryContainer
-  });
 
-  const summaryContent = $('<div>', {
-    class: 'summary-content',
-    appendTo: summaryBlock
-  });
+  // const summaryContainer = $('<div>', {
+  //   class: 'widget',
+  // });
 
-  const summaryHead = $('<div>', {
-    class: 'summary-head',
-    appendTo: summaryContent
-  });
+  // const h4 = $('<h4>', {
+  //   class: 'widget-title',
+  //   text: 'Order Summary',
+  //   appendTo: summaryContainer
+  // });
 
-  const h5 = $('<h5>', {
-    class: 'summary-title',
-    text: 'Total',
-    appendTo: summaryHead
-  });
+  // const summaryBlock = $('<div>', {
+  //   class: 'summary-block',
+  //   appendTo: summaryContainer
+  // });
 
-  const summaryPrice = $('<div>', {
-    class: 'summary-price',
-    appendTo: summaryContent
-  });
+  // const summaryContent = $('<div>', {
+  //   class: 'summary-content',
+  //   appendTo: summaryBlock
+  // });
 
-  const priceP = $('<p>', {
-    class: 'summary-text total-amount-summary',
-    text: '$258',
-    appendTo: summaryPrice
-  });
-  console.log('price array', priceArray, priceArray.length);
-  $('.order-summary-container').html(summaryContainer);
+  // const summaryHead = $('<div>', {
+  //   class: 'summary-head',
+  //   appendTo: summaryContent
+  // });
+
+  // const h5 = $('<h5>', {
+  //   class: 'summary-title',
+  //   text: 'Total',
+  //   appendTo: summaryHead
+  // });
+
+  // const summaryPrice = $('<div>', {
+  //   class: 'summary-price',
+  //   appendTo: summaryContent
+  // });
+
+  // const priceP = $('<p>', {
+  //   class: 'summary-text total-amount-summary',
+  //   text: '$258',
+  //   appendTo: summaryPrice
+  // });
+  //$('.order-summary-container').html(summaryContainer);
 });
