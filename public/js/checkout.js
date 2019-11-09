@@ -1,9 +1,27 @@
 $(document).ready(async function () {
+  const token = sessionStorage.getItem("x-auth-token");
+  //GET CURRENT LOGGED IN USER
+  //---------------------------------------------------------//
+  //GET CURRENT USER
+  //--------------------------------------------------------//
+
+  const user = await $.ajax({
+    url: "/api/users/me",
+    method: "GET",
+    headers: { "x-auth-token": token }
+  });
+  console.log('Me User', user);
+  if (!user) alert('No user so error');
+  var userId = user._id;
+  var userName = user.name;
+  var userEmail = user.email;
+  var isUserAdmin = user.isAdmin;
+  ///END REGION GET LOGGED IN USER
   const moviesInDBArray = [];
   const userSelectedMovies = [];
   const priceArray = [];
   //get all movies to push their names into an array to match with items set in session storage
-  const token = sessionStorage.getItem("x-auth-token");
+
   const movies = await $.ajax({
     url: '/api/movies',
     method: 'GET',
@@ -77,6 +95,9 @@ $(document).ready(async function () {
     const checkOutBtn = $('<a>', {
       href: '#',
       class: 'btn btn-primary btn-lg mb30',
+      id: `checkout-btn-${getMovieForCheckoutId}`,
+      'data-movie-id': getMovieForCheckoutId,
+      'data-user-id': userId,
       text: 'Checkout',
       appendTo: childDiv
     });
@@ -88,51 +109,13 @@ $(document).ready(async function () {
     });
     priceArray.push(getMovieForCheckoutPrice);
     $('.movie-grid-container').append(movieGrid);
+
+    //click event for checking out movies
+    $(`#checkout-btn-${getMovieForCheckoutId}`).click(function () {
+      console.log('checkout button clicked', this);
+    });
+
   });
 
 
-
-
-  // const summaryContainer = $('<div>', {
-  //   class: 'widget',
-  // });
-
-  // const h4 = $('<h4>', {
-  //   class: 'widget-title',
-  //   text: 'Order Summary',
-  //   appendTo: summaryContainer
-  // });
-
-  // const summaryBlock = $('<div>', {
-  //   class: 'summary-block',
-  //   appendTo: summaryContainer
-  // });
-
-  // const summaryContent = $('<div>', {
-  //   class: 'summary-content',
-  //   appendTo: summaryBlock
-  // });
-
-  // const summaryHead = $('<div>', {
-  //   class: 'summary-head',
-  //   appendTo: summaryContent
-  // });
-
-  // const h5 = $('<h5>', {
-  //   class: 'summary-title',
-  //   text: 'Total',
-  //   appendTo: summaryHead
-  // });
-
-  // const summaryPrice = $('<div>', {
-  //   class: 'summary-price',
-  //   appendTo: summaryContent
-  // });
-
-  // const priceP = $('<p>', {
-  //   class: 'summary-text total-amount-summary',
-  //   text: '$258',
-  //   appendTo: summaryPrice
-  // });
-  //$('.order-summary-container').html(summaryContainer);
 });
