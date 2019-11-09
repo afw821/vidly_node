@@ -35,25 +35,16 @@ $(document).ready(async function () {
   });
   //compare movies in Data Base with all movies 
   moviesInDBArray.forEach(function (movieName) {
-    //console.log('movieName', movieName);
     for (let i = 0; i < sessionStorage.length; i++) {
       const selectedMoviesName = sessionStorage.key(i);
-      //console.log('selected Movies name', selectedMoviesName);
       if (movieName === selectedMoviesName) {
-        //console.log('selected movies name iffff', selectedMoviesName);
         userSelectedMovies.push(selectedMoviesName);
       }
     }
-
   });
-
-  //console.log('theses are the movies the user has selected to checkout', userSelectedMovies);
   userSelectedMovies.forEach(async function (movie) {
     const movieIdForCheckout = sessionStorage.getItem(movie);
-
-    //console.log(movieIdForCheckout);
     movieIdForCheckout.toString();
-
     const getMovieById = await $.ajax({
       url: `/api/movies/${movieIdForCheckout}`,
       method: 'GET'
@@ -111,8 +102,22 @@ $(document).ready(async function () {
     $('.movie-grid-container').append(movieGrid);
 
     //click event for checking out movies
-    $(`#checkout-btn-${getMovieForCheckoutId}`).click(function () {
+    $(`#checkout-btn-${getMovieForCheckoutId}`).click( async function () {
       console.log('checkout button clicked', this);
+      const movieId = $(this).data('movie-id');
+      const userId = $(this).data('user-id');
+      
+      const rental = await $.ajax({
+        url: '/api/rentals',
+        method: 'POST',
+        data:{
+          userId: userId,
+          movieId: movieId
+        }
+      });
+
+      console.log('rental', rental);
+
     });
 
   });
