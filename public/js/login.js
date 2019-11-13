@@ -36,10 +36,6 @@ $(document).ready(function () {
         }, 4000);
         return;
       }
-      console.log('name', name);
-      console.log('email', email);
-      console.log('password', password);
-      console.log('is admin', isAdmin);
       //POSTING A NEW USER//
       const result = await $.ajax({
         url: "/api/users",
@@ -51,7 +47,6 @@ $(document).ready(function () {
           isAdmin: isAdmin
         }
       });
-      console.log('result', result);
       //ALERT IF ACCOUNT IS SUCESSFULLY CREATED//
       if (result) {
         //Launch modal if account successfully created
@@ -61,7 +56,6 @@ $(document).ready(function () {
       //--------------------------------------------------//
       //HANDLING ERRORS WE RECEIVE FROM THE SERVER//
       //--------------------------------------------------//
-      console.log("Fatal Error::", ex);
       if (ex.responseText === "User already registered") {
         $(".email-validation").css("opacity", "1.0");
         setTimeout(function () {
@@ -102,6 +96,10 @@ $(document).ready(function () {
     $(this).addClass("active");
     $(".login").removeClass("active");
   });
+  //go to admim portal
+  $('.admin').click(function() {
+    window.location.href = '/admin';
+  });
   //-----------------------------------------//
   //ON CLICK FOR USER TO LOGIN//
   //-----------------------------------------//
@@ -134,7 +132,6 @@ $(document).ready(function () {
       //----------------------------------------------------------//
       //HANDLING ERRORS CLIENT SIDE WE GET FROM THE SERVER//
       //---------------------------------------------------------//
-      console.log("Fatal Error::", ex.responseText);
       switch (ex.responseText) {
         case "invalid email or password":
           $("#invalid-email-password").css("opacity", "1.0");
@@ -157,4 +154,5 @@ $(document).ready(function () {
       }
     }
   });
+
 });
