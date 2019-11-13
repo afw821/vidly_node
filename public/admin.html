@@ -19,31 +19,30 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand ff" href="#">Alex's Movies</a>
+        <a class="navbar-brand go-home ff" href="#">Alex's Movies</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active registration ff" href="#">Register</a>
-                <a class="nav-item nav-link login ff" href="#">Login</a>
-                <a class="nav-item nav-link admin ff" href="#">Admin Portal</a>
+                <a class="nav-item nav-link go-home ff" href="#">Home</a>
+                <a class="nav-item nav-link active admin ff" href="#">Admin Portal</a>
             </div>
         </div>
     </nav>
     <div class="container d-flex justify-content-center mt-5">
-        <form class="text-center border border-light p-5 account-login-form" style="width:600px; height:620px;">
+        <form class="text-center border border-light p-5 account-login-form" style="width:600px; height:360px;">
 
             <p style="color: whitesmoke;" class="h4 mb-4 ff">Administrator Sign In</p>
-            <input type="email" id="user-email-login" class="form-control mb-4" placeholder="E-mail">
-            <input type="password" id="first-password-login" class="form-control mb-4" placeholder="Password">
-            <button class="btn btn-info btn-block my-4" type="button" id="login-user">Sign in</button>
-            <small id="invalid-email-password" class="form-text email-format-validation-login" style="opacity:0.0; color: black; font-weight: bolder;">
+            <input type="email" id="user-email-login-admin" class="form-control mb-4" placeholder="E-mail">
+            <input type="password" id="first-password-login-admin" class="form-control mb-4" placeholder="Password">
+            <button class="btn btn-info btn-block my-4" type="button" id="login-admin">Sign in</button>
+            <small id="invalid-email-password" class="form-text email-format-validation-login-admin" style="opacity:0.0; color: black; font-weight: bolder;">
                 Invalid Email or Password!</small>
-            <h6 id="password-length-login" class="form-text email-format-validation-login" style="opacity:0.0; color: black; font-weight: bolder;">
+            <h6 id="password-length-login" class="form-text email-format-validation-login-admin" style="opacity:0.0; color: black; font-weight: bolder;">
                 Password Must Be 5 Characters In Length!</h6>
-            <small id="valid-email-login" class="form-text email-format-validation-login" style="opacity:0.0; color: black; font-weight: bolder;">
+            <small id="valid-email-login" class="form-text email-format-validation-login-admin" style="opacity:0.0; color: black; font-weight: bolder;">
                 Email Must Be A Valid Email!</small>
 
             <!-- <p class="h4" style="font-weight: bolder;">Not a member?
