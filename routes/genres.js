@@ -3,52 +3,27 @@ const router = express.Router();
 const { Genre, validate } = require('../models/genre');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
-//get all genres
-router.get('/', async function (req, res) {
-    try {
+const ash = require('express-async-handler');
+
+router.get('/', ash(async function (req, res) { 
         const genres = await Genre.find();
-        res.send(genres);
-    } catch (exception) {
-        console.log(exception);
-    }
-});
-//get genre by id
-router.get('/:id', async function (req, res) {
-    try {
-        const genre = await Genre.findById(req.params.id);
-        //if course doesn't exist return 404
-        if (!genre) {
-            res.status(404).send("The requested id doesn't exist");
-            return;
-        }
-        //return genre to the client
-        res.send(genre);
-    } catch (ex) {
-        console.log('FATAL ERROR::', ex);
-    }
+        res.send(genres);        
+}));
 
-});
-//post a genre
-router.post('/', async function (req, res) {
-    try {
-        //validate the req.body object
+router.get('/:id', ash(async function (req, res) {
+        const genre = await Genre.findById(req.params.id);  
+        console.log('genre', genre);   
+        if (!genre) return  res.status(404).send("The requested id doesn't exist");
+        res.send(genre);
+}));
+
+router.post('/', ash(async function (req, res) {
         const result = validate(req.body);
-        //if invalid return a 404 error to the client
-        if (result.error) {
-            res.status(404).send(result.error.details[0].message);
-            return;
-        }
-        //define the object that you want to post(push to array)
+        if (result.error) return  res.status(404).send(result.error.details[0].message);
         let genre = new Genre({ name: req.body.name })
-        //else push the course object to the course array
         genre = await genre.save();
-        //send the response back to the client
         res.send(genre);
-    } catch (ex) {
-        console.log('FATAL ERROR::', ex);
-    }
-
-});
+}));
 //put(replace) route
 router.put('/:id', auth, async function (req, res) {
     try {
