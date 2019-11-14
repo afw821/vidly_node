@@ -1,7 +1,5 @@
 $(document).ready(async function () {
-  //const token = localStorage.getItem("x-auth-token");
   const token = sessionStorage.getItem("x-auth-token");
-  console.log('hp token', token);
   if (!token) {
     window.location.href = '/login';
 
@@ -16,7 +14,6 @@ $(document).ready(async function () {
     method: "GET",
     headers: { "x-auth-token": token }
   });
-  console.log('Me User', user);
   if (!user) alert('No user so error');
   var userId = user._id;
   var userName = user.name;

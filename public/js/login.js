@@ -116,7 +116,6 @@ $(document).ready(function () {
           password: password
         }
       });
-      console.log('auth login token', token);
       //IF VALID USER (THEY HAVE A VALID JWT)
       if (token) {
         try {
