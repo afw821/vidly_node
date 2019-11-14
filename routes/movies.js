@@ -4,8 +4,9 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const ash = require('express-async-handler');
+const admin = require('../middleware/admin');
 
-router.get("/", ash(async function(req, res) {
+router.get("/", auth, ash(async function(req, res) {
     const movies = await Movie.find();
     res.send(movies);
 }));
@@ -29,19 +30,11 @@ router.post("/", ash(async function(req, res) {
   movie = await movie.save();
   res.send(movie);
 }));
-//update route
-router.put("/:id", auth, async function(req, res) {
-  try {
-    //validating the request body because we are sending a new movie object to update a current one
 
+router.put("/:id", auth, ash(async function(req, res) {
     const result = validate(req.body);
-    if (result.error) {
-      res.status(400).send(result.error.details[0].message);
-      return;
-    }
-    //finding the genre by id
+    if (result.error)  return res.status(400).send(result.error.details[0].message); 
     const genre = await Genre.findById(req.body.genreId);
-    //if genre doesn't exist return bad req to client
     if (!genre) return res.status(400).send("Invalid Genre");
     //define a new movie object to update after find by id
     const movie = await Movie.findByIdAndUpdate(
@@ -57,43 +50,21 @@ router.put("/:id", auth, async function(req, res) {
       },
       { new: true }
     );
-    //if movie not found then return 404 to client
-    if (!movie)
-      return res.status(404).send("The movie with the given ID was not found.");
-    //else send movie to the client
+
+    if (!movie) return res.status(404).send("The movie with the given ID was not found.");
     res.send(movie);
-  } catch (ex) {
-    console.log("FATAL ERROR:::", ex);
-  }
-});
-//get movie by id
-router.get("/:id", async function(req, res) {
-  try {
+}));
+
+router.get("/:id", ash(async function(req, res) {
     const movie = await Movie.findById(req.params.id);
-
-    if (!movie)
-      return res
-        .status(404)
-        .send("The movie with thr requested id was not found!!");
-
+    if (!movie) return res.status(404).send("The movie with the requested id was not found.");
     res.send(movie);
-  } catch (ex) {
-    res.send(ex);
-    console.log("FATAL ERROR::", ex);
-  }
-});
-//delete route
-router.delete("/:id", async function(req, res) {
-  try {
+}));
+
+router.delete("/:id", [auth, admin], ash(async function(req, res) {
     const movie = await Movie.findByIdAndRemove(req.params.id);
-    console.log(movie);
-    if (!movie)
-      return res.status(404).send("The movie with the given ID was not found.");
-    console.log("Movie exists");
+    if (!movie) return res.status(404).send("The movie with the given ID was not found.");      
     res.send(movie);
-  } catch (ex) {
-    console.log("FATAL ERROR::", ex);
-  }
-});
+}));
 
 module.exports = router;

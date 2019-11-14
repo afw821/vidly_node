@@ -3,34 +3,25 @@ const { Movie } = require('../models/movie');
 const { User } = require('../models/user');
 const express = require('express');
 const router = express.Router();
+const ash = require('express-async-handler');
+const admin = require('../middleware/admin');
+const auth = require('../middleware/auth');
 
-//get all rentals
-router.get('/', async function (req, res) {
-    //get all rentals and sort by the date out
+router.get('/', [ auth, admin ], ash(async function (req, res) {
     const rentals = await Rental.find().sort('-dateOut');
     res.send(rentals);
-});
-//post a rental AKA checkout or BUYING PRODUCTS
-router.post('/', async function (req, res) {
-    try{
-        console.log('req body', req.body.userId);
-        //validate the request client sends
+}));
+
+router.post('/', ash(async function (req, res) {
         const result = validate(req.body);
-        //if error return 400 bad request to the client
         if (result.error) return res.status(400).send(error.details[0].message);
-        //find customer by id
+       
         const user = await User.findById(req.body.userId);
-        console.log('user', user);
-        //if customer doesn't exist then return 400 to client
         if (!user) return res.status(400).send('Invalid User');
-        //same logic as ablove but for MOVIE
         const movie = await Movie.findById(req.body.movieId);
-        console.log('movie', movie);
         if (!movie) return res.status(400).send('Invalid movie.');
-        //check to see if movie is in stock if not return not in stock to the client
-        if (movie.numberInStock === 0) return res.status(400).send('Movie not in stock.');
-        //create a new rental object
-    
+
+        if (movie.numberInStock === 0) return res.status(400).send('Movie not in stock.');  
         let rental = new Rental({
             user: {
                 //keys here are NEW
@@ -46,23 +37,15 @@ router.post('/', async function (req, res) {
             }
         });
         rental = await rental.save();
-        //decrease the  number of movies in stock by 1
         movie.numberInStock--;
-        movie.save();
-    
+        movie.save();    
         res.send(rental);
-    }catch (ex) {
-        console.log(`fatal error for POSTing rental: ${ex}`);
-    }
+}));
 
-});
-//get a rental by the id
-router.get('/:id', async function (req, res) {
+router.get('/:id', ash(async function (req, res) {
     const rental = await Rental.findById(req.params.id);
-
     if (!rental) return res.status(404).send('The rental with the given ID was not found.');
-
     res.send(rental);
-});
+}));
 
 module.exports = router;
