@@ -5,7 +5,7 @@
     });
 
     //post an auth (login for an admin user)
-
+    console.log('hello world!');
     $('#login-admin').click(async function() {
         try{
             const email = $('#user-email-login-admin').val();
