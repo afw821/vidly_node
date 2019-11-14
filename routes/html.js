@@ -18,4 +18,8 @@ module.exports = function (app) {
   app.get("/admin", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/admin.html"));
   });
+
+  app.get("/admin/:id", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/adminHome.html"));
+  });
 };
