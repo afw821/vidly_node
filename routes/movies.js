@@ -3,25 +3,17 @@ const { Genre } = require("../models/genre");
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
-//get all movies
-router.get("/", auth, async function(req, res) {
-  try {
+const ash = require('express-async-handler');
+
+router.get("/", ash(async function(req, res) {
     const movies = await Movie.find();
     res.send(movies);
-  } catch (ex) {
-    console.log("ex", ex);
-  }
-});
-//post a new movie to DB
-router.post("/", async function(req, res) {
-  //validate the req.body from the client
+}));
+
+router.post("/", ash(async function(req, res) {
   const result = validate(req.body);
-  //if error res to client 400 bad request
-  if (result.error) {
-    res.status(400).send(result.error.details[0].message);
-    return;
-  }
-  //find genre by genreId
+  if (result.error) return  res.status(400).send(result.error.details[0].message);
+  
   const genre = await Genre.findById(req.body.genreId);
   if (!genre) return res.status(400).send("Invalid genre");
   //create a new movie object with the genre _id and name properties
@@ -35,9 +27,8 @@ router.post("/", async function(req, res) {
     dailyRentalRate: req.body.dailyRentalRate
   });
   movie = await movie.save();
-
   res.send(movie);
-});
+}));
 //update route
 router.put("/:id", auth, async function(req, res) {
   try {

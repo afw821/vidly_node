@@ -35,7 +35,7 @@ router.put('/:id', auth, ash(async function (req, res) {
         res.send(genre);
 }));
 
-router.delete('/:id', ash(async function (req, res) {
+router.delete('/:id', [auth, admin], ash(async function (req, res) {
         const genre = await Genre.findByIdAndRemove(req.params.id);
         if (!genre) return  res.status(404).send("the requested genre doesn't exist");        
         res.send(genre);
