@@ -34,7 +34,10 @@ router.post('/admin', ash(async function (req, res) {
     if (!validPassword) return res.status(400).send('Invalid email or password');
     //generate auth token from schema method in user.js
     const token = user.generateAuthToken();//token generated in user.js
-    res.header('x-auth-token', token).header('UserName', user.name).send(token);
+    res.header('x-auth-token', token).header('UserName', user.name).json({
+        token: token,
+        username: user.name
+    });
 }));
 
 //define a validate user function to validate the user input

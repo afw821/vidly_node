@@ -12,7 +12,7 @@
             const password = $('#first-password-login-admin').val();
             console.log(`username: ${email} password:${password}`);
 
-            const token = await $.ajax({
+            const res = await $.ajax({
                 url: '/api/auth/admin',
                 method: 'POST',
                 data: {
@@ -21,10 +21,10 @@
                 }
             });
 
-            console.log('Auth / Admin token', token);
+            console.log('Auth / Admin token', res);
             //console.log(token.getResponseHeader("UserName"));
-            const UserName = 'AlexWatkins'
-            if(token) window.location.href = `/admin/${UserName}`
+            
+            if(res.token) window.location.href = `/admin/${res.username}`
         }catch (ex){
             console.log(ex.responseText);
             switch(ex.responseText) {
