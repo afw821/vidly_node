@@ -23,8 +23,10 @@
 
             console.log('Auth / Admin token', res);
             //console.log(token.getResponseHeader("UserName"));
-            
-            if(res.token) window.location.href = `/admin/${res.username}`
+            console.log('res.token', res.token);
+            sessionStorage.setItem("Admin-Token", res.token);
+            if(res.token) window.location.href = `/adminHome=${res.username}`
+     
         }catch (ex){
             console.log(ex.responseText);
             switch(ex.responseText) {

@@ -15,7 +15,7 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./content/font-awesome.css" />
-    <link rel="stylesheet" type="text/css" href="./content/admin-home.css"/>
+    <link rel="stylesheet" type="text/css" href="./content/admin-home.css" />
     <title>Welcome - Admin</title>
 </head>
 
@@ -28,25 +28,62 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link go-home ff" href="#">Crud Operations</a>
-                <a class="nav-item nav-link active admin ff" href="#">Admin Portal</a>
+                <a class="nav-item nav-link movies ff" href="#">Movies</a>
+                <a class="nav-item nav-link  users ff" href="#">Users</a>
+                <a class="nav-item nav-link  genres ff" href="#">Genres</a>
+                <a class="nav-item nav-link  rentals ff" href="#">Rentals</a>
+                <a class="nav-item nav-link  logout ff" href="#">Logout</a>
             </div>
         </div>
     </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Administrator Portal</h1>
+            <p class="lead">Click on one of the links above to perform Add / Remove / Update / Create Users, Genres,
+                Movies and Rentals</p>
+            <hr class="my-4">
+            <p>To learn more about this site click below!</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- Add Movie HTML String -->
+                <!-- <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Title">
+                        </div>
+                        <div class="col">
+                            <select class="selectList" id="genre-selectList">
+                                <option class="default" selected value="">Genre</option>
+                              </select>
+                        </div>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/js/mdb.min.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"
+    integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script type="text/javascript" src="./js/adminHome.js"></script>
