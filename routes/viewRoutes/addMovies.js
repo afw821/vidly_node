@@ -6,14 +6,11 @@ const auth = require("../../middleware/auth");
 const ash = require('express-async-handler');
 const admin = require('../../middleware/admin');
 
-router.get('/', ash(async function (req, res) {
+router.get('/', [auth, admin], ash(async function (req, res) {
     //get all genres
     const genres = await Genre.find();
-
-
     var optionListArray = [];
     for (let i = 0; i < genres.length; i++) {
-
         var genre = genres[i].name;
         var id = genres[i]._id;
 
@@ -22,7 +19,6 @@ router.get('/', ash(async function (req, res) {
         optionListArray.push(optionList);
     }
         const option = optionListArray.map( m => m);
-        console.log('option', option);
         var genreSelectList = `<form>
         <div class="form-row">
             <div class="col">
@@ -30,13 +26,16 @@ router.get('/', ash(async function (req, res) {
             </div>
             <div class="col">
                 <select class="selectList" id="genre-selectList">
-                <option class="option-genre" value="${id}">${genre}</option>
+               
                   </select>
             </div>
         </div>
     </form>`
 
-    res.send(genreSelectList);
+    res.send({
+        htmlString: genreSelectList,
+        options : option
+    });
 
 
     //build out html string to send back to the client

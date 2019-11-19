@@ -1,5 +1,5 @@
 (async function () {
-    console.log('Hello World!');
+   
     //Redirect if user isn't logged in
     const token = sessionStorage.getItem("Admin-Token");
     if (!token) {
@@ -7,30 +7,24 @@
   
       alert('Only administrators can see this page!!');
     }
-    //get all genres to add to the dropdown list dynamically
-    const genres = await $.ajax({
-        url: '/api/genres',
-        method: 'GET'
-    });
-    console.log(genres);
 
-    for(let i = 0; i < genres.length; i++) {
-        console.log(genres[i].name);
-        const genre = genres[i].name;
-        const id = genres[i]._id;
-
-        var optionList = `<option class="option-genre" value="${id}">${genre}</option>`
-        $('.default').after(optionList);
+    try{
+        const data = await $.ajax({
+            url: '/api/addMovie',
+            method: 'GET',
+        });
+        const defaultOption = '<option selected class="option-genre">Select Genre</option>';
+        const optionList = data.options;
+        $('.movie-dump').append(data.htmlString);
+        $('.movie-dump').find('.selectList').append(defaultOption)
+        optionList.forEach(function(option, i, arr) {
+            $('.movie-dump').find('.selectList').append(option);
+        });
+    }catch(ex) {
+        alert('Fatal Error');
     }
-    console.log(optionList);
-    // genres.forEach(function(v,i,arr) {
-    //     console.log(v);
-    //     const id = v._id;
-    //     const genre = v.name;
-    //     console.log(genre);
-    //     const optionList = `<option class="option-genre" value="${id}">${genre}</option>`
-        
-    // });
+
+    
     //logout
     $('.logout').click(function() {
         sessionStorage.clear();
