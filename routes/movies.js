@@ -12,6 +12,7 @@ router.get("/", auth, ash(async function(req, res) {
 }));
 
 router.post("/", ash(async function(req, res) {
+  console.log('req body', req.body);
   const result = validate(req.body);
   if (result.error) return  res.status(400).send(result.error.details[0].message);
   
@@ -28,7 +29,10 @@ router.post("/", ash(async function(req, res) {
     dailyRentalRate: req.body.dailyRentalRate
   });
   movie = await movie.save();
-  res.send(movie);
+  res.send({
+    result: true,
+    movie: movie
+  });
 }));
 
 router.put("/:id", auth, ash(async function(req, res) {

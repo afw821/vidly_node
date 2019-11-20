@@ -24,6 +24,37 @@
     }catch(ex) {
         alert('Fatal Error');
     }
+    //ADD MOVIE TO DB AJAX AND LOGIC///
+    //*****************************/ */
+    $('#add-movie').click(async function() {
+        try{
+            //get data from form
+            const title = $('#add-movie-title').val();
+            const genreId = $('#genre-selectList').val();
+            const numberInStock = parseInt($('#number-in-stock').val());
+            console.log('numer in stock', numberInStock);
+            const dailyRentalRate = parseInt($('#rental-rate').val());
+            const result = await $.ajax({
+                url: '/api/movies',
+                method: 'POST',
+                data: {
+                    title: title,
+                    genreId: genreId,
+                    numberInStock: numberInStock,
+                    dailyRentalRate: dailyRentalRate
+                }
+                
+            });
+
+            if(result.result) {
+                alert('Movie Sucessfully posted!');
+                console.log('movie', result.movie);
+            }
+        }catch(ex) {
+            alert(`Fatal error for post movie`);
+        }
+    });
+
 
     
     //logout
