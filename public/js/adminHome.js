@@ -1,17 +1,18 @@
 (async function () {
    
     //Redirect if user isn't logged in
-    const token = sessionStorage.getItem("Admin-Token");
+    const token = sessionStorage.getItem('x-auth-token');
     if (!token) {
       window.location.href = '/admin';
   
       alert('Only administrators can see this page!!');
     }
-
+    //Get html string from server to Add Movies to DB
     try{
         const data = await $.ajax({
             url: '/api/addMovie',
             method: 'GET',
+            headers: { 'x-auth-token' : token }
         });
         const defaultOption = '<option selected class="option-genre">Select Genre</option>';
         const optionList = data.options;

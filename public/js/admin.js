@@ -24,7 +24,7 @@
             console.log('Auth / Admin token', res);
             //console.log(token.getResponseHeader("UserName"));
             console.log('res.token', res.token);
-            sessionStorage.setItem("Admin-Token", res.token);
+            sessionStorage.setItem('x-auth-token', res.token);
             if(res.token) window.location.href = `/adminHome=${res.username}`
      
         }catch (ex){

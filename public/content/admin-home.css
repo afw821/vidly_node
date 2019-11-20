@@ -10,3 +10,19 @@ body{
     height:38px;
     border-radius: 5px;
 }
+form{
+    /* border: 2px solid rgb(22, 21, 22); */
+    border-radius: 5px;
+    min-height: 275px;
+    width:800px;
+    background-color: whitesmoke;
+    opacity: 0.9;
+    /* padding-left: 100px;
+    padding-top: 125px; */
+}
+input.add-movie{
+    width: 224px;
+}
+.add-movie-form-row{
+    margin-bottom: 25px;
+}
