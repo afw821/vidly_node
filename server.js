@@ -16,7 +16,7 @@ app.use(express.json());
 // require('./startup/routes')(app);
 require("./routes/html")(app);
 // require('./startup/db')();
-// require("./startup/config")();
+//require("./startup/config")();
 //mongoose.connect(process.env.MONGODB_URI);
 
 app.use("/api/auth", auth);
