@@ -12,7 +12,7 @@ function auth(req, res, next) {
 
 
         // //id there is a token we need to verify it's a valid token
-        const decoded = jwt.verify(token,'jwtPrivateKey');
+        const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
         // //ABOVE WILL BE DECODED PAYLOAD
         //Decoded user object from Sign method
         req.user = decoded;
