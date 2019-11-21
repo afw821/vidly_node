@@ -49,15 +49,11 @@ router.get('/', [auth, admin], ash(async function (req, res) {
             </div>
             <div class="form-row d-flex justify-content-center">
                 
-                <button type="button" id="add-movie" class="btn btn-primary">Add</button>
-                
-            </div>
-           
-        </div>
-            
+                <button type="button" id="add-movie" class="btn btn-primary">Add</button>               
+            </div>           
+        </div>            
     </form>`
         
-
     res.send({
         htmlString: genreSelectList,
         options : option
