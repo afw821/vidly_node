@@ -11,8 +11,8 @@ router.get("/", auth, ash(async function(req, res) {
     res.send(movies);
 }));
 
-router.post("/", ash(async function(req, res) {
-  console.log('req body', req.body);
+router.post("/", [ auth, admin ], ash(async function(req, res) {
+ 
   const result = validate(req.body);
   if (result.error) return  res.status(400).send(result.error.details[0].message);
   

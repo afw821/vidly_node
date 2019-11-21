@@ -42,7 +42,8 @@
                     genreId: genreId,
                     numberInStock: numberInStock,
                     dailyRentalRate: dailyRentalRate
-                }
+                },
+                headers: { 'x-auth-token' : token }
                 
             });
 

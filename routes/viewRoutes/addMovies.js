@@ -20,7 +20,6 @@ router.get('/', [auth, admin], ash(async function (req, res) {
 
         optionListArray.push(optionList);
     }
-        const option = optionListArray.map( m => m);
         var genreSelectList = `                <form class="d-flex justify-content-center align-items-center">
         <div class="form-content-wrapper-div">
             <div class="row header-row d-flex justify-content-center">
@@ -56,7 +55,7 @@ router.get('/', [auth, admin], ash(async function (req, res) {
         
     res.send({
         htmlString: genreSelectList,
-        options : option
+        options : optionListArray
     });
 
 
