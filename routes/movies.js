@@ -74,7 +74,7 @@ router.get("/search/name", ash(async function(req, res) {
 router.delete("/:id", [auth, admin], ash(async function(req, res) {
     const movie = await Movie.findByIdAndRemove(req.params.id);
     if (!movie) return res.status(404).send("The movie with the given ID was not found.");      
-    res.send(movie);
+    res.send({ result: true, movieDeleted: movie });
 }));
 
 module.exports = router;

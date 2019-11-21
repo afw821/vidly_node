@@ -73,7 +73,27 @@
             alert(`Fatal error for post movie`);
         }
     });
+    //DELETE MOVIE TO DB AJAX AND LOGIC///
+    //*****************************/ */
+    $('#delete-movie').click(async function () {
+        try {
+            //get data from form
+            const movieId = $('#movie-selectList').val();
+            console.log('movie id', movieId);
+            const result = await $.ajax({
+                url: `/api/movies/${movieId}`,
+                method: 'DELETE',
+                headers: { 'x-auth-token': token }
+            });
 
+            if (result.result) {
+                alert('Movie Sucessfully deleted!');
+                console.log('movie deleted', result.movieDeleted);
+            }
+        } catch (ex) {
+            alert(`Fatal error for delete movie`);
+        }
+    }); 
 
     //logout
     $('.logout').click(function () {
