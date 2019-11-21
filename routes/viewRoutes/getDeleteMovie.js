@@ -1,5 +1,4 @@
 const { Movie, validate } = require("../../models/movie");
-const { Genre } = require("../../models/genre");
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
@@ -28,7 +27,7 @@ router.get('/', [ auth, admin ], ash(async function (req, res) {
         </div>
         <div class="form-row delete-movie-form-row">
             <div class="col">
-                <select class="selectList" id="genre-selectList">
+                <select class="selectList" id="movie-selectList">
 
                 </select>
             </div>

@@ -1,4 +1,3 @@
-const { Movie, validate } = require("../../models/movie");
 const { Genre } = require("../../models/genre");
 const express = require("express");
 const router = express.Router();
@@ -53,10 +52,10 @@ router.get('/', [auth, admin], ash(async function (req, res) {
         </div>            
     </form>`
         
-    res.send({
-        htmlString: genreSelectList,
-        options : optionListArray
-    });
+    res.send({ htmlString: genreSelectList, options : optionListArray });
+        
+        
+    
 
 
     //build out html string to send back to the client
