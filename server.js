@@ -11,6 +11,7 @@ const users = require("./routes/users");
 const auth = require("./routes/auth");
 const addMovies = require("./routes/viewRoutes/addMovies");
 const deleteMovie = require("./routes/viewRoutes/getDeleteMovie");
+const reviews = require('./routes/reviews');
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use("/api/movies", movies);
 app.use("/api/customers", customers);
 app.use("/api/addMovie", addMovies);
 app.use("/api/getDeleteMovie", deleteMovie);
+app.use('/api/reviews', reviews);
 
 const TEST_URI = "mongodb://localhost/vidly_node";
 
