@@ -14,13 +14,56 @@
             method: 'GET',
             headers: { 'x-auth-token': token }
         });
-        const defaultOption = '<option selected class="option-genre">Select Genre</option>';
+        const defaultOption = '<option selected class="option-genre" value="">Select Genre</option>';
         const optionList = data.options;
         $('.movie-dump').append(data.htmlString);
         $('.movie-dump').find('.selectList').append(defaultOption);
         optionList.forEach(function (option, i, arr) {
             $('.movie-dump').find('.selectList').append(option);
         });
+
+        //re index array (alphabetical order dd list)
+
+        const reindexArray = [];
+        console.log( $('#genre-selectList').find('option'));
+        $('#genre-selectList').find('option').each(function (index, element) {
+            console.log('element', element);
+             if ($(this).val()) {
+                const value = $(element).val();
+                const name = $(element).text();
+
+                let reindexObject = { name: name, value: value }
+                console.log('reindex object', reindexObject);
+                reindexArray.push(reindexObject);
+             }
+        });
+        console.log('index array', reindexArray);
+        $('#genre-selectList').find('option').first().siblings().remove();
+
+        // sort by name
+        reindexArray.sort(function (a, b) {
+            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA > nameB) {
+                return -1;
+            }
+            if (nameA < nameB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
+        });
+
+        reindexArray.forEach(function(element, index, arr) {
+            const id = element.value;
+            const name = element.name;
+
+            const sortedElement = `<option class="option-genre" value="${id}">${name}</option>`;
+
+            $('#genre-selectList').find('option').first().after(sortedElement);
+
+        })
     } catch (ex) {
         alert('Fatal Error');
     }
@@ -38,7 +81,7 @@
         optionList.forEach(function (option, i, arr) {
             $('.delete-movie-dump').find('.selectList').append(option);
         });
-       
+
     } catch (ex) {
         alert('Fatal Error getting delete movie list');
     }
@@ -93,7 +136,7 @@
         } catch (ex) {
             alert(`Fatal error for delete movie`);
         }
-    }); 
+    });
 
     //logout
     $('.logout').click(function () {
