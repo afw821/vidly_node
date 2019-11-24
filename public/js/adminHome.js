@@ -23,47 +23,8 @@
         });
 
         //re index array (alphabetical order dd list)
-
-        const reindexArray = [];
-        console.log( $('#genre-selectList').find('option'));
-        $('#genre-selectList').find('option').each(function (index, element) {
-            console.log('element', element);
-             if ($(this).val()) {
-                const value = $(element).val();
-                const name = $(element).text();
-
-                let reindexObject = { name: name, value: value }
-                console.log('reindex object', reindexObject);
-                reindexArray.push(reindexObject);
-             }
-        });
-        console.log('index array', reindexArray);
-        $('#genre-selectList').find('option').first().siblings().remove();
-
-        // sort by name
-        reindexArray.sort(function (a, b) {
-            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-            if (nameA > nameB) {
-                return -1;
-            }
-            if (nameA < nameB) {
-                return 1;
-            }
-
-            // names must be equal
-            return 0;
-        });
-
-        reindexArray.forEach(function(element, index, arr) {
-            const id = element.value;
-            const name = element.name;
-
-            const sortedElement = `<option class="option-genre" value="${id}">${name}</option>`;
-
-            $('#genre-selectList').find('option').first().after(sortedElement);
-
-        })
+        reindexArray('#genre-selectList');
+        
     } catch (ex) {
         alert('Fatal Error');
     }
@@ -142,6 +103,52 @@
     $('.logout').click(function () {
         sessionStorage.clear();
         window.location.href = '/admin';
-    })
+    });
+
+
+    function reindexArray (args){
+                //re index array (alphabetical order dd list)
+                console.log('args elm', args);
+                const reindexArray = [];
+                console.log('element find', $(args).find('option'));
+                $(args).find('option').each(function (index, element) {
+                    
+                     if ($(this).val()) {
+                        const value = $(element).val();
+                        const name = $(element).text();
+        
+                        let reindexObject = { name: name, value: value }
+                        // console.log('reindex object', reindexObject);
+                        reindexArray.push(reindexObject);
+                     }
+                });
+                console.log('index array', reindexArray);
+                $(args).find('option').first().siblings().remove();
+        
+                // sort by name
+                reindexArray.sort(function (a, b) {
+                    var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+                    var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+                    if (nameA > nameB) {
+                        return -1;
+                    }
+                    if (nameA < nameB) {
+                        return 1;
+                    }
+        
+                    // names must be equal
+                    return 0;
+                });
+        
+                reindexArray.forEach(function(element, index, arr) {
+                    const id = element.value;
+                    const name = element.name;
+        
+                    const sortedElement = `<option class="option-genre" value="${id}">${name}</option>`;
+        
+                    $(args).find('option').first().after(sortedElement);
+        
+                });
+    }
 
 })();
