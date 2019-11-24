@@ -24,7 +24,7 @@
 
         //re index array (alphabetical order dd list)
         reindexArray('#genre-selectList');
-        
+
     } catch (ex) {
         alert('Fatal Error');
     }
@@ -43,6 +43,9 @@
             $('.delete-movie-dump').find('.selectList').append(option);
         });
 
+        //re index array (alphabetical order dd list)
+        reindexArray('#movie-selectList');
+
     } catch (ex) {
         alert('Fatal Error getting delete movie list');
     }
@@ -54,7 +57,6 @@
             const title = $('#add-movie-title').val();
             const genreId = $('#genre-selectList').val();
             const numberInStock = parseInt($('#number-in-stock').val());
-            console.log('numer in stock', numberInStock);
             const dailyRentalRate = parseInt($('#rental-rate').val());
             const result = await $.ajax({
                 url: '/api/movies',
@@ -71,7 +73,6 @@
 
             if (result.result) {
                 alert('Movie Sucessfully posted!');
-                console.log('movie', result.movie);
             }
         } catch (ex) {
             alert(`Fatal error for post movie`);
@@ -104,51 +105,40 @@
         sessionStorage.clear();
         window.location.href = '/admin';
     });
+    
+    function reindexArray(args) {
+       
+        const reindexArray = [];
 
+        $(args).find('option').each(function (index, element) {
 
-    function reindexArray (args){
-                //re index array (alphabetical order dd list)
-                console.log('args elm', args);
-                const reindexArray = [];
-                console.log('element find', $(args).find('option'));
-                $(args).find('option').each(function (index, element) {
-                    
-                     if ($(this).val()) {
-                        const value = $(element).val();
-                        const name = $(element).text();
-        
-                        let reindexObject = { name: name, value: value }
-                        // console.log('reindex object', reindexObject);
-                        reindexArray.push(reindexObject);
-                     }
-                });
-                console.log('index array', reindexArray);
-                $(args).find('option').first().siblings().remove();
-        
-                // sort by name
-                reindexArray.sort(function (a, b) {
-                    var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-                    var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-                    if (nameA > nameB) {
-                        return -1;
-                    }
-                    if (nameA < nameB) {
-                        return 1;
-                    }
-        
-                    // names must be equal
-                    return 0;
-                });
-        
-                reindexArray.forEach(function(element, index, arr) {
-                    const id = element.value;
-                    const name = element.name;
-        
-                    const sortedElement = `<option class="option-genre" value="${id}">${name}</option>`;
-        
-                    $(args).find('option').first().after(sortedElement);
-        
-                });
+            if ($(this).val()) {
+                const value = $(element).val();
+                const name = $(element).text();
+                let reindexObject = { name: name, value: value }
+                reindexArray.push(reindexObject);
+            }
+        });
+
+        $(args).find('option').first().siblings().remove();
+        // sort by name
+        reindexArray.sort(function (a, b) {
+            var nameA = a.name.toUpperCase();
+            var nameB = b.name.toUpperCase();
+            if (nameA > nameB) {
+                return -1;
+            }
+            if (nameA < nameB) {
+                return 1;
+            }
+            return 0;
+        });
+        reindexArray.forEach(function (element, index, arr) {
+            const id = element.value;
+            const name = element.name;
+            const sortedElement = `<option class="option-genre" value="${id}">${name}</option>`;
+
+            $(args).find('option').first().after(sortedElement);
+        });
     }
-
 })();
