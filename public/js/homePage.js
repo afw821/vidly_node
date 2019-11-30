@@ -192,94 +192,112 @@ $(document).ready(async function () {
   //Search Movie Logic
   //--------------------------------------------------------//
   $('#btnSearchMovie').click(async function () {
-    const movieName = $('#txtMovieName').val();
-    console.log('movie name', movieName);
+    try{
+      const movieName = $('#txtMovieName').val();
+      console.log('movie name', movieName);
+  
+      const result = await $.ajax({
+        url: 'api/movies/search/name',
+        method: 'POST',
+        data: {
+          title: movieName
+        }
+      });
+  
+      if (result.result) {
+        console.log('res movie', result.movie);
+        $('#btnSearchResult').click();
+        const resultArray = result.movie;
+        for (let i = 0; i < resultArray.length; i++) {
+  
+          const name = result.movie[i].title;
+          const price = result.movie[i].dailyRentalRate;
+          const numberInStock = result.movie[i].numberInStock;
+          const movieId = result.movie[i]._id;
+          const genreName = result.movie[i].genre.name;
+          const genreId = result.movie[i].genre._id;
+  
+          const table = $('<table>', {
+            class: "table",
+            "data-genre-id": genreId,
+            id: movieId,
+            "data-movie-id": movieId
+          });
+          const thead = $('<thead>', {
+            class: "thead-dark",
+            appendTo: table
+          });
+          const tr = $('<tr>', {
+            appendTo: thead
+          });
+          const thTitle = $('<th>', {
+            scope: "col",
+            text: "Title",
+            appendTo: tr
+          });
+          const thPrice = $('<th>', {
+            scope: "col",
+            text: "Price",
+            appendTo: tr
+          });
+          const thStock = $('<th>', {
+            scope: "col",
+            text: "# in Stock",
+            appendTo: tr
+          });
+  
+          const tbody = $('<tbody>', {
+            appendTo: table
+          });
+          const trBody = $('<tr>', {
+            appendTo: tbody
+          });
+          const tdTitle = $('<td>', {
+            text: name,
+            id: movieId,
+            "data-genre-id": genreId,
+            "data-movie-id": movieId,
+            appendTo: trBody
+          });
+          const tdPrice = $('<td>', {
+            text: `$${price} / Day`,
+            id: movieId,
+            "data-genre-id": genreId,
+            "data-movie-id": movieId,
+            appendTo: trBody
+          });
+          const tdStock = $('<td>', {
+            text: numberInStock,
+            id: movieId,
+            "data-genre-id": genreId,
+            "data-movie-id": movieId,
+            appendTo: trBody
+          });
+          const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
+          const cartButton = '<button type="button" class="btn btn-primary ff add-to-cart" data-dismiss="modal">Add To Cart</button>'
+          
+          $('#movie-search-modal').empty();
+          $('.modal-button-div').empty();
 
-    const result = await $.ajax({
-      url: 'api/movies/search/name',
-      method: 'POST',
-      data: {
-        title: movieName
+          $('#movie-search-modal').append(table);
+          $('.modal-button-div').append(closeBtn, cartButton);
+  
+        }
+  
       }
-    });
-
-    if (result.result) {
-      console.log('res movie', result.movie);
-      $('#btnSearchResult').click();
-      const resultArray = result.movie;
-      for (let i = 0; i < resultArray.length; i++) {
-
-        const name = result.movie[i].title;
-        const price = result.movie[i].dailyRentalRate;
-        const numberInStock = result.movie[i].numberInStock;
-        const movieId = result.movie[i]._id;
-        const genreName = result.movie[i].genre.name;
-        const genreId = result.movie[i].genre._id;
-
-        const table = $('<table>', {
-          class: "table",
-          "data-genre-id": genreId,
-          id: movieId,
-          "data-movie-id": movieId
-        });
-        const thead = $('<thead>', {
-          class: "thead-dark",
-          appendTo: table
-        });
-        const tr = $('<tr>', {
-          appendTo: thead
-        });
-        const thTitle = $('<th>', {
-          scope: "col",
-          text: "Title",
-          appendTo: tr
-        });
-        const thPrice = $('<th>', {
-          scope: "col",
-          text: "Price",
-          appendTo: tr
-        });
-        const thStock = $('<th>', {
-          scope: "col",
-          text: "# in Stock",
-          appendTo: tr
-        });
-
-        const tbody = $('<tbody>', {
-          appendTo: table
-        });
-        const trBody = $('<tr>', {
-          appendTo: tbody
-        });
-        const tdTitle = $('<td>', {
-          text: name,
-          id: movieId,
-          "data-genre-id": genreId,
-          "data-movie-id": movieId,
-          appendTo: trBody
-        });
-        const tdPrice = $('<td>', {
-          text: `$${price} / Day`,
-          id: movieId,
-          "data-genre-id": genreId,
-          "data-movie-id": movieId,
-          appendTo: trBody
-        });
-        const tdStock = $('<td>', {
-          text: numberInStock,
-          id: movieId,
-          "data-genre-id": genreId,
-          "data-movie-id": movieId,
-          appendTo: trBody
-        });
-
-        $('#movie-search-modal').append(table);
-
+    }catch(ex) {
+      const response = ex.responseText;
+      if(response == "The movie with the requested title was not found."){
+        $('#btnSearchResult').click();
+        const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
+        $('#movie-search-modal').empty();
+        $('.modal-button-div').empty();
+        $('#movie-search-modal').text("Sorry we don't have that movie in stock");
+        $('.modal-button-div').append(closeBtn);
+          
       }
-
     }
 
 
-
-  })
+  });
 });
