@@ -24,18 +24,14 @@
         data-target="#movieSearch"></button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <a class="navbar-brand ff" href="#">Alex's Movies</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active registration ff" href="#">Movies</a>
                 <a class="nav-item nav-link check-out-user ff" href="#">Checkout</a>
                 <a class="nav-item nav-link logout-user ff" href="#">Logout</a>
                 <a class="nav-item nav-link cart-items ff" href="#">Cart</a>
-
-
             </div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" id="txtMovieName" type="search" placeholder="Search Movies"
@@ -47,13 +43,7 @@
 
                 </h5>
             </div>
-
-            <!-- <div class="navbar-nav cart-margin">
-                <h5 class="nav-item nav-link cart-items ff">
-                    Items In Cart:
-                </h5>
-                <img src="./content/assests/cart3.png" style="width:50px; height:50px;" />
-            </div> -->
+            <!-- Quick view cart -->
             <div class="quick-view-cart hide">
                 <div class="quick-cart-container">
                     <div class="card card-width">
@@ -65,7 +55,6 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-
                             <div class="row mb-2 header-div">
                                 <div class="col-4">
                                     <h3 class="card-text">Name</h3>
@@ -76,21 +65,20 @@
                                 <div class="col-2">
                                     <h3 class="card-text">Price</h3>
                                 </div>
-
                             </div>
                             <div class="movie-grid-container">
 
                             </div>
-
-
                             <a href="#" class="btn btn-primary check-out-user">Checkout</a>
                         </div>
                     </div>
 
                 </div>
             </div>
-
+            <!-- End quick view cart -->
         </div>
+
+        
     </nav>
     <div class="container">
         <div class="movie-container d-flex flex-wrap justify-content-around"></div>

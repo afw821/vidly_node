@@ -247,6 +247,12 @@ $(document).ready(async function () {
           });
   
           const tbody = $('<tbody>', {
+            mouseenter: function () {
+              $(this).css('background-color', 'lightgray');
+            },
+            mouseleave: function() {
+              $(this).css('background-color', 'white');
+            },
             appendTo: table
           });
           const trBody = $('<tr>', {
