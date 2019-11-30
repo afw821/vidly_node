@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
+        integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous" />
 
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -20,6 +20,8 @@
 </head>
 
 <body>
+    <button type="button" style="display:none;" id="btnSearchResult" class="btn btn-primary" data-toggle="modal"
+        data-target="#movieSearch"></button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <a class="navbar-brand ff" href="#">Alex's Movies</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -31,26 +33,35 @@
                 <a class="nav-item nav-link active registration ff" href="#">Movies</a>
                 <a class="nav-item nav-link check-out-user ff" href="#">Checkout</a>
                 <a class="nav-item nav-link logout-user ff" href="#">Logout</a>
+                <a class="nav-item nav-link cart-items ff" href="#">Cart</a>
+
 
             </div>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="txtMovieName" type="search" placeholder="Search Movies"
+                    aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="btnSearchMovie" type="button">Search</button>
+            </form>
             <div class="navbar-nav">
-                <h5 class="nav-item nav-link welcome-label">
+                <h5 class="nav-item nav-link welcome-label ff">
 
                 </h5>
             </div>
-            <div class="navbar-nav cart-margin">
+
+            <!-- <div class="navbar-nav cart-margin">
                 <h5 class="nav-item nav-link cart-items ff">
                     Items In Cart:
                 </h5>
                 <img src="./content/assests/cart3.png" style="width:50px; height:50px;" />
-            </div>
+            </div> -->
             <div class="quick-view-cart hide">
                 <div class="quick-cart-container">
                     <div class="card card-width">
                         <div class="card-body">
                             <div class="h5-div d-flex justify-content-between">
                                 <h5 class="card-title ff">Your Items</h5>
-                                <button type="button" class="close quick-cart-close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close quick-cart-close" data-dismiss="modal"
+                                    aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -78,6 +89,7 @@
 
                 </div>
             </div>
+
         </div>
     </nav>
     <div class="container">
@@ -87,6 +99,27 @@
 
 
     </div>
+    <!-- MODAL -->
+    <div class="modal fade modal-color" id="movieSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ff" id="exampleModalLabel">Search Results</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ff" id="movie-search-modal">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary ff add-to-cart" data-dismiss="modal">Add to
+                        Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
@@ -94,15 +127,18 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"
+    integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
     crossorigin="anonymous"></script>
 <script src="./js/StateManager.js"></script>
 <script src="./js/homePage.js"> </script>

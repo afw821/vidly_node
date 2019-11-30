@@ -65,10 +65,11 @@ router.get("/:id", ash(async function(req, res) {
     res.send(movie);
 }));
 
-router.get("/search/name", ash(async function(req, res) {
+router.post("/search/name", ash(async function(req, res) {
   const movie = await Movie.find({ title: req.body.title });
-  if (!movie) return res.status(404).send("The movie with the requested title was not found.");
-  res.send(movie);
+  console.log('search movie', movie);
+  if (!movie || movie.length == 0) return res.status(404).send("The movie with the requested title was not found.");
+  res.send({ result: true, movie: movie });
 }));
 
 router.delete("/:id", [auth, admin], ash(async function(req, res) {
