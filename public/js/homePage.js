@@ -245,6 +245,11 @@ $(document).ready(async function () {
             text: "# in Stock",
             appendTo: tr
           });
+          const thBlank = $('<th>', {
+            html: '<i class="fas fa-cart-plus"></i>',
+            scope: 'col',
+            appendTo: tr
+          });
   
           const tbody = $('<tbody>', {
             mouseenter: function () {
@@ -256,6 +261,7 @@ $(document).ready(async function () {
             appendTo: table
           });
           const trBody = $('<tr>', {
+            class: 'table-row-movie-search',
             appendTo: tbody
           });
           const tdTitle = $('<td>', {
@@ -279,6 +285,12 @@ $(document).ready(async function () {
             "data-movie-id": movieId,
             appendTo: trBody
           });
+          const tdBtn = $('<td>', {
+            style: 'cursor: pointer;',
+            html: '<i class="fas fa-plus"></i>',
+            appendTo: trBody
+          });
+
           const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
           const cartButton = '<button type="button" class="btn btn-primary ff add-to-cart" data-dismiss="modal">Add To Cart</button>'
           
