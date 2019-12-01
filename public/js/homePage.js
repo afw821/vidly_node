@@ -292,13 +292,10 @@ $(document).ready(async function () {
           });
 
           const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
-          const cartButton = '<button type="button" class="btn btn-primary ff add-to-cart" data-dismiss="modal">Add To Cart</button>'
           
           $('#movie-search-modal').empty();
-          $('.modal-button-div').empty();
 
           $('#movie-search-modal').append(table);
-          $('.modal-button-div').append(closeBtn, cartButton);
   
         }
   
