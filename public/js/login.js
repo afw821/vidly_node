@@ -82,22 +82,34 @@ $(document).ready(function () {
     }
   });
 
-  //switch to the login screen//
+  //switch to the login screen// AND to Customer Reviews
   $(".login").on("click", function () {
     $(".account-register-form").hide();
     $(".account-login-form").show();
+    $('.customer-review-div').hide();
     $(this).addClass("active");
     $(".registration").removeClass("active");
+    $('.customer-reviews').removeClass("active");
   });
 
   $(".registration").on("click", function () {
     $(".account-register-form").show();
     $(".account-login-form").hide();
+    $('.customer-review-div').hide();
     $(this).addClass("active");
     $(".login").removeClass("active");
+    $('.customer-reviews').removeClass("active");
+  });
+  $('.customer-reviews').click(function () {
+    $(".account-register-form").hide();
+    $(".account-login-form").hide();
+    $('.customer-review-div').show();
+    $(".login").removeClass("active");
+    $(this).addClass("active");
+    $(".registration").removeClass("active");
   });
   //go to admim portal
-  $('.admin').click(function() {
+  $('.admin').click(function () {
     window.location.href = '/admin';
   });
   //-----------------------------------------//
@@ -154,4 +166,19 @@ $(document).ready(function () {
     }
   });
 
+  //-----------------------------------------//
+  //GETTING AND DISPLAYING REVIEWS//
+  //-----------------------------------------//
+  (async function() {
+    try{
+      const reviews = await $.ajax({
+        url: 'api/reviews/',
+        method: 'GET'
+      });
+
+      console.log('reviews', reviews);
+    }catch(ex) {
+      alert('There was an error!!');
+    }
+  })();
 });
