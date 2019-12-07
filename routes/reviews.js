@@ -25,7 +25,7 @@ router.post('/', ash(async function (req, res) {
 
     review = await review.save();
     
-    res.send(review);
+    res.send({status: true, review: review });
 }));
 
 router.get('/', ash(async function (req, res) {
