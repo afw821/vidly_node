@@ -192,10 +192,10 @@ $(document).ready(async function () {
   //Search Movie Logic
   //--------------------------------------------------------//
   $('#btnSearchMovie').click(async function () {
-    try{
+    try {
       const movieName = $('#txtMovieName').val();
       console.log('movie name', movieName);
-  
+
       const result = await $.ajax({
         url: 'api/movies/search/name',
         method: 'POST',
@@ -203,20 +203,20 @@ $(document).ready(async function () {
           title: movieName
         }
       });
-  
+
       if (result.result) {
         console.log('res movie', result.movie);
         $('#btnSearchResult').click();
         const resultArray = result.movie;
         for (let i = 0; i < resultArray.length; i++) {
-  
+
           const name = result.movie[i].title;
           const price = result.movie[i].dailyRentalRate;
           const numberInStock = result.movie[i].numberInStock;
           const movieId = result.movie[i]._id;
           const genreName = result.movie[i].genre.name;
           const genreId = result.movie[i].genre._id;
-  
+
           const table = $('<table>', {
             class: "table",
             "data-genre-id": genreId,
@@ -250,12 +250,12 @@ $(document).ready(async function () {
             scope: 'col',
             appendTo: tr
           });
-  
+
           const tbody = $('<tbody>', {
             mouseenter: function () {
               $(this).css('background-color', 'lightgray');
             },
-            mouseleave: function() {
+            mouseleave: function () {
               $(this).css('background-color', 'white');
             },
             appendTo: table
@@ -292,24 +292,24 @@ $(document).ready(async function () {
           });
 
           const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
-          
+
           $('#movie-search-modal').empty();
 
           $('#movie-search-modal').append(table);
-  
+
         }
-  
+
       }
-    }catch(ex) {
+    } catch (ex) {
       const response = ex.responseText;
-      if(response == "The movie with the requested title was not found."){
+      if (response == "The movie with the requested title was not found.") {
         $('#btnSearchResult').click();
         const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
         $('#movie-search-modal').empty();
         $('.modal-button-div').empty();
         $('#movie-search-modal').text("Sorry we don't have that movie in stock");
         $('.modal-button-div').append(closeBtn);
-          
+
       }
     }
 
@@ -320,26 +320,67 @@ $(document).ready(async function () {
   //--------------------------------------------------------//
 
   //select stars
-  $('span.fa-star').click(function(e) {
-    console.log('clicked', e.target.id);
-    let starClickedId = e.target.id;
-    let oneStar = 'one-star';
-    let twoStar = 'two-star';
-    let threeStar = 'three-star';
-    let fourStar = 'four-star';
-    let fiveStar = 'five-star';
-    if(starClickedId == oneStar && !($('#one-star').hasClass('checked'))){
-      
-      $('#one-star').addClass('checked');
-      return;
-    }
-    if(starClickedId == oneStar && $('#one-star').hasClass('checked')){
-      
-      $('#one-star').removeClass('checked');
-      return;
-    }
-    if(starClickedId == twoStar && !($('#two-star').hasClass('checked'))){
-      
-    }
+  // $('span.fa-star').click(function(e) {
+  //   console.log('clicked', e.target.id);
+  //   let starClickedId = e.target.id;
+  //   let oneStar = 'one-star';
+  //   let twoStar = 'two-star';
+  //   let threeStar = 'three-star';
+  //   let fourStar = 'four-star';
+  //   let fiveStar = 'five-star';
+  //   if(starClickedId == oneStar && !($('#one-star').hasClass('checked'))){     
+  //     $('#one-star').addClass('checked');
+  //     return;
+  //   }
+  //   if(starClickedId == oneStar && $('#one-star').hasClass('checked')){      
+  //     $('#one-star').removeClass('checked');
+  //     return;
+  //   }
+  //   if(starClickedId == twoStar && !($('#two-star').hasClass('checked'))){
+  //     $('#one-star').addClass('checked');
+  //     $('#two-star').addClass('checked');
+  //     return;
+  //   }
+  //   if(starClickedId == twoStar && $('#two-star').hasClass('checked')){
+  //     $('#one-star').removeClass('checked');
+  //     $('#two-star').removeClass('checked');
+  //     return;
+  //   }
+  // });
+  //temporary solution
+  $('span.fa-star').each(function (i, element) {
+    $(this).click(function (e) {
+      let star = i + 1;
+      console.log(star);
+      switch (star) {
+        case 1:
+          $(this).toggleClass('checked');
+          break;
+        case 2:
+          $('#one-star').toggleClass('checked');
+          $(this).toggleClass('checked');
+          break;
+        case 3:
+          $('#one-star').toggleClass('checked');
+          $('#two-star').toggleClass('checked');
+          $(this).toggleClass('checked');
+          break;
+        case 4:
+          $('#one-star').toggleClass('checked');
+          $('#two-star').toggleClass('checked');
+          $('#three-star').toggleClass('checked');
+          $(this).toggleClass('checked');
+          break;
+        case 5:
+          $('#one-star').toggleClass('checked');
+          $('#two-star').toggleClass('checked');
+          $('#three-star').toggleClass('checked');
+          $('#four-star').toggleClass('checked');
+          $(this).toggleClass('checked');
+          break;
+      }
+
+
+    })
   });
 });
