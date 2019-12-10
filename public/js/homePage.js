@@ -315,4 +315,31 @@ $(document).ready(async function () {
 
 
   });
+  //---------------------------------------------------------//
+  //Post review Logic
+  //--------------------------------------------------------//
+
+  //select stars
+  $('span.fa-star').click(function(e) {
+    console.log('clicked', e.target.id);
+    let starClickedId = e.target.id;
+    let oneStar = 'one-star';
+    let twoStar = 'two-star';
+    let threeStar = 'three-star';
+    let fourStar = 'four-star';
+    let fiveStar = 'five-star';
+    if(starClickedId == oneStar && !($('#one-star').hasClass('checked'))){
+      
+      $('#one-star').addClass('checked');
+      return;
+    }
+    if(starClickedId == oneStar && $('#one-star').hasClass('checked')){
+      
+      $('#one-star').removeClass('checked');
+      return;
+    }
+    if(starClickedId == twoStar && !($('#two-star').hasClass('checked'))){
+      
+    }
+  });
 });

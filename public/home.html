@@ -16,6 +16,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./content/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="./content/home.css" />
+    <style>
+        .checked {
+            color: orange;
+        }
+        .pointer{
+            cursor: pointer;
+        }
+    </style>
+
     <title>Movie Page</title>
 </head>
 
@@ -31,6 +40,7 @@
                 <a class="nav-item nav-link active registration ff" href="#">Movies</a>
                 <a class="nav-item nav-link check-out-user ff" href="#">Checkout</a>
                 <a class="nav-item nav-link logout-user ff" href="#">Logout</a>
+                <a class="nav-item nav-link leave-review ff" href="#">Leave Review</a>
                 <a class="nav-item nav-link cart-items ff" href="#"><i class="fas fa-shopping-cart"></i></a>
             </div>
             <form class="form-inline my-2 my-lg-0">
@@ -80,14 +90,32 @@
 
 
     </nav>
+    <!-- MOVIE DUMP DIV -->
     <div class="container">
-        <div class="movie-container d-flex flex-wrap justify-content-around"></div>
+        <!-- <div class="movie-container d-flex flex-wrap justify-content-around" style="display:none;"></div> -->
+        <div class="leave-review-container d-flex justify-content-center">
 
-
-
-
+            <form style="width:50%;">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                </div>
+                <div class="form-group">
+                    <label for="Review">Comment</label>
+                    <textarea class="form-control" id="Review" rows="3" placeholder="Maximum 500 characters"></textarea>
+                </div>
+                <div class="form-group star-group">
+                    <label for="Stars">How would you rate us?</label><br />
+                    <span class="fa fa-star pointer" id="one-star"></span>
+                    <span class="fa fa-star pointer" id="two-star"></span>
+                    <span class="fa fa-star pointer" id="three-star"></span>
+                    <span class="fa fa-star pointer" id="four-star"></span>
+                    <span class="fa fa-star pointer" id="five-star"></span>
+                </div>
+            </form>
+        </div>
     </div>
-    <!-- MODAL -->
+    <!-- MODAL Movie Search -->
     <div class="modal fade modal-color" id="movieSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -98,7 +126,8 @@
                 <div class="modal-body ff" id="movie-search-modal">
                 </div>
                 <div class="modal-footer modal-button-div d-flex justify-content-around">
-                    <div class="alert alert-success d-flex align-items-center" style="height: 46px; opacity:0.0;" role="alert">
+                    <div class="alert alert-success d-flex align-items-center" style="height: 46px; opacity:0.0;"
+                        role="alert">
                         Added to Cart
                     </div>
                     <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
