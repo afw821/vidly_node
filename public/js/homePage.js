@@ -320,67 +320,91 @@ $(document).ready(async function () {
   //--------------------------------------------------------//
 
   //select stars
-  // $('span.fa-star').click(function(e) {
-  //   console.log('clicked', e.target.id);
-  //   let starClickedId = e.target.id;
-  //   let oneStar = 'one-star';
-  //   let twoStar = 'two-star';
-  //   let threeStar = 'three-star';
-  //   let fourStar = 'four-star';
-  //   let fiveStar = 'five-star';
-  //   if(starClickedId == oneStar && !($('#one-star').hasClass('checked'))){     
-  //     $('#one-star').addClass('checked');
-  //     return;
-  //   }
-  //   if(starClickedId == oneStar && $('#one-star').hasClass('checked')){      
-  //     $('#one-star').removeClass('checked');
-  //     return;
-  //   }
-  //   if(starClickedId == twoStar && !($('#two-star').hasClass('checked'))){
-  //     $('#one-star').addClass('checked');
-  //     $('#two-star').addClass('checked');
-  //     return;
-  //   }
-  //   if(starClickedId == twoStar && $('#two-star').hasClass('checked')){
-  //     $('#one-star').removeClass('checked');
-  //     $('#two-star').removeClass('checked');
-  //     return;
-  //   }
-  // });
-  //temporary solution
   $('span.fa-star').each(function (i, element) {
     $(this).click(function (e) {
-      let star = i + 1;
-      console.log(star);
-      switch (star) {
-        case 1:
-          $(this).toggleClass('checked');
-          break;
-        case 2:
-          $('#one-star').toggleClass('checked');
-          $(this).toggleClass('checked');
-          break;
-        case 3:
-          $('#one-star').toggleClass('checked');
-          $('#two-star').toggleClass('checked');
-          $(this).toggleClass('checked');
-          break;
-        case 4:
-          $('#one-star').toggleClass('checked');
-          $('#two-star').toggleClass('checked');
-          $('#three-star').toggleClass('checked');
-          $(this).toggleClass('checked');
-          break;
-        case 5:
-          $('#one-star').toggleClass('checked');
-          $('#two-star').toggleClass('checked');
-          $('#three-star').toggleClass('checked');
-          $('#four-star').toggleClass('checked');
-          $(this).toggleClass('checked');
-          break;
+      //clear all if ANY of the stars are checked AND the one you click is checked ***AND*** there are no more checked after the one clicked
+      //This clears them if you click on a yellow star//****** */
+      const starClicked = parseInt(e.target.id);
+      if ($('span.fa-star').hasClass('checked') && (e.target.classList[3]) && !(e.currentTarget.nextElementSibling.classList[3])) {
+        //remove all of them
+        $('span.fa-star').removeClass('checked');
+        return;
       }
-
-
-    })
+      //if ANY of the stars are checked AND the one you click is checked ***AND*** there ARE more checked after the one clicked ONLY clear the ones after the one clicked
+      if ($('span.fa-star').hasClass('checked') && (e.target.classList[3])) {        
+        switch (starClicked) {
+          case 1:
+            $('#2').removeClass('checked');
+            $('#3').removeClass('checked');
+            $('#4').removeClass('checked');
+            $('#5').removeClass('checked');
+            break;
+          case 2:
+            $('#3').removeClass('checked');
+            $('#4').removeClass('checked');
+            $('#5').removeClass('checked');
+            break;
+          case 3:
+            $('#4').removeClass('checked');
+            $('#5').removeClass('checked');
+            break;
+          case 4:
+            $('#5').removeClass('checked');
+            break;
+        }
+        return;
+      }
+      //if no stars are checked we add yellow to all the ones behind the one and including the one clicked
+      if (!$('span.fa-star').hasClass('checked')) {
+        switch (starClicked) {
+          case 1:
+            $('#1').addClass('checked');
+            break;
+          case 2:
+            $('#1').addClass('checked');
+            $('#2').addClass('checked');
+            break;
+          case 3:
+            $('#1').addClass('checked');
+            $('#2').addClass('checked');
+            $('#3').addClass('checked');
+            break;
+          case 4:
+            $('#1').addClass('checked');
+            $('#2').addClass('checked');
+            $('#3').addClass('checked');
+            $('#4').addClass('checked');
+            break;
+          case 5:
+            $('#1').addClass('checked');
+            $('#2').addClass('checked');
+            $('#3').addClass('checked');
+            $('#4').addClass('checked');
+            $('#5').addClass('checked');
+            break;
+        }
+        return;
+      } else { //else we are adding stars when there are already stars behind one clicked
+        switch (starClicked) {
+          case 2:
+            console.log('two star');
+            $('#2').addClass('checked');
+            break;
+          case 3:
+            console.log('three star');
+            $('#3').addClass('checked');
+            break;
+          case 4:
+            console.log('four star');
+            $('#4').addClass('checked');
+            break;
+          case 5:
+            console.log('five star');
+            $('#5').addClass('checked');
+            break;
+        }
+        return;
+      }
+    });
   });
 });

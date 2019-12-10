@@ -106,12 +106,17 @@
                 </div>
                 <div class="form-group star-group">
                     <label for="Stars">How would you rate us?</label><br />
-                    <span class="fa fa-star pointer" id="one-star"></span>
-                    <span class="fa fa-star pointer" id="two-star"></span>
-                    <span class="fa fa-star pointer" id="three-star"></span>
-                    <span class="fa fa-star pointer" id="four-star"></span>
-                    <span class="fa fa-star pointer" id="five-star"></span>
+                    <span class="fa fa-star pointer" id="1"></span>
+                    <span class="fa fa-star pointer" id="2"></span>
+                    <span class="fa fa-star pointer" id="3"></span>
+                    <span class="fa fa-star pointer" id="4"></span>
+                    <span class="fa fa-star pointer" id="5"></span>
+                    <span class="fa fa-star pointer" style="display: none;" id="6"></span> 
+                    <!-- need this so there is another sibling node for e.currentTaget.NextSibling -->
                 </div>
+                <div class="form-group d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
             </form>
         </div>
     </div>
