@@ -23,6 +23,12 @@
         .pointer{
             cursor: pointer;
         }
+        a.nav-item{
+            border-bottom: 2px solid transparent;
+        }
+        a.nav-item:hover{
+            border-bottom: 2px solid white;
+        }
     </style>
 
     <title>Movie Page</title>
@@ -115,7 +121,7 @@
                     <!-- need this so there is another sibling node for e.currentTaget.NextSibling -->
                 </div>
                 <div class="form-group d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary">Submit</button>
+                        <button type="button" id="btnReviewSubmit" class="btn btn-primary">Submit</button>
                     </div>
             </form>
         </div>

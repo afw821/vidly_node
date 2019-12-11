@@ -319,7 +319,7 @@ $(document).ready(async function () {
   //Post review Logic
   //--------------------------------------------------------//
 
-  //select stars
+  //select stars - logic to highlight them on click
   $('span.fa-star').each(function (i, element) {
     $(this).click(function (e) {
       //clear all if ANY of the stars are checked AND the one you click is checked ***AND*** there are no more checked after the one clicked
@@ -406,5 +406,36 @@ $(document).ready(async function () {
         return;
       }
     });
+  }); //end star on click
+
+  //POST the review on click of submit
+  $('#btnReviewSubmit').click(async function() {
+    try{
+      const comment = $('#Review').val();
+      const subject = $('#subject').val();
+      const stars = $('.checked').length;
+      const result = await $.ajax({
+        url: '/api/reviews',
+        method: 'POST',
+        data: {
+          userId : userId,
+          comment : comment,
+          subject: subject,
+          stars: stars
+        }
+      });
+      console.log('result', result);
+  
+      if(result.status){
+        alert(`Review for ${userName} posted successfully!!!`);
+      }
+    }catch(ex) {
+      console.log('ex', ex);
+      const comment = ex.responseText;
+      console.log(comment);
+      alert(`${Comment}`);
+    }
+
   });
+
 });

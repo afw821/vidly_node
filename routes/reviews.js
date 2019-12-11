@@ -5,9 +5,10 @@ const router = express.Router();
 const ash = require('express-async-handler');
 
 router.post('/', ash(async function (req, res) {
+    console.log('req body', req.body)
     const result = validate(req.body);
-    console.log('result', result);
-    // if(result.error) return res.status(400).send(error.details[0].message);
+    console.log('result error', result.error);
+    if(result.error) return res.status(400).send(result.error.details[0].message);
 
     const user = await User.findById(req.body.userId);
     if(!user) return res.status(400).send('Invalid User');
