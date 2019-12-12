@@ -188,30 +188,30 @@ $(document).ready(async function () {
   $(".quick-cart-close").on("click", function () {
     $(".quick-view-cart").slideUp();
   });
-    //---------------------------------------------------------//
+  //---------------------------------------------------------//
   //Leave review view and movie view toggle
   //--------------------------------------------------------//
-$('.leave-review').click(function() {
-  $('.leave-review-container').addClass('d-flex');
-  $('.leave-review-container').removeClass('hide');
+  $('.leave-review').click(function () {
+    $('.leave-review-container').addClass('d-flex');
+    $('.leave-review-container').removeClass('hide');
 
-  $('.movie-container').removeClass('d-flex');
-  $('.movie-container').addClass('hide');
+    $('.movie-container').removeClass('d-flex');
+    $('.movie-container').addClass('hide');
 
-  $('.movies').removeClass('active');
-  $(this).addClass('active');
-});
+    $('.movies').removeClass('active');
+    $(this).addClass('active');
+  });
 
-$('.movies').click(function() {
-  $('.leave-review-container').removeClass('d-flex');
-  $('.leave-review-container').addClass('hide');
+  $('.movies').click(function () {
+    $('.leave-review-container').removeClass('d-flex');
+    $('.leave-review-container').addClass('hide');
 
-  $('.movie-container').addClass('d-flex');
-  $('.movie-container').removeClass('hide');
+    $('.movie-container').addClass('d-flex');
+    $('.movie-container').removeClass('hide');
 
-  $('.leave-review').removeClass('active');
-  $(this).addClass('active');
-});
+    $('.leave-review').removeClass('active');
+    $(this).addClass('active');
+  });
 
   //---------------------------------------------------------//
   //Search Movie Logic
@@ -230,7 +230,6 @@ $('.movies').click(function() {
       });
 
       if (result.result) {
-        console.log('res movie', result.movie);
         $('#btnSearchResult').click();
         const resultArray = result.movie;
         for (let i = 0; i < resultArray.length; i++) {
@@ -355,7 +354,7 @@ $('.movies').click(function() {
         return;
       }
       //if ANY of the stars are checked AND the one you click is checked ***AND*** there ARE more checked after the one clicked ONLY clear the ones after the one clicked
-      if ($('span.fa-star').hasClass('checked') && (e.target.classList[3])) {        
+      if ($('span.fa-star').hasClass('checked') && (e.target.classList[3])) {
         switch (starClicked) {
           case 1:
             $('#2').removeClass('checked');
@@ -408,7 +407,7 @@ $('.movies').click(function() {
             break;
         }
         return;
-      } else if($('span.fa-star').hasClass('checked') && (e.currentTarget.previousElementSibling.classList[3])) { //else we are adding stars when there are already stars behind one clicked . any stars checked 2. there are stars behind the one checked
+      } else if ($('span.fa-star').hasClass('checked') && (e.currentTarget.previousElementSibling.classList[3])) { //else we are adding stars when there are already stars behind one clicked . any stars checked 2. there are stars behind the one checked
         switch (starClicked) {
           case 2:
             $('#2').addClass('checked');
@@ -424,7 +423,7 @@ $('.movies').click(function() {
             break;
         }
         return;
-      }else{
+      } else {
         switch (starClicked) {
           case 3:
             $('#2').addClass('checked');
@@ -447,27 +446,37 @@ $('.movies').click(function() {
     });
   }); //end star on click
   //POST the review on click of submit
-  $('#btnReviewSubmit').click(async function() {
-    try{
-      const comment = $('#Review').val();
-      const subject = $('#subject').val();
+  $('#btnReviewSubmit').click(async function () {
+    try {
+      const comment = $('#Comment').val();
+      const subject = $('#Subject').val();
       const stars = $('.checked').length;
+      //client side validation
+      if (subject.length < 5) 
+        return reviewValidation('Subject', 5, true);
+        
+      if(comment.length < 15)
+        return reviewValidation('Comment', 15, true);
+
+      if(stars < 1)
+        return reviewValidation('Stars', 1, false);
+      
       const result = await $.ajax({
         url: '/api/reviews',
         method: 'POST',
         data: {
-          userId : userId,
-          comment : comment,
+          userId: userId,
+          comment: comment,
           subject: subject,
           stars: stars
         }
       });
       console.log('result', result);
-  
-      if(result.status){
+
+      if (result.status) {
         alert(`Review for ${userName} posted successfully!!!`);
       }
-    }catch(ex) {
+    } catch (ex) {
       console.log('ex', ex);
       const comment = ex.responseText;
       console.log(comment);
@@ -475,5 +484,21 @@ $('.movies').click(function() {
     }
 
   });
+  
+  //reuseable review validation functions
+  function reviewValidation(args, length, bool) {
+    const html = `<b>${args} must be at least ${length} Characters in length</b>`;
+    const starHtml = `<b>Must leave at least a ${length} star review`;
+    $('.review-validation').show().html(bool ? html : starHtml);
+    $(`#${args}`).css('border', '1px solid red');
+    setTimeout(function () {
+      const style = 
+      $(`#${args}`).css('border', function() {
+        return bool ? '1px solid #ced4da' : 'none';
+      });
+      $('.review-validation').hide().empty();
+    }, 4000);
+    return;
+  }
 
 });
