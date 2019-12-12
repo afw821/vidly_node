@@ -26,7 +26,7 @@ router.get('/', [auth, admin], ash(async function (req, res) {
             </div>
             <div class="form-row add-movie-form-row">
                 <div class="col">
-                    <input type="text" class="form-control add-movie" id="add-movie-title"
+                    <input type="search" class="form-control add-movie" id="add-movie-title"
                         placeholder="Title">
                 </div>
                 <div class="col">
@@ -37,11 +37,11 @@ router.get('/', [auth, admin], ash(async function (req, res) {
             </div>
             <div class="form-row">
                 <div class="col">
-                    <input type="text" class="form-control add-movie" id="number-in-stock"
+                    <input type="search" class="form-control add-movie" id="number-in-stock"
                         placeholder="Number In Stock">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control add-movie" id="rental-rate"
+                    <input type="search" class="form-control add-movie" id="rental-rate"
                         placeholder="Daily Rental Rate">
                 </div>
             </div>
