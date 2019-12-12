@@ -219,7 +219,6 @@ $(document).ready(async function () {
   $('#btnSearchMovie').click(async function () {
     try {
       const movieName = $('#txtMovieName').val();
-      console.log('movie name', movieName);
 
       const result = await $.ajax({
         url: 'api/movies/search/name',
@@ -472,15 +471,31 @@ $(document).ready(async function () {
         }
       });
       console.log('result', result);
-
+     
       if (result.status) {
-        alert(`Review for ${userName} posted successfully!!!`);
+        $('#Comment').val("");
+        $('#Subject').val("");
+        $('span.fa-star').removeClass('checked');
+        $('#btnReviewPosted').click();
       }
-    } catch (ex) {
-      console.log('ex', ex);
+    } catch (ex) { //server side JOI validation
+      const status = ex.status;
+      if(status !== 400) {
+        alert(`${status} error: Something Broke, please try again later`);
+        return;
+      }
       const comment = ex.responseText;
-      console.log(comment);
-      alert(`${Comment}`);
+      switch(comment){
+        case '"comment" is not allowed to be empty':
+            reviewValidation('Comment', 15, true);
+          break;
+        case '"subject" is not allowed to be empty':
+          reviewValidation('Subject', 5, true);
+          break;
+        case '"stars" must be larger than or equal to 1':
+          reviewValidation('Stars', 1, false);
+      }
+
     }
 
   });
@@ -492,7 +507,6 @@ $(document).ready(async function () {
     $('.review-validation').show().html(bool ? html : starHtml);
     $(`#${args}`).css('border', '1px solid red');
     setTimeout(function () {
-      const style = 
       $(`#${args}`).css('border', function() {
         return bool ? '1px solid #ced4da' : 'none';
       });

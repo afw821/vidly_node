@@ -44,6 +44,8 @@
 <body>
     <button type="button" style="display:none;" id="btnSearchResult" class="btn btn-primary" data-toggle="modal"
         data-target="#movieSearch"></button>
+        <button type="button" style="display:none;" id="btnReviewPosted" class="btn btn-primary" data-toggle="modal"
+        data-target="#reviewPosted"></button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <a class="navbar-brand ff" href="#">Alex's Movies</a>
 
@@ -116,17 +118,18 @@
                 </div>
                 <div class="form-group">
                     <label for="Review">Comment</label>
-                    <textarea class="form-control" id="Comment" rows="3" placeholder="Maximum 500 characters"></textarea>
+                    <textarea class="form-control" id="Comment" rows="3"
+                        placeholder="Maximum 500 characters"></textarea>
                 </div>
                 <div class="form-group star-group">
                     <label for="Stars">How would you rate us?</label><br />
                     <div id="Stars" style="width:110px;">
-                            <span class="fa fa-star pointer" id="1"></span>
-                            <span class="fa fa-star pointer" id="2"></span>
-                            <span class="fa fa-star pointer" id="3"></span>
-                            <span class="fa fa-star pointer" id="4"></span>
-                            <span class="fa fa-star pointer" id="5"></span>
-                            <span class="fa fa-star pointer" style="display: none;" id="6"></span>
+                        <span class="fa fa-star pointer" id="1"></span>
+                        <span class="fa fa-star pointer" id="2"></span>
+                        <span class="fa fa-star pointer" id="3"></span>
+                        <span class="fa fa-star pointer" id="4"></span>
+                        <span class="fa fa-star pointer" id="5"></span>
+                        <span class="fa fa-star pointer" style="display: none;" id="6"></span>
                     </div>
 
                     <!-- need this so there is another sibling node for e.currentTaget.NextSibling -->
@@ -135,8 +138,8 @@
                     <button type="button" id="btnReviewSubmit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="alert alert-danger review-validation" style="display:none;" role="alert">
-                       
-                    </div>
+
+                </div>
             </form>
         </div>
     </div>
@@ -155,6 +158,23 @@
                         role="alert">
                         Added to Cart
                     </div>
+                    <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Review posted successfully modal     -->
+    <div class="modal fade modal-color" id="reviewPosted" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ff">Review successfully posted</h5>
+                </div>
+                <div class="modal-body ff">
+                    Thank you for your feedback!!
+                </div>
+                <div class="modal-footer modal-button-div d-flex justify-content-around">
                     <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
                 </div>
             </div>

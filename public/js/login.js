@@ -176,9 +176,7 @@ $(document).ready(function () {
         method: 'GET'
       });
 
-      console.log('reviews', reviews);
       for(let i = 0; i < reviews.length; i++) {
-        console.log(reviews[i]);
 
         const comment = reviews[i].comment;
         const date = reviews[i].date;
