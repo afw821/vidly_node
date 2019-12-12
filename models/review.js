@@ -49,7 +49,7 @@ function validateReview(review) {
         userId: Joi.string().required(),
         comment: Joi.string().required().min(15).max(500),
         subject: Joi.string().required().min(5).max(50),
-        stars: Joi.number().required()
+        stars: Joi.number().min(1).required()
     };
     return Joi.validate(review, schema);
 }
