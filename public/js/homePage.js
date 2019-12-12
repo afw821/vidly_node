@@ -188,6 +188,31 @@ $(document).ready(async function () {
   $(".quick-cart-close").on("click", function () {
     $(".quick-view-cart").slideUp();
   });
+    //---------------------------------------------------------//
+  //Leave review view and movie view toggle
+  //--------------------------------------------------------//
+$('.leave-review').click(function() {
+  $('.leave-review-container').addClass('d-flex');
+  $('.leave-review-container').removeClass('hide');
+
+  $('.movie-container').removeClass('d-flex');
+  $('.movie-container').addClass('hide');
+
+  $('.movies').removeClass('active');
+  $(this).addClass('active');
+});
+
+$('.movies').click(function() {
+  $('.leave-review-container').removeClass('d-flex');
+  $('.leave-review-container').addClass('hide');
+
+  $('.movie-container').addClass('d-flex');
+  $('.movie-container').removeClass('hide');
+
+  $('.leave-review').removeClass('active');
+  $(this).addClass('active');
+});
+
   //---------------------------------------------------------//
   //Search Movie Logic
   //--------------------------------------------------------//
@@ -318,7 +343,6 @@ $(document).ready(async function () {
   //---------------------------------------------------------//
   //Post review Logic
   //--------------------------------------------------------//
-
   //select stars - logic to highlight them on click
   $('span.fa-star').each(function (i, element) {
     $(this).click(function (e) {
@@ -384,22 +408,37 @@ $(document).ready(async function () {
             break;
         }
         return;
-      } else { //else we are adding stars when there are already stars behind one clicked
+      } else if($('span.fa-star').hasClass('checked') && (e.currentTarget.previousElementSibling.classList[3])) { //else we are adding stars when there are already stars behind one clicked . any stars checked 2. there are stars behind the one checked
         switch (starClicked) {
           case 2:
-            console.log('two star');
             $('#2').addClass('checked');
             break;
           case 3:
-            console.log('three star');
             $('#3').addClass('checked');
             break;
           case 4:
-            console.log('four star');
             $('#4').addClass('checked');
             break;
           case 5:
-            console.log('five star');
+            $('#5').addClass('checked');
+            break;
+        }
+        return;
+      }else{
+        switch (starClicked) {
+          case 3:
+            $('#2').addClass('checked');
+            $('#3').addClass('checked');
+            break;
+          case 4:
+            $('#2').addClass('checked');
+            $('#3').addClass('checked');
+            $('#4').addClass('checked');
+            break;
+          case 5:
+            $('#2').addClass('checked');
+            $('#3').addClass('checked');
+            $('#4').addClass('checked');
             $('#5').addClass('checked');
             break;
         }
@@ -407,7 +446,6 @@ $(document).ready(async function () {
       }
     });
   }); //end star on click
-
   //POST the review on click of submit
   $('#btnReviewSubmit').click(async function() {
     try{

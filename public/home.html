@@ -29,6 +29,9 @@
         a.nav-item:hover{
             border-bottom: 2px solid white;
         }
+        .hide{
+            display: none;
+        }
     </style>
 
     <title>Movie Page</title>
@@ -43,7 +46,7 @@
 
         <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active registration ff" href="#">Movies</a>
+                <a class="nav-item nav-link active movies ff" href="#">Movies</a>
                 <a class="nav-item nav-link check-out-user ff" href="#">Checkout</a>
                 <a class="nav-item nav-link logout-user ff" href="#">Logout</a>
                 <a class="nav-item nav-link leave-review ff" href="#">Leave Review</a>
@@ -98,8 +101,8 @@
     </nav>
     <!-- MOVIE DUMP DIV -->
     <div class="container">
-        <!-- <div class="movie-container d-flex flex-wrap justify-content-around" style="display:none;"></div> -->
-        <div class="leave-review-container d-flex justify-content-center">
+        <div class="movie-container d-flex flex-wrap justify-content-around"></div>
+        <div class="leave-review-container justify-content-center hide">
 
             <form style="width:50%;">
                 <div class="form-group">
