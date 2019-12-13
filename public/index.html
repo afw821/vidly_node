@@ -83,13 +83,17 @@
 
 
         </form>
-        <form class="text-center p-5 account-login-form"
-            style="display:none; width:600px; height:400px;">
+        <form class="text-center p-5 account-login-form" style="display:none; width:600px; height:400px;">
 
             <p style="color: black;" class="h4 mb-4 ff">Sign in</p>
             <input type="email" id="user-email-login" class="form-control mb-4" placeholder="E-mail">
             <input type="password" id="first-password-login" class="form-control mb-4" placeholder="Password">
             <button class="btn ff sign-in-btn btn-block my-4" type="button" id="login-user">Sign in</button>
+
+
+            <p class="h4" style="font-weight: bolder;">Not a member?
+                <large class="registration" style="cursor: pointer;">Register</large>
+            </p>
             <small id="invalid-email-password" class="form-text email-format-validation-login"
                 style="opacity:0.0; color: black; font-weight: bolder;">
                 Invalid Email or Password!</small>
@@ -99,10 +103,6 @@
             <small id="valid-email-login" class="form-text email-format-validation-login"
                 style="opacity:0.0; color: black; font-weight: bolder;">
                 Email Must Be A Valid Email!</small>
-
-            <p class="h4" style="font-weight: bolder;">Not a member?
-                <large class="login" style="cursor: pointer;">Register</large>
-            </p>
 
         </form>
         <div class="customer-review-div" style="display:none; width:65%;">
