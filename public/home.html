@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
-        integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
+        crossorigin="anonymous" />
 
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -44,7 +44,7 @@
 <body>
     <button type="button" style="display:none;" id="btnSearchResult" class="btn btn-primary" data-toggle="modal"
         data-target="#movieSearch"></button>
-        <button type="button" style="display:none;" id="btnReviewPosted" class="btn btn-primary" data-toggle="modal"
+    <button type="button" style="display:none;" id="btnReviewPosted" class="btn btn-primary" data-toggle="modal"
         data-target="#reviewPosted"></button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <a class="navbar-brand ff" href="#">Alex's Movies</a>
@@ -75,8 +75,7 @@
                         <div class="card-body">
                             <div class="h5-div d-flex justify-content-between">
                                 <h5 class="card-title ff">Your Items</h5>
-                                <button type="button" class="close quick-cart-close" data-dismiss="modal"
-                                    aria-label="Close">
+                                <button type="button" class="close quick-cart-close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -107,8 +106,8 @@
     </nav>
     <!-- MOVIE DUMP DIV -->
     <div class="container">
-        <!-- <div class="movie-container d-flex flex-wrap justify-content-around"></div> -->
-        <div class="leave-review-container d-flex justify-content-center">
+        <div class="movie-container d-flex flex-wrap justify-content-around"></div>
+        <div class="leave-review-container justify-content-center hide">
 
             <form style="width:50%;">
 
@@ -118,8 +117,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Review">Comment</label>
-                    <textarea class="form-control" id="Comment" rows="3"
-                        placeholder="Maximum 500 characters"></textarea>
+                    <textarea class="form-control" id="Comment" rows="3" placeholder="Maximum 500 characters"></textarea>
                 </div>
                 <div class="form-group star-group">
                     <label for="Stars">How would you rate us?</label><br />
@@ -154,8 +152,7 @@
                 <div class="modal-body ff" id="movie-search-modal">
                 </div>
                 <div class="modal-footer modal-button-div d-flex justify-content-around">
-                    <div class="alert alert-success d-flex align-items-center" style="height: 46px; opacity:0.0;"
-                        role="alert">
+                    <div class="alert alert-success d-flex align-items-center" style="height: 46px; opacity:0.0;" role="alert">
                         Added to Cart
                     </div>
                     <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
@@ -187,18 +184,15 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"
-    integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
     crossorigin="anonymous"></script>
 <script src="./js/StateManager.js"></script>
 <script src="./js/homePage.js"> </script>
