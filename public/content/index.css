@@ -1,14 +1,7 @@
-/* .modal-color{
-    background-color: whitesmoke;
-} */
+
 body{
-    /* background-color:rgb(80, 152, 180);  */
-    /* background-image: url("./assests/movies.jpg");
-    background-repeat:no-repeat;
-    background-size: cover; 
-    opacity:0.9;
-    width:100%; */
-    background-color: lightslategrey;
+
+    background-color: whitesmoke;
 }
 
 html {
@@ -25,3 +18,24 @@ html {
     height: 60px;
     background-color: #f5f5f5;
   }
+  .checked {
+    color: orange;
+}
+a.navbar-brand{
+    color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding:5px;
+    background-color: lightskyblue;
+}
+a.nav-item{
+    color: black !important;
+    border-bottom: 2px solid transparent;
+}
+a.nav-item:hover{
+    border-bottom: 2px solid black;
+}
+.account-register-form{
+  border: 2px solid lightgray;
+  border-radius: 15px;
+}
