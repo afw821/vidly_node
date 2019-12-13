@@ -91,7 +91,7 @@ $(document).ready(function () {
     $(".registration").removeClass("active");
     $('.customer-reviews').removeClass("active");
   });
-
+  console.log('Testing console.log');
   $(".registration").on("click", function () {
     $(".account-register-form").show();
     $(".account-login-form").hide();
