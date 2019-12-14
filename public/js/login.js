@@ -1,5 +1,4 @@
 $(document).ready(function () {
-console.log('test commit two');
   //------------------------------//
   //REGISTERING A USER//
   //------------------------------//
