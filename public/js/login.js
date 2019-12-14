@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+console.log('test commit two');
   //------------------------------//
   //REGISTERING A USER//
   //------------------------------//
@@ -91,7 +91,6 @@ $(document).ready(function () {
     $(".registration").removeClass("active");
     $('.customer-reviews').removeClass("active");
   });
-  
   $(".registration").on("click", function () {
     $(".account-register-form").show();
     $(".account-login-form").hide();
