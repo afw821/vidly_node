@@ -19,24 +19,8 @@ const cartSchema = new mongoose.Schema({
         }),
         required: true
     },
-    movie: {
-        type: [
-            new mongoose.Schema({
-                title: {
-                    type: String,
-                    required: true,
-                    trim: true,
-                    minlength: 5,
-                    maxlength: 255
-                },
-                dailyRentalRate: {
-                    type: Number,
-                    required: true,
-                    min: 0,
-                    max: 255
-                }
-            })
-        ],
+    movieId: {
+        type: [String],
         required: true
     }
 });
