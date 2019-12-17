@@ -21,7 +21,8 @@ router.post('/', ash(async function (req, res) {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        isAdmin: req.body.isAdmin
+        isAdmin: req.body.isAdmin,
+        cartId: null
     });
     //salt and has passord using bcrypt
     const salt = await bcrypt.genSalt(10);
