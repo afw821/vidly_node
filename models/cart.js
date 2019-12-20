@@ -28,7 +28,7 @@ const cartSchema = new mongoose.Schema({
 const Cart = mongoose.model('Cart', cartSchema);
 
 function validateCart(items) {
-    const schema ={
+    const schema = {
         userId: Joi.string().required(),
         movieId: Joi.required()
     }
