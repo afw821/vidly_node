@@ -11,9 +11,7 @@ router.post('/', ash(async function (req, res) {
     //validate the req body validate function
     const result = validate(req.body);
     if (result.error) return res.status(400).send(error.details[0].message);
-    //find user
-    console.log('req body movieId', req.body.movieId);
-    
+    //find user  
     const userId = req.body.userId;
     const movieId = req.body.movieId;
     const user = await User.findById(userId);
@@ -21,14 +19,13 @@ router.post('/', ash(async function (req, res) {
     if (!user) return res.status(404).send("invalid User");
     //IF//if !user.cartId this means this user is creating a new crt for the first time
     if (!user.cartId) {
-       
         let cart = new Cart({
             user: {
                 _id: user._id,
                 name: user.name,
                 email: user.email
             },
-            movieId: movieId.map(id => id)
+            movieId: movieId //use movieId.map(id => id) to send more than one movie id at a time
         });
 
         cart = await cart.save();
@@ -47,30 +44,39 @@ router.post('/', ash(async function (req, res) {
         res.send({ status: true, cart: cart, updatedUser: updatedUser });
 
     } else { //else user has a cart already 
-        //ELSE//if user.cartId then we are updating the cart by the cartId stored on the user
-        //find cart by id and update
-        //need to find it first to get all current calues in 
+        const cartArray = [];
+
         let cart = await Cart.findById(user.cartId);
-        console.log('movie ids in original cart', typeof cart.movieId);
-        console.log(cart.movieId[1]);
-        // const combinedCartItems = cart.movieId.map(id => id);
-        // console.log('combined cart items', combinedCartItems);
-        //console.log('user.cart id true so user has a cart already', user.cartId);
-        // let updatedCart = await Cart.findByIdAndUpdate(user.cartId, {
-        //     user: {
-        //         _id: user._id,
-        //         name: user.name,
-        //         email: user.email
-        //     },
-        //     movieId: movieId
-        // }, { new: true });
 
-        // res.send({ status: true, updatedCart: updatedCart, user: user });
+        cart.movieId.forEach(function(id){
+            cartArray.push(id);
+        });
+        cartArray.push(movieId);
+
+        let updatedCart = await Cart.findByIdAndUpdate(user.cartId, {
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email
+            },
+            movieId: cartArray
+        }, { new: true });
+
+        res.send({ status: true, updatedCart: updatedCart, user: user });
     }
+}));
 
-    
+router.get('/:id', ash(async function(req,res){
+    const moviesArray = [];
+    const cart = await Cart.findById(req.params.id);
 
+    if(!cart) return res.status(404).send("The cart with the given id was not found");
 
+    for(let i = 0; i < cart.movieId.length; i++) {
+        var movies = await Movie.findById(cart.movieId[i]);
+        moviesArray.push(movies);
+    }   
+    res.send(moviesArray);
 }));
 
 module.exports = router;
