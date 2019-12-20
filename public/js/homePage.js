@@ -19,6 +19,7 @@ $(document).ready(async function () {
   var userName = user.name;
   var userEmail = user.email;
   var isUserAdmin = user.isAdmin;
+  var userCartId = user.cartId;
   $(".welcome-label").text(`Welcome ${userName}!`);
   //---------------------------------------------------------//
   //GET ALL MOVIES FROM THE DB AND BUILD OUT THE GRID
@@ -103,80 +104,53 @@ $(document).ready(async function () {
   //ADD MOVIES TO CART (SESSION STORAGE)
   //--------------------------------------------------------//
   $(".add-to-cart").each(function (i, e) {
-    $(this).on("click", function () {
-      //text alerting added
-      $(this)
-        .next()
-        .css("opacity", "1.0");
-      setTimeout(function () {
-        $(".add-to-cart")
-          .next()
-          .css("opacity", "0.0");
-      }, 1000);
-      //adding movie to session storage
-      const name = $(this).attr("data-movie-name");
-      const id = $(this).attr("data-movieId");
-      const price = $(this).attr("data-price");
-      sessionStorage.setItem(name, id);
-      //build out the quick cart grid
-      const movieRow = $("<div>", {
-        class: "row mb-3 movie-row"
-      });
-      const col6 = $("<div>", {
-        class: "col-6",
-        appendTo: movieRow
-      });
-      const h3 = $("<h3>", {
-        class: "card-text",
-        text: name,
-        appendTo: col6
-      });
-      const col2 = $("<div>", {
-        class: "col-2",
-        appendTo: movieRow
-      });
-      const quantity = $("<h3>", {
-        class: "card-text",
-        text: "1",
-        appendTo: col2
-      });
-      const col3 = $("<div>", {
-        class: "col-3",
-        appendTo: movieRow
-      });
-      const priceQc = $("<h3>", {
-        class: "card-text",
-        text: price,
-        appendTo: col3
-      });
-      const col1 = $("<div>", {
-        class: "col-1",
-        appendTo: movieRow
-      });
-      const button = $("<button>", {
-        class: "close",
-        type: "button",
-        "data-dismiss": "modal",
-        "aria-label": "Close",
-        "data-movie-name": name,
-        appendTo: col1,
-        click: function () {
+    $(this).on("click", async function () {
+      try {
+ 
+        const userId = $(this).attr('data-user-id');
+        const movieId = $(this).attr('data-movieid');
+
+        const result = await $.ajax({
+          url: '/api/carts',
+          method: 'POST',
+          data: {
+            userId: userId,
+            movieId: movieId
+          }
+        });
+       
+        if (result.status) {
           $(this)
-            .parents(".movie-row")
-            .remove();
-          //also need to remove the item from session storage
-          //so it wont appear on checkout page
-          sessionStorage.removeItem(name);
+            .next()
+            .css("opacity", "1.0");
+          setTimeout(function () {
+            $(".add-to-cart")
+              .next()
+              .css("opacity", "0.0");
+          }, 1000);
         }
-      });
-      const span = $("<span>", {
-        class: "close",
-        "aria-hidden": "true",
-        html: "&times;",
-        appendTo: button
-      });
-      $(".movie-grid-container").append(movieRow);
+      } catch (ex) {
+        console.log(`Ex posting a cart: ${ex}`);
+      }
     });
+  });
+  //---------------------------------------------------------//
+  //Launch Cart Modal / Get Cart
+  //--------------------------------------------------------//
+
+  $('.cart-items').click(async function () {
+    //$('#btnViewCart').click();
+    //get cart by cart id
+    const movies = await $.ajax({
+      url: `/api/carts/${userCartId}`,
+      method: 'GET'
+    });
+
+    if(movies.result){
+      console.log('movie array', movies);
+    }
+    
+
   });
   //---------------------------------------------------------//
   //Quick View Cart Toggle
@@ -451,15 +425,15 @@ $(document).ready(async function () {
       const subject = $('#Subject').val();
       const stars = $('.checked').length;
       //client side validation
-      if (subject.length < 5) 
+      if (subject.length < 5)
         return reviewValidation('Subject', 5, true);
-        
-      if(comment.length < 15)
+
+      if (comment.length < 15)
         return reviewValidation('Comment', 15, true);
 
-      if(stars < 1)
+      if (stars < 1)
         return reviewValidation('Stars', 1, false);
-      
+
       const result = await $.ajax({
         url: '/api/reviews',
         method: 'POST',
@@ -471,7 +445,7 @@ $(document).ready(async function () {
         }
       });
       console.log('result', result);
-     
+
       if (result.status) {
         $('#Comment').val("");
         $('#Subject').val("");
@@ -480,14 +454,14 @@ $(document).ready(async function () {
       }
     } catch (ex) { //server side JOI validation
       const status = ex.status;
-      if(status !== 400) {
+      if (status !== 400) {
         alert(`${status} error: Something Broke, please try again later`);
         return;
       }
       const comment = ex.responseText;
-      switch(comment){
+      switch (comment) {
         case '"comment" is not allowed to be empty':
-            reviewValidation('Comment', 15, true);
+          reviewValidation('Comment', 15, true);
           break;
         case '"subject" is not allowed to be empty':
           reviewValidation('Subject', 5, true);
@@ -499,7 +473,7 @@ $(document).ready(async function () {
     }
 
   });
-  
+
   //reuseable review validation functions
   function reviewValidation(args, length, bool) {
     const html = `<b>${args} must be at least ${length} Characters in length</b>`;
@@ -507,7 +481,7 @@ $(document).ready(async function () {
     $('.review-validation').show().html(bool ? html : starHtml);
     $(`#${args}`).css('border', '1px solid red');
     setTimeout(function () {
-      $(`#${args}`).css('border', function() {
+      $(`#${args}`).css('border', function () {
         return bool ? '1px solid #ced4da' : 'none';
       });
       $('.review-validation').hide().empty();

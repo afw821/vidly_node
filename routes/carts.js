@@ -66,7 +66,7 @@ router.post('/', ash(async function (req, res) {
     }
 }));
 
-router.get('/:id', ash(async function(req,res){
+router.get('/:id', ash(async function(req,res){ // get cart by cart id
     const moviesArray = [];
     const cart = await Cart.findById(req.params.id);
 
@@ -76,7 +76,7 @@ router.get('/:id', ash(async function(req,res){
         var movies = await Movie.findById(cart.movieId[i]);
         moviesArray.push(movies);
     }   
-    res.send(moviesArray);
+    res.send({ result: true, movies: moviesArray });
 }));
 
 module.exports = router;
