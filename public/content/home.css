@@ -1,11 +1,6 @@
 body{
-    /* background-color:rgb(80, 152, 180);  */
-    /* background-image: url("./assests/movies.jpg");
-    background-repeat:no-repeat;
-    background-size: cover; 
-    opacity:0.9; */
     width:100%; 
-    background-color: lightslategrey;
+    background-color: #fdf9f3;
 }
 .quick-view-cart{
     width: 400px;

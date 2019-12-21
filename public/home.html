@@ -46,7 +46,7 @@
         data-target="#movieSearch"></button>
     <button type="button" style="display:none;" id="btnReviewPosted" class="btn btn-primary" data-toggle="modal"
         data-target="#reviewPosted"></button>
-        <button type="button" style="display: none;" id="btnViewCart" class="btn btn-primary" data-toggle="modal"
+    <button type="button" style="display: none;" id="btnViewCart" class="btn btn-primary" data-toggle="modal"
         data-target="#cartModal"></button>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
         <a class="navbar-brand ff" href="#">Alex's Movies</a>
@@ -183,8 +183,8 @@
     </div>
 
     <!-- Cart MODAL -->
-    <div class="modal fade modal-color" id="cartModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-color" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -194,12 +194,26 @@
                     </button>
                 </div>
                 <div class="modal-body ff cart-wrapper">
-                    
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Price</th>
+                                <th scope="col"># in Stock</th>
+                                <th scope="col"><i class="fas fa-cart-plus"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary ff check-out-user" data-dismiss="modal">Checkout</button>
+                    <button type="button" class="btn btn-primary ff check-out-user"
+                        data-dismiss="modal">Checkout</button>
                     <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
-                    
+
                 </div>
             </div>
         </div>
