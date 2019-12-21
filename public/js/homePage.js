@@ -141,79 +141,20 @@ $(document).ready(async function () {
   $('.cart-items').click(async function () {
     $('#btnViewCart').click();
     //get cart by cart id
-    const movies = await $.ajax({
+    const result = await $.ajax({
       url: `/api/carts/${userCartId}`,
       method: 'GET'
     });
 
-    if(movies.result){
-      console.log('movie array', movies.movies.length);
-      const moviesArray = movies.movies;
-      if(movies.movies.length == 0){
+    if(result.result){
+      const moviesArray = result.movies;
+      if(result.movies.length == 0){
         $('.cart-wrapper').empty().html('<b>Your Cart is Empty</b>');
         return;
       }
       $('tbody').empty();
-      for (let i = 0; i < moviesArray.length; i++) {
-        const name = movies.movies[i].title;
-        const price = movies.movies[i].dailyRentalRate;
-        const numberInStock = movies.movies[i].numberInStock;
-        const movieId = movies.movies[i]._id;
-        const genreName = movies.movies[i].genre.name;
-        const genreId = movies.movies[i].genre._id;
-
-        
-
-        // const tbody = $('<tbody>', {
-        //   mouseenter: function () {
-        //     $(this).css('background-color', 'lightgray');
-        //   },
-        //   mouseleave: function () {
-        //     $(this).css('background-color', 'white');
-        //   },
-          
-        // });
-        const trBody = $('<tr>', {
-          class: 'table-row-cart',
-          mouseenter: function (){
-            this.style.background = 'lightgray';
-          },
-          mouseleave: function () {
-            this.style.background = 'white';
-          }
-        });
-        const tdTitle = $('<td>', {
-          text: name,
-          id: movieId,
-          "data-genre-id": genreId,
-          "data-movie-id": movieId,
-          appendTo: trBody
-        });
-        const tdPrice = $('<td>', {
-          text: `$${price} / Day`,
-          id: movieId,
-          "data-genre-id": genreId,
-          "data-movie-id": movieId,
-          appendTo: trBody
-        });
-        const tdStock = $('<td>', {
-          text: numberInStock,
-          id: movieId,
-          "data-genre-id": genreId,
-          "data-movie-id": movieId,
-          appendTo: trBody
-        });
-        const tdBtn = $('<td>', {
-          style: 'cursor: pointer;',
-          html: '<i class="fas fa-plus"></i>',
-          appendTo: trBody
-        });
-        $('.cart-wrapper').find('tbody').append(trBody);
-
-      }
+      buildMovieGrid(moviesArray, '.cart-wrapper');
     }
-    
-
   });
   //---------------------------------------------------------//
   //Quick View Cart Toggle
@@ -268,97 +209,8 @@ $(document).ready(async function () {
       if (result.result) {
         $('#btnSearchResult').click();
         const resultArray = result.movie;
-        for (let i = 0; i < resultArray.length; i++) {
-
-          const name = result.movie[i].title;
-          const price = result.movie[i].dailyRentalRate;
-          const numberInStock = result.movie[i].numberInStock;
-          const movieId = result.movie[i]._id;
-          const genreName = result.movie[i].genre.name;
-          const genreId = result.movie[i].genre._id;
-
-          const table = $('<table>', {
-            class: "table",
-            "data-genre-id": genreId,
-            id: movieId,
-            "data-movie-id": movieId
-          });
-          const thead = $('<thead>', {
-            class: "thead-dark",
-            appendTo: table
-          });
-          const tr = $('<tr>', {
-            appendTo: thead
-          });
-          const thTitle = $('<th>', {
-            scope: "col",
-            text: "Title",
-            appendTo: tr
-          });
-          const thPrice = $('<th>', {
-            scope: "col",
-            text: "Price",
-            appendTo: tr
-          });
-          const thStock = $('<th>', {
-            scope: "col",
-            text: "# in Stock",
-            appendTo: tr
-          });
-          const thBlank = $('<th>', {
-            html: '<i class="fas fa-cart-plus"></i>',
-            scope: 'col',
-            appendTo: tr
-          });
-
-          const tbody = $('<tbody>', {
-            mouseenter: function () {
-              $(this).css('background-color', 'lightgray');
-            },
-            mouseleave: function () {
-              $(this).css('background-color', 'white');
-            },
-            appendTo: table
-          });
-          const trBody = $('<tr>', {
-            class: 'table-row-movie-search',
-            appendTo: tbody
-          });
-          const tdTitle = $('<td>', {
-            text: name,
-            id: movieId,
-            "data-genre-id": genreId,
-            "data-movie-id": movieId,
-            appendTo: trBody
-          });
-          const tdPrice = $('<td>', {
-            text: `$${price} / Day`,
-            id: movieId,
-            "data-genre-id": genreId,
-            "data-movie-id": movieId,
-            appendTo: trBody
-          });
-          const tdStock = $('<td>', {
-            text: numberInStock,
-            id: movieId,
-            "data-genre-id": genreId,
-            "data-movie-id": movieId,
-            appendTo: trBody
-          });
-          const tdBtn = $('<td>', {
-            style: 'cursor: pointer;',
-            html: '<i class="fas fa-plus"></i>',
-            appendTo: trBody
-          });
-
-          const closeBtn = '<button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>';
-
-          $('#movie-search-modal').empty();
-
-          $('#movie-search-modal').append(table);
-
-        }
-
+        $('tbody').empty();
+        buildMovieGrid(resultArray, '#movie-search-modal');
       }
     } catch (ex) {
       const response = ex.responseText;
@@ -372,8 +224,6 @@ $(document).ready(async function () {
 
       }
     }
-
-
   });
   //---------------------------------------------------------//
   //Post review Logic
@@ -550,6 +400,55 @@ $(document).ready(async function () {
       $('.review-validation').hide().empty();
     }, 4000);
     return;
+  }
+
+  function buildMovieGrid (array, container) {
+    for (let i = 0; i < array.length; i++) {
+      const name = array[i].title;
+      const price = array[i].dailyRentalRate;
+      const numberInStock = array[i].numberInStock;
+      const movieId = array[i]._id;
+      const genreName = array[i].genre.name;
+      const genreId = array[i].genre._id;
+
+      const trBody = $('<tr>', {
+        class: 'table-row-cart',
+        mouseenter: function (){
+          this.style.background = 'lightgray';
+        },
+        mouseleave: function () {
+          this.style.background = 'white';
+        }
+      });
+      const tdTitle = $('<td>', {
+        text: name,
+        id: movieId,
+        "data-genre-id": genreId,
+        "data-movie-id": movieId,
+        appendTo: trBody
+      });
+      const tdPrice = $('<td>', {
+        text: `$${price} / Day`,
+        id: movieId,
+        "data-genre-id": genreId,
+        "data-movie-id": movieId,
+        appendTo: trBody
+      });
+      const tdStock = $('<td>', {
+        text: numberInStock,
+        id: movieId,
+        "data-genre-id": genreId,
+        "data-movie-id": movieId,
+        appendTo: trBody
+      });
+      const tdBtn = $('<td>', {
+        style: 'cursor: pointer;',
+        html: '<i class="fas fa-plus"></i>',
+        appendTo: trBody
+      });
+      $(container).find('tbody').append(trBody);
+
+    }
   }
 
 });
