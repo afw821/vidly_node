@@ -2,16 +2,6 @@ body{
     width:100%; 
     background-color: #fdf9f3;
 }
-.quick-view-cart{
-    width: 400px;
-    height: 200px;
-    z-index:200000000;
-    background-color: transparent;
-    position:absolute;
-    left:975px;
-    top:67px;
-   
-}
 .hide{
     display: none;
 }
@@ -23,4 +13,41 @@ body{
 }
 .welcome-label-margin{
     margin-left:300px;
+}
+.active{
+    border-bottom:2px solid black !important;
+  }
+  a.navbar-brand{
+    color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding:5px;
+    background-color: lightgray;
+  }
+  a.nav-item{
+    color: black !important;
+    border-bottom: 2px solid transparent;
+  }
+  a.nav-item:hover{
+    border-bottom: 2px solid black;
+  }
+
+.checked {
+    color: orange;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* a.nav-item {
+    border-bottom: 2px solid transparent;
+}
+
+a.nav-item:hover {
+    border-bottom: 2px solid white;
+} */
+
+.hide {
+    display: none;
 }

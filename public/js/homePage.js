@@ -104,6 +104,7 @@ $(document).ready(async function () {
 
     $('.movies').removeClass('active');
     $(this).addClass('active');
+    $('label').removeClass('active');
   });
 
   $('.movies').click(function () {
@@ -135,7 +136,7 @@ $(document).ready(async function () {
       if (result.result) {
         $('#btnSearchResult').click();
         const resultArray = result.movie;
-        $('tbody').empty();
+        $('tbody.search-tbody').empty();
         buildMovieGrid(resultArray, '#movie-search-modal', null, 'search', userId);
       }
     } catch (ex) {
