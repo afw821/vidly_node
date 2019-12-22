@@ -40,14 +40,6 @@ body{
     cursor: pointer;
 }
 
-/* a.nav-item {
-    border-bottom: 2px solid transparent;
-}
-
-a.nav-item:hover {
-    border-bottom: 2px solid white;
-} */
-
 .hide {
     display: none;
 }

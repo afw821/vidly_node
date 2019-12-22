@@ -111,7 +111,6 @@ $(document).ready(async function () {
     $('.leave-review-container').removeClass('d-flex');
     $('.leave-review-container').addClass('hide');
 
-    $('.movie-container').addClass('d-flex');
     $('.movie-container').removeClass('hide');
 
     $('.leave-review').removeClass('active');
