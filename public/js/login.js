@@ -115,8 +115,12 @@ $(document).ready(function () {
   //-----------------------------------------//
   $("#login-user").on("click", async function () {
     const email = $("#user-email-login").val();
-    const password = $("#first-password-login").val();
+    const password = $("#Password").val();
     try {
+
+      if(password.length < 6){
+        return reviewValidation('Password', 5, true);
+      }
       //POST TO AUTH TO AUTHENTICATE THE USER
       const token = await $.ajax({
         url: "/api/auth",
@@ -129,10 +133,8 @@ $(document).ready(function () {
       //IF VALID USER (THEY HAVE A VALID JWT)
       if (token) {
         try {
-
           sessionStorage.setItem("x-auth-token", token);
           window.location.href = '/homepage';
-
         } catch (ex) {
           console.log(ex, 'ex');
         }
@@ -163,7 +165,6 @@ $(document).ready(function () {
       }
     }
   });
-
   //-----------------------------------------//
   //GETTING AND DISPLAYING REVIEWS//
   //-----------------------------------------//

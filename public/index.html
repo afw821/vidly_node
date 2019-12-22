@@ -41,6 +41,7 @@
             </div>
         </div>
     </nav>
+    <!-- Register Form -->
     <div class="container d-flex justify-content-center mt-5">
         <form class="text-center p-5 account-register-form" style="width:600px; height:620px;">
 
@@ -83,18 +84,21 @@
 
 
         </form>
+        <!-- Login form -->
         <form class="text-center p-5 account-login-form" style="display:none; width:600px; height:400px;">
 
             <p style="color: black;" class="h4 mb-4 ff">Sign in</p>
             <input type="email" id="user-email-login" class="form-control mb-4" placeholder="E-mail">
-            <input type="password" id="first-password-login" class="form-control mb-4" placeholder="Password">
+            <input type="password" id="Password" class="form-control mb-4" placeholder="Password">
             <button class="btn ff sign-in-btn btn-block my-4" type="button" id="login-user">Sign in</button>
 
 
             <p class="h4" style="font-weight: bolder;">Not a member?
                 <large class="registration" style="cursor: pointer;">Register</large>
             </p>
-            <small id="invalid-email-password" class="form-text email-format-validation-login"
+            <div class="alert alert-danger review-validation" style="display:none;" role="alert">
+            </div>
+            <!-- <small id="invalid-email-password" class="form-text email-format-validation-login"
                 style="opacity:0.0; color: black; font-weight: bolder;">
                 Invalid Email or Password!</small>
             <h6 id="password-length-login" class="form-text email-format-validation-login"
@@ -102,7 +106,7 @@
                 Password Must Be 5 Characters In Length!</h6>
             <small id="valid-email-login" class="form-text email-format-validation-login"
                 style="opacity:0.0; color: black; font-weight: bolder;">
-                Email Must Be A Valid Email!</small>
+                Email Must Be A Valid Email!</small> -->
 
         </form>
         <div class="customer-review-div" style="display:none; width:65%;">
@@ -162,5 +166,5 @@
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-<script src="./js/StateManager.js"></script>
-<script src="./js/login.js">  </script>
+<script src="./js/utils/validation.js"></script>
+<script src="./js/login.js"></script>
