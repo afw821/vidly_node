@@ -108,11 +108,22 @@
     </nav>
     <!-- MOVIE DUMP DIV -->
     <div class="container">
-        <div class="movie-container d-flex flex-wrap justify-content-around"></div>
+        <div class="movie-container ff">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Price/Day</th>
+                        <th scope="col"># in Stock</th>
+                        <th scope="col"><i class="fas fa-cart-plus"></i></th>
+                    </tr>
+                </thead>
+                <tbody class="movie-tbody">
+                </tbody>
+            </table>
+        </div>
         <div class="leave-review-container justify-content-center hide">
-
             <form style="width:50%;">
-
                 <div class="form-group">
                     <label for="subject">Subject</label>
                     <input type="text" class="form-control" id="Subject" placeholder="Subject">
@@ -132,14 +143,12 @@
                         <span class="fa fa-star pointer" id="5"></span>
                         <span class="fa fa-star pointer" style="display: none;" id="6"></span>
                     </div>
-
                     <!-- need this so there is another sibling node for e.currentTaget.NextSibling -->
                 </div>
                 <div class="form-group d-flex justify-content-end">
                     <button type="button" id="btnReviewSubmit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="alert alert-danger review-validation" style="display:none;" role="alert">
-
                 </div>
             </form>
         </div>
@@ -153,19 +162,19 @@
                     <h5 class="modal-title ff" id="exampleModalLabel">Search Results</h5>
                 </div>
                 <div class="modal-body ff" id="movie-search-modal">
-                        <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col"># in Stock</th>
-                                        <th scope="col"><i class="fas fa-cart-plus"></i></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-        
-                                </tbody>
-                            </table>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Price/Day</th>
+                                <th scope="col"># in Stock</th>
+                                <th scope="col"><i class="fas fa-cart-plus"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody class="search-tbody">
+
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer modal-button-div d-flex justify-content-around">
                     <div class="alert alert-success d-flex align-items-center" style="height: 46px; opacity:0.0;"
@@ -211,12 +220,12 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Title</th>
-                                <th scope="col">Price</th>
-                                <th scope="col"># in Stock</th>
-                                <th scope="col"><i class="fas fa-cart-plus"></i></th>
+                                <th scope="col">Price/Day</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="cart-tbody">
 
                         </tbody>
                     </table>
@@ -251,6 +260,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"
     integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
     crossorigin="anonymous"></script>
-<script src="./js/StateManager.js"></script>
+<script src="./js/utils/star.js"></script>
+<script src="./js/utils/validation.js"></script>
+<script src="./js/utils/buildMovieGrid.js"></script>
 <script src="./js/homePage.js"> </script>
 <script src="./js/login.js"></script>

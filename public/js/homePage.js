@@ -30,61 +30,7 @@ $(document).ready(async function () {
     headers: { "x-auth-token": token }
   });
 
-  $(movies).each(function (i, e) {
-    const dailyRentalRate = movies[i].dailyRentalRate;
-    const numberInStock = movies[i].numberInStock;
-    const movieName = movies[i].title;
-    const movieId = movies[i]._id;
-
-    const movieCard = $("<div>", {
-      class: "movie-card card mb-4",
-      style: "width: 18rem; background-color: lightgray;"
-    });
-    const movieCardBody = $("<div>", {
-      class: "movie-card-body card-body",
-      appendTo: movieCard
-    });
-    const h5 = $("<h5>", {
-      class: "movie-card-title card-title",
-      text: movieName,
-      appendTo: movieCardBody
-    });
-    const inStock = $("<p>", {
-      class: "card-text",
-      text: `Only ${numberInStock} Left In Stock!`,
-      appendTo: h5
-    });
-    const price = $("<div>", {
-      class: "card-text",
-      text: `$${dailyRentalRate} / Day`,
-      appendTo: h5
-    });
-    const button = $("<a>", {
-      class: "btn btn-primary add-to-cart",
-      id: `${movieId}`,
-      "data-user-id": userId,
-      "data-movie-name": movieName,
-      "data-movieId": movieId,
-      "data-price": dailyRentalRate,
-      text: "Add To Cart",
-      appendTo: h5
-    });
-    const alertText = $("<small>", {
-      id: movieId,
-      class: "added-to-cart form-text",
-      style: "opacity:0.0; color:green",
-      text: "Successfully Added To Cart!!",
-      appendTo: h5
-    });
-    $(".movie-container").append(movieCard);
-    //Adding to Card we are setting the item in local staorage to be able to get it on checkout page
-    $(`#${movieId}`).on("click", function () {
-      const movieid = $(this).attr("data-movieId");
-      const userid = $(this).attr("data-user-id");
-      localStorage.setItem("Movie", movieid);
-      localStorage.setItem("User", userid);
-    });
-  });
+  buildMovieGrid(movies, '.movie-container', userCartId, 'home', userId);
 
   //---------------------------------------------------------//
   //LOGOUT A USER
@@ -101,15 +47,12 @@ $(document).ready(async function () {
     window.location.href = "/checkout";
   });
   //---------------------------------------------------------//
-  //ADD MOVIES TO CART (SESSION STORAGE)
+  //ADD MOVIES TO CART 
   //--------------------------------------------------------//
   $(".add-to-cart").each(function (i, e) {
     $(this).on("click", async function () {
-      try {
- 
-        const userId = $(this).attr('data-user-id');
+      try {      
         const movieId = $(this).attr('data-movieid');
-
         const result = await $.ajax({
           url: '/api/carts',
           method: 'POST',
@@ -120,14 +63,7 @@ $(document).ready(async function () {
         });
        
         if (result.status) {
-          $(this)
-            .next()
-            .css("opacity", "1.0");
-          setTimeout(function () {
-            $(".add-to-cart")
-              .next()
-              .css("opacity", "0.0");
-          }, 1000);
+          console.log('result updated cart', result.updatedCart);
         }
       } catch (ex) {
         console.log(`Ex posting a cart: ${ex}`);
@@ -152,19 +88,9 @@ $(document).ready(async function () {
         $('.cart-wrapper').empty().html('<b>Your Cart is Empty</b>');
         return;
       }
-      $('tbody').empty();
-      buildMovieGrid(moviesArray, '.cart-wrapper');
+      $('tbody.cart-tbody').empty();
+      buildMovieGrid(moviesArray, '.cart-wrapper', userCartId, 'cart', userId);
     }
-  });
-  //---------------------------------------------------------//
-  //Quick View Cart Toggle
-  //--------------------------------------------------------//
-  $(".cart-items").on("mouseenter", function () {
-    $(".quick-view-cart").removeClass("hide");
-    $(".quick-view-cart").slideDown();
-  });
-  $(".quick-cart-close").on("click", function () {
-    $(".quick-view-cart").slideUp();
   });
   //---------------------------------------------------------//
   //Leave review view and movie view toggle
@@ -210,7 +136,7 @@ $(document).ready(async function () {
         $('#btnSearchResult').click();
         const resultArray = result.movie;
         $('tbody').empty();
-        buildMovieGrid(resultArray, '#movie-search-modal');
+        buildMovieGrid(resultArray, '#movie-search-modal', null, 'search', userId);
       }
     } catch (ex) {
       const response = ex.responseText;
@@ -231,104 +157,7 @@ $(document).ready(async function () {
   //select stars - logic to highlight them on click
   $('span.fa-star').each(function (i, element) {
     $(this).click(function (e) {
-      //clear all if ANY of the stars are checked AND the one you click is checked ***AND*** there are no more checked after the one clicked
-      //This clears them if you click on a yellow star//****** */
-      const starClicked = parseInt(e.target.id);
-      if ($('span.fa-star').hasClass('checked') && (e.target.classList[3]) && !(e.currentTarget.nextElementSibling.classList[3])) {
-        //remove all of them
-        $('span.fa-star').removeClass('checked');
-        return;
-      }
-      //if ANY of the stars are checked AND the one you click is checked ***AND*** there ARE more checked after the one clicked ONLY clear the ones after the one clicked
-      if ($('span.fa-star').hasClass('checked') && (e.target.classList[3])) {
-        switch (starClicked) {
-          case 1:
-            $('#2').removeClass('checked');
-            $('#3').removeClass('checked');
-            $('#4').removeClass('checked');
-            $('#5').removeClass('checked');
-            break;
-          case 2:
-            $('#3').removeClass('checked');
-            $('#4').removeClass('checked');
-            $('#5').removeClass('checked');
-            break;
-          case 3:
-            $('#4').removeClass('checked');
-            $('#5').removeClass('checked');
-            break;
-          case 4:
-            $('#5').removeClass('checked');
-            break;
-        }
-        return;
-      }
-      //if no stars are checked we add yellow to all the ones behind the one and including the one clicked
-      if (!$('span.fa-star').hasClass('checked')) {
-        switch (starClicked) {
-          case 1:
-            $('#1').addClass('checked');
-            break;
-          case 2:
-            $('#1').addClass('checked');
-            $('#2').addClass('checked');
-            break;
-          case 3:
-            $('#1').addClass('checked');
-            $('#2').addClass('checked');
-            $('#3').addClass('checked');
-            break;
-          case 4:
-            $('#1').addClass('checked');
-            $('#2').addClass('checked');
-            $('#3').addClass('checked');
-            $('#4').addClass('checked');
-            break;
-          case 5:
-            $('#1').addClass('checked');
-            $('#2').addClass('checked');
-            $('#3').addClass('checked');
-            $('#4').addClass('checked');
-            $('#5').addClass('checked');
-            break;
-        }
-        return;
-      } else if ($('span.fa-star').hasClass('checked') && (e.currentTarget.previousElementSibling.classList[3])) { //else we are adding stars when there are already stars behind one clicked . any stars checked 2. there are stars behind the one checked
-        switch (starClicked) {
-          case 2:
-            $('#2').addClass('checked');
-            break;
-          case 3:
-            $('#3').addClass('checked');
-            break;
-          case 4:
-            $('#4').addClass('checked');
-            break;
-          case 5:
-            $('#5').addClass('checked');
-            break;
-        }
-        return;
-      } else {
-        switch (starClicked) {
-          case 3:
-            $('#2').addClass('checked');
-            $('#3').addClass('checked');
-            break;
-          case 4:
-            $('#2').addClass('checked');
-            $('#3').addClass('checked');
-            $('#4').addClass('checked');
-            break;
-          case 5:
-            $('#2').addClass('checked');
-            $('#3').addClass('checked');
-            $('#4').addClass('checked');
-            $('#5').addClass('checked');
-            break;
-        }
-        return;
-      }
+      star(e);
     });
   }); //end star on click
   //POST the review on click of submit
@@ -357,7 +186,6 @@ $(document).ready(async function () {
           stars: stars
         }
       });
-      console.log('result', result);
 
       if (result.status) {
         $('#Comment').val("");
@@ -382,73 +210,6 @@ $(document).ready(async function () {
         case '"stars" must be larger than or equal to 1':
           reviewValidation('Stars', 1, false);
       }
-
     }
-
   });
-
-  //reuseable review validation functions
-  function reviewValidation(args, length, bool) {
-    const html = `<b>${args} must be at least ${length} Characters in length</b>`;
-    const starHtml = `<b>Must leave at least a ${length} star review`;
-    $('.review-validation').show().html(bool ? html : starHtml);
-    $(`#${args}`).css('border', '1px solid red');
-    setTimeout(function () {
-      $(`#${args}`).css('border', function () {
-        return bool ? '1px solid #ced4da' : 'none';
-      });
-      $('.review-validation').hide().empty();
-    }, 4000);
-    return;
-  }
-
-  function buildMovieGrid (array, container) {
-    for (let i = 0; i < array.length; i++) {
-      const name = array[i].title;
-      const price = array[i].dailyRentalRate;
-      const numberInStock = array[i].numberInStock;
-      const movieId = array[i]._id;
-      const genreName = array[i].genre.name;
-      const genreId = array[i].genre._id;
-
-      const trBody = $('<tr>', {
-        class: 'table-row-cart',
-        mouseenter: function (){
-          this.style.background = 'lightgray';
-        },
-        mouseleave: function () {
-          this.style.background = 'white';
-        }
-      });
-      const tdTitle = $('<td>', {
-        text: name,
-        id: movieId,
-        "data-genre-id": genreId,
-        "data-movie-id": movieId,
-        appendTo: trBody
-      });
-      const tdPrice = $('<td>', {
-        text: `$${price} / Day`,
-        id: movieId,
-        "data-genre-id": genreId,
-        "data-movie-id": movieId,
-        appendTo: trBody
-      });
-      const tdStock = $('<td>', {
-        text: numberInStock,
-        id: movieId,
-        "data-genre-id": genreId,
-        "data-movie-id": movieId,
-        appendTo: trBody
-      });
-      const tdBtn = $('<td>', {
-        style: 'cursor: pointer;',
-        html: '<i class="fas fa-plus"></i>',
-        appendTo: trBody
-      });
-      $(container).find('tbody').append(trBody);
-
-    }
-  }
-
 });
