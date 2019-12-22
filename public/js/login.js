@@ -2,6 +2,7 @@ $(document).ready(function () {
   //------------------------------//
   //REGISTERING A USER//
   //------------------------------//
+  console.log('test cl');
   $("#register").on("click", async function () {
     try {
       const firstPassword = $("#first-password")
