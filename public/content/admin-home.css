@@ -1,6 +1,10 @@
 body{
-    width:100%; 
-    background-color: #fdf9f3;
+    /* background-image: url("./assests/movies.jpg");
+    background-repeat:no-repeat;
+    background-size: cover; 
+    opacity:0.9;
+    width:100%; */
+    background-color: lightslategrey;
 }
 .selectList{
     width:224px;
@@ -8,11 +12,14 @@ body{
     border-radius: 5px;
 }
 form{
+    /* border: 2px solid rgb(22, 21, 22); */
     border-radius: 5px;
     min-height: 275px;
     width:800px;
-    background-color: lightgrey;
-    opacity: 1.0;
+    background-color: whitesmoke;
+    opacity: 0.9;
+    /* padding-left: 100px;
+    padding-top: 125px; */
 }
 input.add-movie{
     width: 224px;
@@ -20,20 +27,3 @@ input.add-movie{
 .add-movie-form-row{
     margin-bottom: 25px;
 }
-a.navbar-brand{
-    color: black;
-    border: 3px solid black;
-    border-radius: 10px;
-    padding:5px;
-    background-color: lightgray;
-  }
-  a.nav-item{
-    color: black !important;
-    border-bottom: 2px solid transparent;
-  }
-  a.nav-item:hover{
-    border-bottom: 2px solid black;
-  }
-  .active{
-    border-bottom:2px solid black !important;
-  }

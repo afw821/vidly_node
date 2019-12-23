@@ -23,10 +23,6 @@ const userSchema = new mongoose.Schema({
         maxlength: 1024
     },
     isAdmin: Boolean,
-    cartId: {
-        type: String,
-        required: false
-    }
 });
 
 //define a method for the user schema to be used again

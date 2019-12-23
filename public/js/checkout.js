@@ -1,5 +1,10 @@
 $(document).ready(async function () {
   const token = sessionStorage.getItem("x-auth-token");
+  //GET CURRENT LOGGED IN USER
+  //---------------------------------------------------------//
+  //GET CURRENT USER
+  //--------------------------------------------------------//
+
   const user = await $.ajax({
     url: "/api/users/me",
     method: "GET",
@@ -110,7 +115,12 @@ $(document).ready(async function () {
           movieId: movieId
         }
       });
+
       console.log('rental', rental);
+
     });
+
   });
+
+
 });
