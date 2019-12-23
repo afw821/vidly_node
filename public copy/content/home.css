@@ -1,0 +1,31 @@
+body{
+    /* background-color:rgb(80, 152, 180);  */
+    /* background-image: url("./assests/movies.jpg");
+    background-repeat:no-repeat;
+    background-size: cover; 
+    opacity:0.9; */
+    width:100%; 
+    background-color: lightslategrey;
+}
+.quick-view-cart{
+    width: 400px;
+    height: 200px;
+    z-index:200000000;
+    background-color: transparent;
+    position:absolute;
+    left:975px;
+    top:67px;
+   
+}
+.hide{
+    display: none;
+}
+.header-div{
+    border-bottom:1px solid lightgray;
+}
+.cart-margin{
+    margin-left:600px;
+}
+.welcome-label-margin{
+    margin-left:300px;
+}

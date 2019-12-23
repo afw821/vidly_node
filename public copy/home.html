@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="movie-page" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
+        crossorigin="anonymous" />
+
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./content/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="./content/home.css" />
+    <style>
+        .checked {
+            color: orange;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        a.nav-item {
+            border-bottom: 2px solid transparent;
+        }
+
+        a.nav-item:hover {
+            border-bottom: 2px solid white;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+
+    <title>Movie Page</title>
+</head>
+
+<body>
+    <button type="button" style="display:none;" id="btnSearchResult" class="btn btn-primary" data-toggle="modal"
+        data-target="#movieSearch"></button>
+    <button type="button" style="display:none;" id="btnReviewPosted" class="btn btn-primary" data-toggle="modal"
+        data-target="#reviewPosted"></button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+        <a class="navbar-brand ff" href="#">Alex's Movies</a>
+
+
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active movies ff" href="#">Movies</a>
+                <a class="nav-item nav-link check-out-user ff" href="#">Checkout</a>
+                <a class="nav-item nav-link logout-user ff" href="#">Logout</a>
+                <a class="nav-item nav-link leave-review ff" href="#">Leave Review</a>
+                <a class="nav-item nav-link cart-items ff" href="#"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="txtMovieName" type="search" placeholder="Search Movies"
+                    aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" id="btnSearchMovie" type="button">Search</button>
+            </form>
+            <div class="navbar-nav">
+                <h5 class="nav-item nav-link welcome-label ff">
+
+                </h5>
+            </div>
+            <!-- Quick view cart -->
+            <div class="quick-view-cart hide">
+                <div class="quick-cart-container">
+                    <div class="card card-width">
+                        <div class="card-body">
+                            <div class="h5-div d-flex justify-content-between">
+                                <h5 class="card-title ff">Your Items</h5>
+                                <button type="button" class="close quick-cart-close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="row mb-2 header-div">
+                                <div class="col-4">
+                                    <h3 class="card-text">Name</h3>
+                                </div>
+                                <div class="col-4">
+                                    <h3 class="card-text">Quantity</h3>
+                                </div>
+                                <div class="col-2">
+                                    <h3 class="card-text">Price</h3>
+                                </div>
+                            </div>
+                            <div class="movie-grid-container">
+
+                            </div>
+                            <a href="#" class="btn btn-primary check-out-user">Checkout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End quick view cart -->
+        </div>
+
+
+    </nav>
+    <!-- MOVIE DUMP DIV -->
+    <div class="container">
+        <div class="movie-container d-flex flex-wrap justify-content-around"></div>
+        <div class="leave-review-container justify-content-center hide">
+
+            <form style="width:50%;">
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="Subject" placeholder="Subject">
+                </div>
+                <div class="form-group">
+                    <label for="Review">Comment</label>
+                    <textarea class="form-control" id="Comment" rows="3" placeholder="Maximum 500 characters"></textarea>
+                </div>
+                <div class="form-group star-group">
+                    <label for="Stars">How would you rate us?</label><br />
+                    <div id="Stars" style="width:110px;">
+                        <span class="fa fa-star pointer" id="1"></span>
+                        <span class="fa fa-star pointer" id="2"></span>
+                        <span class="fa fa-star pointer" id="3"></span>
+                        <span class="fa fa-star pointer" id="4"></span>
+                        <span class="fa fa-star pointer" id="5"></span>
+                        <span class="fa fa-star pointer" style="display: none;" id="6"></span>
+                    </div>
+
+                    <!-- need this so there is another sibling node for e.currentTaget.NextSibling -->
+                </div>
+                <div class="form-group d-flex justify-content-end">
+                    <button type="button" id="btnReviewSubmit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="alert alert-danger review-validation" style="display:none;" role="alert">
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL Movie Search -->
+    <div class="modal fade modal-color" id="movieSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ff" id="exampleModalLabel">Search Results</h5>
+                </div>
+                <div class="modal-body ff" id="movie-search-modal">
+                </div>
+                <div class="modal-footer modal-button-div d-flex justify-content-around">
+                    <div class="alert alert-success d-flex align-items-center" style="height: 46px; opacity:0.0;" role="alert">
+                        Added to Cart
+                    </div>
+                    <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Review posted successfully modal     -->
+    <div class="modal fade modal-color" id="reviewPosted" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ff">Review successfully posted</h5>
+                </div>
+                <div class="modal-body ff">
+                    Thank you for your feedback!!
+                </div>
+                <div class="modal-footer modal-button-div d-flex justify-content-around">
+                    <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.5/js/mdb.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+    crossorigin="anonymous"></script>
+<script src="./js/StateManager.js"></script>
+<script src="./js/homePage.js"> </script>
+<script src="./js/login.js"></script>
