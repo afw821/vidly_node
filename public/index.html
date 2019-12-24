@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html class="login-page-replace" lang="en">
+
+<head class="login-head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
+        integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <!-- Font Awesome Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./content/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="./content/index.css" />
+    <title>Alex's Movies</title>
+
+</head>
+
+<body class="login-body">
+    <button type="button" style="display:none;" id="btnAcct" class="btn btn-primary" data-toggle="modal"
+        data-target="#accountCreated">
+    </button>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand ff" href="#">Alex's Movies</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active registration ff" href="#">Register</a>
+                <a class="nav-item nav-link login ff" href="#">Login</a>
+                <a class="nav-item nav-link admin ff" href="#">Admin Portal</a>
+                <a class="nav-item nav-link customer-reviews ff" href="#">Customer Reviews</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Register Form -->
+    <div class="container d-flex justify-content-center mt-5">
+        <form class="text-center p-5 account-register-form" style="width:600px; height:620px;">
+
+            <p style="color: black;" class="h4 mb-4 ff">Sign up</p>
+
+            <div class="form-row mb-4">
+                <div class="col-12">
+                    <input type="text" id="user-name" class="form-control" placeholder="Name">
+                    <small id="name-length-validation" class="form-text name-length-validation"
+                        style="opacity:0.0; color: black; font-weight: bolder;">Name
+                        Must Be At Least 5 Characters In Length!</small>
+                </div>
+            </div>
+            <input type="email" id="user-email" id="defaultRegisterFormEmail" class="form-control mb-4"
+                placeholder="E-mail">
+            <h6 id="email-validation" class="form-text email-validation"
+                style="opacity:0.0; color: black; font-weight: bolder;">Account
+                Already Registered With This Email!</h6>
+            <h6 id="email-format-validation" class="form-text email-format-validation"
+                style="opacity:0.0; color: black; font-weight: bolder;">Email
+                Address Must Be Valid!</h6>
+            <input type="password" id="first-password" class="form-control" placeholder="Password"
+                aria-describedby="defaultRegisterFormPasswordHelpBlock">
+            <h6 id="defaultRegisterFormPasswordHelpBlock" class="mb-4" style="font-weight:bolder;">
+                At least 5 characters
+            </h6>
+
+            <input type="password" id="user-password" class="form-control verify-password"
+                placeholder="Re-Enter Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+            <h6 id="password-length-validation" class="form-text password-length-validation"
+                style="opacity:0.0; color: black; font-weight: bolder;">Password
+                Must Be At Least 5 Characters In Length!</h6>
+            <h6 id="password-match-validation" class="form-text password-match-validation"
+                style="opacity:0.0; color: black; font-weight: bolder;">Passwords
+                Must Match!</h6>
+            <button class="btn my-4 btn-block ff register-btn" type="button" id="register">Register</button>
+            <p class="h4" style="font-weight: bolder;">Already Have an Account?
+                <large class="login" style="cursor: pointer;">Login</large>
+            </p>
+
+
+        </form>
+        <!-- Login form -->
+        <form class="text-center p-5 account-login-form" style="display:none; width:600px; height:400px;">
+
+            <p style="color: black;" class="h4 mb-4 ff">Sign in</p>
+            <input type="email" id="user-email-login" class="form-control mb-4" placeholder="E-mail">
+            <input type="password" id="Password" class="form-control mb-4" placeholder="Password">
+            <button class="btn ff sign-in-btn btn-block my-4" type="button" id="login-user">Sign in</button>
+
+
+            <p class="h4" style="font-weight: bolder;">Not a member?
+                <large class="registration" style="cursor: pointer;">Register</large>
+            </p>
+            <div class="alert alert-danger review-validation" style="display:none;" role="alert">
+            </div>
+            <!-- <small id="invalid-email-password" class="form-text email-format-validation-login"
+                style="opacity:0.0; color: black; font-weight: bolder;">
+                Invalid Email or Password!</small>
+            <h6 id="password-length-login" class="form-text email-format-validation-login"
+                style="opacity:0.0; color: black; font-weight: bolder;">
+                Password Must Be 5 Characters In Length!</h6>
+            <small id="valid-email-login" class="form-text email-format-validation-login"
+                style="opacity:0.0; color: black; font-weight: bolder;">
+                Email Must Be A Valid Email!</small> -->
+
+        </form>
+        <div class="customer-review-div" style="display:none; width:65%;">
+            <div class="card mb-4">
+                <div class="card-body d-flex justify-content-center ff" style="font-size: 22pt;">
+                    <b>Customer Reviews</b>
+                </div>
+            </div>
+        </div>
+        <!-- MODAL -->
+        <div class="modal fade modal-color" id="accountCreated" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title ff" id="exampleModalLabel">Alex's Movies</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ff">
+                        Account Successfully Created
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary ff" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary ff login" data-dismiss="modal">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <footer class="page-footer font-small mt-3" style="background-color:#2E2E2E;">
+        <div class="footer-copyright text-center py-3 ff">© 2019 Copyright:
+            <a href=""> Alexsmovies.herokuapp.com</a>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.3/js/mdb.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"
+    integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="./js/utils/validation.js"></script>
+<script src="./js/utils/buildReviews.js"></script>
+<script src="./js/login.js"></script>
