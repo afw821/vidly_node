@@ -1,3 +1,4 @@
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -12,13 +13,14 @@ const auth = require("./routes/auth");
 const addMovies = require("./routes/viewRoutes/addMovies");
 const deleteMovie = require("./routes/viewRoutes/getDeleteMovie");
 const reviews = require('./routes/reviews');
+const carts = require('./routes/carts');
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // require('./startup/routes')(app);
 require("./routes/html")(app);
 // require('./startup/db')();
-//require("./startup/config")();
+require("./startup/config")();
 //mongoose.connect(process.env.MONGODB_URI);
 
 app.use("/api/auth", auth);
@@ -30,7 +32,7 @@ app.use("/api/customers", customers);
 app.use("/api/addMovie", addMovies);
 app.use("/api/getDeleteMovie", deleteMovie);
 app.use('/api/reviews', reviews);
-
+app.use('/api/carts', carts);
 const TEST_URI = "mongodb://localhost/vidly_node";
 
 mongoose
