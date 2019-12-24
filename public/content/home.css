@@ -1,0 +1,46 @@
+
+body{
+    width:100%; 
+    background-color: #fdf9f3;
+}
+.hide{
+    display: none;
+}
+.header-div{
+    border-bottom:1px solid lightgray;
+}
+.cart-margin{
+    margin-left:600px;
+}
+.welcome-label-margin{
+    margin-left:300px;
+}
+.active{
+    border-bottom:2px solid black !important;
+  }
+  a.navbar-brand{
+    color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding:5px;
+    background-color: lightgray;
+  }
+  a.nav-item{
+    color: black !important;
+    border-bottom: 2px solid transparent;
+  }
+  a.nav-item:hover{
+    border-bottom: 2px solid black;
+  }
+
+.checked {
+    color: orange;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}

@@ -1,0 +1,40 @@
+  
+body{
+    width:100%; 
+    background-color: #fdf9f3;
+}
+.selectList{
+    width:224px;
+    height:38px;
+    border-radius: 5px;
+}
+form{
+    border-radius: 5px;
+    min-height: 275px;
+    width:800px;
+    background-color: lightgrey;
+    opacity: 1.0;
+}
+input.add-movie{
+    width: 224px;
+}
+.add-movie-form-row{
+    margin-bottom: 25px;
+}
+a.navbar-brand{
+    color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding:5px;
+    background-color: lightgray;
+  }
+  a.nav-item{
+    color: black !important;
+    border-bottom: 2px solid transparent;
+  }
+  a.nav-item:hover{
+    border-bottom: 2px solid black;
+  }
+  .active{
+    border-bottom:2px solid black !important;
+  }
