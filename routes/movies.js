@@ -6,8 +6,9 @@ const auth = require("../middleware/auth");
 const ash = require('express-async-handler');
 const admin = require('../middleware/admin');
 
-router.get("/", auth, ash(async function (req, res) {
-  const movies = await Movie.find();
+router.get("/", auth,  ash(async function (req, res) {
+  let movies = await Movie.find().sort({ title: 'asc' });
+
   res.send(movies);
 }));
 
