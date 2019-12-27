@@ -28,10 +28,24 @@ $(document).ready(async function () {
     const movies = await $.ajax({
       url: "/api/movies",
       method: "GET",
-      headers: { "x-auth-token": token }
+      headers: { "x-auth-token": token, "index": 1 }
     });
   
     buildMovieGrid(movies, '.movie-container', userCartId, 'home', userId);
+
+    $('.page-link').click(async function() {
+      let index = $(this).data('index');
+      $('.page-link').removeClass('active');
+      $(this).addClass('active');
+      const movies = await $.ajax({
+        url: "/api/movies",
+        method: "GET",
+        headers: { "x-auth-token": token, "index": index }
+      });
+      $('.movie-tbody').empty();
+
+      buildMovieGrid(movies, '.movie-container', userCartId, 'home', userId);
+    })
   
     //---------------------------------------------------------//
     //LOGOUT A USER
