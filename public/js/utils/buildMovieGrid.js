@@ -42,8 +42,37 @@ function buildMovieGrid(array, container, userCartId, modal, userId) {
         if (modal == 'search' || modal == 'home') {
             const tdBtn = $('<td>', {
                 style: 'cursor: pointer;',
-                html: `<i data-user-id="${userId}" data-movieid="${movieId}" class="fas fa-plus add-to-cart"></i>`,
                 appendTo: trBody
+            });
+            const i = $('<i>', {
+                'data-user-id': userId,
+                'data-movieid': movieId,
+                class: 'fas fa-plus add-to-cart',
+                click: async function () {
+                    try {      
+                        const movieId = $(this).attr('data-movieid');
+                        const result = await $.ajax({
+                          url: '/api/carts',
+                          method: 'POST',
+                          data: {
+                            userId: userId,
+                            movieId: movieId
+                          }
+                        });
+                       
+                        if (result.status && result.cart) { // first time creating a new cart
+                          console.log('result first cart', result.cart);
+              
+                          console.log(result.cart._id);
+                          userCartId = result.cart._id;
+                        }else if(result.status && result.updatedCart){ //else updating a cart
+                          console.log('we successfully added a movie to an existing cart');
+                        }
+                      } catch (ex) {
+                        console.log(`Ex posting a cart: ${ex}`);
+                      }
+                },
+                appendTo: tdBtn
             });
         } else if (modal == 'cart') {
             const tdBtn = $('<td>', {

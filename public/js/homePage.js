@@ -64,32 +64,7 @@ $(document).ready(async function () {
     //---------------------------------------------------------//
     //ADD MOVIES TO CART 
     //--------------------------------------------------------//
-    $(".add-to-cart").each(function (i, e) {
-      $(this).on("click", async function () {
-        try {      
-          const movieId = $(this).attr('data-movieid');
-          const result = await $.ajax({
-            url: '/api/carts',
-            method: 'POST',
-            data: {
-              userId: userId,
-              movieId: movieId
-            }
-          });
-         
-          if (result.status && result.cart) { // first time creating a new cart
-            console.log('result first cart', result.cart);
-
-            console.log(result.cart._id);
-            userCartId = result.cart._id;
-          }else if(result.status && result.updatedCart){ //else updating a cart
-            console.log('we successfully added a movie to an existing cart');
-          }
-        } catch (ex) {
-          console.log(`Ex posting a cart: ${ex}`);
-        }
-      });
-    });
+        //This logic was recently added to build movie grid
     //---------------------------------------------------------//
     //Launch Cart Modal / Get Cart
     //--------------------------------------------------------//
