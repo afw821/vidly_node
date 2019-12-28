@@ -88,7 +88,6 @@ $(document).ready(function () {
     const email = $("#Email").val();
     const password = $("#Password").val();
     try {
-
       if (password.length < 5)
         return validation.reviewValidation('Password', 5, true);
       if (email.length < 5)
@@ -105,20 +104,13 @@ $(document).ready(function () {
       });
       //IF VALID USER (THEY HAVE A VALID JWT)
       if (token) {
-        try {
-          sessionStorage.setItem("x-auth-token", token);
-          window.location.href = '/homepage';
-        } catch (ex) {
-          console.log(ex, 'ex');
-        }
+        sessionStorage.setItem("x-auth-token", token);
+        window.location.href = '/homepage';
       }
     } catch (ex) {
-      //----------------------------------------------------------//
-      //Server Side Errors we get logging in//
-      //---------------------------------------------------------//
       switch (ex.responseText) {
         case "invalid email or password":
-          validation.authValidation(false, false)
+          validation.authValidation(false, false);
           break;
         case '"email" must be a valid email':
           validation.authValidation('Email', true);

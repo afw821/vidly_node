@@ -33,5 +33,14 @@ const validation = {
       $(`#${args},#${args2}`).css('border', '1px solid #ced4da');
       $('.review-validation').hide().empty();
     }, 4000);
+  },
+  notAdmin: function (args) {
+    const html = `<b>User is not an Administrator</b>`;
+    $('.review-validation').show().html(html);
+    $(`#${args}`).css('border', '1px solid red');
+    setTimeout(function () {
+      $(`#${args}`).css('border', '1px solid #ced4da');
+      $('.review-validation').hide().empty();
+    }, 4000);
   }
 }

@@ -33,15 +33,14 @@
         </div>
     </nav>
     <div class="container d-flex justify-content-center mt-5">
-        <form class="text-center p-5 admin-login-form" style="width:600px; height:px;">
+        <form class="text-center p-5 admin-login-form" style="width:600px; height: 400px;">
 
             <p style="color: black;" class="h4 mb-4 ff">Administrator Sign In</p>
-            <input type="email" id="user-email-login-admin" class="form-control mb-4" placeholder="E-mail">
-            <input type="password" id="first-password-login-admin" class="form-control mb-4" placeholder="Password">
+            <input type="email" id="Email" class="form-control mb-4" placeholder="E-mail">
+            <input type="password" id="Password" class="form-control mb-4" placeholder="Password">
             <button class="btn ff admin-sign-in-btn btn-block my-4" type="button" id="login-admin">Sign in</button>
-            <div class="alert alert-danger" id="incorrect-danger" style="display:none;" role="alert">
-                
-              </div>
+            <div class="alert alert-danger review-validation" style="display:none;" role="alert">
+            </div>
         </form>
 
     </div>
@@ -61,4 +60,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js" integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
     crossorigin="anonymous"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="./js/utils/validation.js"></script>
 <script type="text/javascript" src="./js/admin.js"></script>

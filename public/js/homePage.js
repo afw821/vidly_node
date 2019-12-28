@@ -6,10 +6,7 @@ $(document).ready(async function () {
   
       alert('Only logged in users can see this Page!!!');
     }
-    //---------------------------------------------------------//
     //GET CURRENT USER
-    //--------------------------------------------------------//
-  
     const user = await $.ajax({
       url: "/api/users/me",
       method: "GET",
@@ -163,13 +160,13 @@ $(document).ready(async function () {
         const stars = $('.checked').length;
         //client side validation
         if (subject.length < 5)
-          return reviewValidation('Subject', 5, true);
+          return validation.reviewValidation('Subject', 5, true);
   
         if (comment.length < 15)
-          return reviewValidation('Comment', 15, true);
+          return validation.reviewValidation('Comment', 15, true);
   
         if (stars < 1)
-          return reviewValidation('Stars', 1, false);
+          return validation.reviewValidation('Stars', 1, false);
   
         const result = await $.ajax({
           url: '/api/reviews',
@@ -197,13 +194,13 @@ $(document).ready(async function () {
         const comment = ex.responseText;
         switch (comment) {
           case '"comment" is not allowed to be empty':
-            reviewValidation('Comment', 15, true);
+            validation.reviewValidation('Comment', 15, true);
             break;
           case '"subject" is not allowed to be empty':
-            reviewValidation('Subject', 5, true);
+            validation.reviewValidation('Subject', 5, true);
             break;
           case '"stars" must be larger than or equal to 1':
-            reviewValidation('Stars', 1, false);
+            validation.reviewValidation('Stars', 1, false);
         }
       }
     });
