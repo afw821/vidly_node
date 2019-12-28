@@ -116,12 +116,14 @@ $(document).ready(function () {
     //ON CLICK FOR USER TO LOGIN//
     //-----------------------------------------//
     $("#login-user").on("click", async function () {
-      const email = $("#user-email-login").val();
+      const email = $("#Email").val();
       const password = $("#Password").val();
       try {
   
         if(password.length < 5)
           return reviewValidation('Password', 5, true);
+        if(email.length < 5)
+          return reviewValidation('Email', 5, true);
         
         //POST TO AUTH TO AUTHENTICATE THE USER
         const token = await $.ajax({
@@ -143,27 +145,16 @@ $(document).ready(function () {
         }
       } catch (ex) {
         //----------------------------------------------------------//
-        //HANDLING ERRORS CLIENT SIDE WE GET FROM THE SERVER//
+        //Server Side Errors we get logging in//
         //---------------------------------------------------------//
+        console.log('wouldnot login', ex.responseText);
         switch (ex.responseText) {
+          
           case "invalid email or password":
-            $("#invalid-email-password").css("opacity", "1.0");
-            setTimeout(function () {
-              $("#invalid-email-password").css("opacity", "0.0");
-            }, 4000);
-            break;
-          case '"password" length must be at least 5 characters long':
-            $("#password-length-login").css("opacity", "1.0");
-            setTimeout(function () {
-              $("#password-length-login").css("opacity", "0.0");
-            }, 4000);
+            authValidation(false, false)
             break;
           case '"email" must be a valid email':
-            $("#valid-email-login").css("opacity", "1.0");
-            setTimeout(function () {
-              $("#valid-email-login").css("opacity", "0.0");
-              $('#user-email').css('background-color', 'red');
-            }, 4000);
+            authValidation('Email', true);
         }
       }
     });
