@@ -44,45 +44,29 @@
     </nav>
     <!-- Register Form -->
     <div class="container d-flex justify-content-center mt-5">
-        <form class="text-center p-5 account-register-form" style="width:600px; height:620px;">
+        <form class="text-center p-5 account-register-form" style="width:600px; height:550px;">
 
             <p style="color: black;" class="h4 mb-4 ff">Sign up</p>
 
             <div class="form-row mb-4">
                 <div class="col-12">
-                    <input type="text" id="user-name" class="form-control" placeholder="Name">
-                    <small id="name-length-validation" class="form-text name-length-validation"
-                        style="opacity:0.0; color: black; font-weight: bolder;">Name
-                        Must Be At Least 5 Characters In Length!</small>
+                    <input type="text" id="User-Name" class="form-control" placeholder="Name">
                 </div>
             </div>
-            <input type="email" id="user-email" id="defaultRegisterFormEmail" class="form-control mb-4"
+            <input type="email" id="User-Email" id="defaultRegisterFormEmail" class="form-control mb-4"
                 placeholder="E-mail">
-            <h6 id="email-validation" class="form-text email-validation"
-                style="opacity:0.0; color: black; font-weight: bolder;">Account
-                Already Registered With This Email!</h6>
-            <h6 id="email-format-validation" class="form-text email-format-validation"
-                style="opacity:0.0; color: black; font-weight: bolder;">Email
-                Address Must Be Valid!</h6>
-            <input type="password" id="first-password" class="form-control" placeholder="Password"
+            <input type="password" id="First-Password" class="form-control mb-4" placeholder="Password"
                 aria-describedby="defaultRegisterFormPasswordHelpBlock">
-            <h6 id="defaultRegisterFormPasswordHelpBlock" class="mb-4" style="font-weight:bolder;">
-                At least 5 characters
-            </h6>
 
-            <input type="password" id="user-password" class="form-control verify-password"
+            <input type="password" id="User-Password" class="form-control verify-password"
                 placeholder="Re-Enter Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-            <h6 id="password-length-validation" class="form-text password-length-validation"
-                style="opacity:0.0; color: black; font-weight: bolder;">Password
-                Must Be At Least 5 Characters In Length!</h6>
-            <h6 id="password-match-validation" class="form-text password-match-validation"
-                style="opacity:0.0; color: black; font-weight: bolder;">Passwords
-                Must Match!</h6>
+
             <button class="btn my-4 btn-block ff register-btn" type="button" id="register">Register</button>
             <p class="h4" style="font-weight: bolder;">Already Have an Account?
                 <large class="login" style="cursor: pointer;">Login</large>
             </p>
-
+            <div class="alert alert-danger review-validation" style="display:none;" role="alert">
+            </div>
 
         </form>
         <!-- Login form -->
@@ -99,15 +83,6 @@
             </p>
             <div class="alert alert-danger review-validation" style="display:none;" role="alert">
             </div>
-            <!-- <small id="invalid-email-password" class="form-text email-format-validation-login"
-                style="opacity:0.0; color: black; font-weight: bolder;">
-                Invalid Email or Password!</small>
-            <h6 id="password-length-login" class="form-text email-format-validation-login"
-                style="opacity:0.0; color: black; font-weight: bolder;">
-                Password Must Be 5 Characters In Length!</h6>
-            <small id="valid-email-login" class="form-text email-format-validation-login"
-                style="opacity:0.0; color: black; font-weight: bolder;">
-                Email Must Be A Valid Email!</small> -->
 
         </form>
         <div class="customer-review-div" style="display:none; width:65%;">

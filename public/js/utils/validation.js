@@ -1,6 +1,6 @@
+const validation = {
 
-  //reuseable review validation functions
-  function reviewValidation(args, length, bool) {
+  reviewValidation: function (args, length, bool) {
     const html = `<b>${args} must be at least ${length} Characters in length</b>`;
     const starHtml = `<b>Must leave at least a ${length} star review`;
     $('.review-validation').show().html(bool ? html : starHtml);
@@ -11,17 +11,26 @@
       });
       $('.review-validation').hide().empty();
     }, 4000);
-    return;
-  }
-   function authValidation(args, bool) {
+  },
+
+  authValidation: function (args, bool) {
     const email = `<b>${args} must be a valid ${args}</b>`;
-    const password = `<b>Invalid Email and / or Password`;
+    const password = `<b>Invalid Email and / or Password</b>`;
     $('.review-validation').show().html(bool ? email : password);
-    if(args) $(`#${args}`).css('border', '1px solid red');
-    
+    if (args) $(`#${args}`).css('border', '1px solid red');
     setTimeout(function () {
-      if (args) $(`#${args}`).css('border', '1px solid #ced4da')
+      if (args) $(`#${args}`).css('border', '1px solid #ced4da');
       $('.review-validation').hide().empty();
     }, 4000);
-    return;
-   }
+  },
+
+  match: function (args, args2) {
+    const match = `<b>Passwords must match`;
+    $('.review-validation').show().html(match);
+    $(`#${args}, #${args2}`).css('border', '1px solid red');
+    setTimeout(function () {
+      $(`#${args},#${args2}`).css('border', '1px solid #ced4da');
+      $('.review-validation').hide().empty();
+    }, 4000);
+  }
+}
