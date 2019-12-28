@@ -10,7 +10,6 @@ $(document).ready(function () {
       const email = $("#User-Email").val().trim();
       const name = $("#User-Name").val().trim();
       let doesPasswordMatch = firstPassword === password;
-      console.log(firstPassword, password, email, name);
       //-----------------------------------//
       //VALIDATING A USER INPUT//
       //----------------------------------//
@@ -19,7 +18,11 @@ $(document).ready(function () {
       if (password.length < 5)
         return validation.reviewValidation('User-Password', 5, true);
       if (!doesPasswordMatch)
-        return validation.match('First-Password', 'User-Password');
+        return validation.match('First-Password', 'User-Password', true);
+      if (email.length < 5)
+        return validation.reviewValidation('User-Email', 5, true);
+      if (name.length < 5)
+        return validation.reviewValidation('User-Name', 5, true);
       //POSTING A NEW USER//
       const result = await $.ajax({
         url: "/api/users",
@@ -28,53 +31,24 @@ $(document).ready(function () {
           name: name,
           email: email,
           password: password,
-          isAdmin: isAdmin
         }
       });
       //ALERT IF ACCOUNT IS SUCESSFULLY CREATED//
       if (result) {
-        //Launch modal if account successfully created
         $('#btnAcct').click();
       }
     } catch (ex) {
-      //--------------------------------------------------//
-      //HANDLING ERRORS WE RECEIVE FROM THE SERVER//
-      //--------------------------------------------------//
       switch (ex.responseText) {
         case "User already registered":
-
+          validation.match('User-Email', null, false);
           break;
         case '"name" length must be at least 5 characters long':
-
+          validation.reviewValidation('User-Name', 5, true);
           break;
         case '"email" must be a valid email':
-          validation.authValidation('Email', true);
+          validation.authValidation('User-Email', true);
           break;
       }
-
-      // if (ex.responseText === "User already registered") {
-      //   $(".email-validation").css("opacity", "1.0");
-      //   setTimeout(function () {
-      //     $(".email-validation").css("opacity", "0.0");
-      //   }, 4000);
-      //   return;
-      // }
-      // if (
-      //   ex.responseText === '"name" length must be at least 5 characters long'
-      // ) {
-      //   $(".name-length-validation").css("opacity", "1.0");
-      //   setTimeout(function () {
-      //     $(".name-length-validation").css("opacity", "0.0");
-      //   }, 4000);
-      //   return;
-      // }
-      // if (ex.responseText === '"email" must be a valid email') {
-      //   $(".email-format-validation").css("opacity", "1.0");
-      //   setTimeout(function () {
-      //     $(".email-format-validation").css("opacity", "0.0");
-      //   }, 4000);
-      //   return;
-      // }
     }
   });
 

@@ -14,7 +14,7 @@ const validation = {
   },
 
   authValidation: function (args, bool) {
-    const email = `<b>${args} must be a valid ${args}</b>`;
+    const email = `<b>${args} must be a valid Email</b>`;
     const password = `<b>Invalid Email and / or Password</b>`;
     $('.review-validation').show().html(bool ? email : password);
     if (args) $(`#${args}`).css('border', '1px solid red');
@@ -24,9 +24,10 @@ const validation = {
     }, 4000);
   },
 
-  match: function (args, args2) {
-    const match = `<b>Passwords must match`;
-    $('.review-validation').show().html(match);
+  match: function (args, args2, bool) {
+    const match = `<b>Passwords must match</b>`;
+    const nameTaken = `<b>Account already registered with this E-Mail</b>`;
+    $('.review-validation').show().html(bool ? match: nameTaken);
     $(`#${args}, #${args2}`).css('border', '1px solid red');
     setTimeout(function () {
       $(`#${args},#${args2}`).css('border', '1px solid #ced4da');
