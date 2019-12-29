@@ -37,6 +37,12 @@ const rentalSchema = new mongoose.Schema({
         }),
         required: true
     },
+    quantity:{
+        type: Number,
+        required: true,
+        minlength: 1,
+        maxlength: 5
+    },
     dateOut: {
         type: Date,
         required: true,
@@ -56,7 +62,8 @@ const Rental = mongoose.model('Rental', rentalSchema);
 function validateRental(rental) {
     const schema = {
         userId: Joi.string().required(),
-        movieId: Joi.string().required()
+        movieId: Joi.string().required(),
+        quantity: Joi.number().required().min(1).max(5)
     };
     return Joi.validate(rental, schema);
 }

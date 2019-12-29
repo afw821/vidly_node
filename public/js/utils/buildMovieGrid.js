@@ -32,13 +32,32 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
             "data-movie-id": movieId,
             appendTo: trBody
         });
-        const tdStock = $('<td>', {
-            text: numberInStock,
-            id: movieId,
-            "data-genre-id": genreId,
-            "data-movie-id": movieId,
-            appendTo: trBody
-        });
+        if (modal == 'checkout') {
+            const tdStock = $('<td>', {
+                class: 'closest-td',
+                html: `<select id="select-${movieId}" class="qty-select-list">
+                <option selected>Select Qty</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>`,
+                id: movieId,
+                "data-genre-id": genreId,
+                "data-movie-id": movieId,
+                appendTo: trBody
+            });
+        } else {
+            const tdStock = $('<td>', {
+                text: numberInStock,
+                id: movieId,
+                "data-genre-id": genreId,
+                "data-movie-id": movieId,
+                appendTo: trBody
+            });
+        }
+
         if (modal == 'search' || modal == 'home') {
             const tdBtn = $('<td>', {
                 style: 'cursor: pointer;',
@@ -89,6 +108,33 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
                 'data-movieid': movieId,
                 'data-user-cart-id': userCartId,
                 text: 'Checkout',
+                click: async function () {
+                    try {
+                        const quantity = parseInt($(this).parent('td').prev().children('select').val());
+                        const movieId = $(this).data('movieid');
+                        const userId = $(this).data('user-id');
+                        const rental = await $.ajax({
+                            url: '/api/rentals',
+                            method: 'POST',
+                            data: {
+                                userId: userId,
+                                movieId: movieId,
+                                quantity: quantity
+                            }
+                        });
+                        console.log('rental', rental);
+                        alert('You rental was successful! Enjoy!');
+                    } catch (ex) {
+                        console.log(ex.responseText);
+                        switch (ex.responseText) {
+                            case `Not enough movies left in stock. Only ${numberInStock} left`:
+                                alert(ex.responseText);
+                                break;
+                            case 'Movie not in stock':
+                                alert(ex.responseText);
+                        }
+                    }
+                },
                 appendTo: tdBtn
             });
         }

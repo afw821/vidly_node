@@ -14,14 +14,16 @@ router.get('/', [ auth, admin ], ash(async function (req, res) {
 
 router.post('/', ash(async function (req, res) {
         const result = validate(req.body);
-        if (result.error) return res.status(400).send(error.details[0].message);
+        if (result.error) return res.status(400).send(result.error.details[0].message);
        
         const user = await User.findById(req.body.userId);
         if (!user) return res.status(400).send('Invalid User');
         const movie = await Movie.findById(req.body.movieId);
         if (!movie) return res.status(400).send('Invalid movie.');
-
-        if (movie.numberInStock === 0) return res.status(400).send('Movie not in stock.');  
+        const quantity = req.body.quantity;
+        if (movie.numberInStock === 0) return res.status(400).send('Movie not in stock');
+        if((movie.numberInStock - quantity) < 0) return res.status(400).send(`Not enough movies left in stock. Only ${movie.numberInStock} left`);          
+        
         let rental = new Rental({
             user: {
                 //keys here are NEW
@@ -34,10 +36,11 @@ router.post('/', ash(async function (req, res) {
                 _id: movie._id,
                 title: movie.title,
                 dailyRentalRate: movie.dailyRentalRate
-            }
+            },
+            quantity: quantity
         });
         rental = await rental.save();
-        movie.numberInStock--;
+        movie.numberInStock = movie.numberInStock-quantity;
         movie.save();    
         res.send(rental);
 }));
