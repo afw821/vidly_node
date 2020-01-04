@@ -28,7 +28,7 @@ $(document).ready(async function () {
     headers: { "x-auth-token": token, "index": 1 }
   });
 
-  buildMovieGrid(movies, '.movie-container', userCartId, 'home', userId);
+  buildMovieGrid(movies.movies, '.movie-container', userCartId, 'home', userId);
 
   $('.page-link').click(async function () {
     let index = $(this).data('index');
@@ -41,7 +41,7 @@ $(document).ready(async function () {
     });
     $('.movie-tbody').empty();
 
-    buildMovieGrid(movies, '.movie-container', userCartId, 'home', userId);
+    buildMovieGrid(movies.movies, '.movie-container', userCartId, 'home', userId);
   })
 
   //---------------------------------------------------------//

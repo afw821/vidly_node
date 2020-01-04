@@ -8,9 +8,15 @@ const admin = require('../middleware/admin');
 
 router.get("/", auth, ash(async function (req, res) {
   let index = req.header('index');
+  const listItemArray = [];
+  const count = await Movie.countDocuments();
+   
+  let numberOfTabs = Math.ceil(count/10);
 
-  let movies = await Movie.find().skip((index * 10) - 10).limit(10).sort({ title: 'asc' });
-  res.send(movies);
+
+  let movies = await Movie.find()
+  .skip((index * 10) - 10).limit(10).sort({ title: 'asc' });
+  res.send({ movies: movies, tabs: numberOfTabs });
 }));
 
 router.post("/", [auth, admin], ash(async function (req, res) {

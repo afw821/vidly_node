@@ -88,4 +88,24 @@ router.get('/:id', ash(async function(req,res){ // get cart by cart id
     res.send({ result: true, movies: moviesArray });
 }));
 
+router.put('/:id', ash(async function(req,res) {
+    //find the cart by the cart id
+    const cartId = req.params.id;
+    const movieId = req.body.movieId;
+    console.log(cartId);
+    console.log(movieId);
+    const cart = await Cart.findById(cartId);
+    if(!cart) return status(404).send('Unable to find cart');
+    const updatedMovieIds = cart.movieId.filter(id => id !== movieId);
+
+    console.log(updatedMovieIds);
+    let updatedCart = await Cart.findByIdAndUpdate(cartId, {
+        movieId: updatedMovieIds
+    }, { new: true });
+
+    await updatedCart.save();
+
+    res.send({ status: true, updatedCart: updatedCart });
+}));
+
 module.exports = router;

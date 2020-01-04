@@ -10,6 +10,7 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
 
         const trBody = $('<tr>', {
             class: 'table-row-cart',
+            id: `movie-table-row-${movieId}`,
             mouseenter: function () {
                 this.style.background = 'lightgray';
             },
@@ -94,8 +95,35 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
         } else if (modal == 'cart') {
             const tdBtn = $('<td>', {
                 style: 'cursor: pointer;',
-                html: `<a href="#" data-cart-id="${userCartId}" data-movie-id="${movieId}" class="badge badge-light" id="remove-cart-item-${userCartId}">Remove</a>`,
                 appendTo: trBody
+            });
+            const removeBtn = $('<a>', {
+                href: '#',
+                'data-cart-id': userCartId,
+                'data-movie-id': movieId,
+                class: 'badge badge-light',
+                id: `remove-cart-item-${userCartId}`,
+                text: 'Remove',
+                appendTo: tdBtn,
+                click: async function () {
+                    try{
+                        const result = await $.ajax({
+                            url: `/api/carts/${userCartId}`,
+                            method: 'PUT',
+                            data: {
+                                movieId: movieId
+                            }
+                        });
+
+                        console.log('result removing cart', result);
+                        if(result.status){
+                            //remove from the DOM
+                            $(this).closest('tr').remove();
+                        }
+                    }catch(ex) {
+                        console.log(`error removing from cart: ${ex}`);
+                    }
+                }
             });
         } else if (modal == 'checkout') {
             const tdBtn = $('<td>', {
