@@ -49,27 +49,36 @@
     } catch (ex) {
         alert('Fatal Error getting delete movie list');
     }
+    //Get html string from server to GET ALL USERS
+    try {
+        const data = await $.ajax({
+            url: '/api/getUsers',
+            method: 'GET',
+            headers: { 'x-auth-token': token }
+        });
+        const defaultOption = '<option selected class="option-user">Select User to Edit...</option>';
+        const optionList = data.options;
+        $('.user-dump').append(data.htmlString);
+        $('.user-dump').find('.selectList').append(defaultOption);
+        optionList.forEach(function (option, i, arr) {
+            $('.user-dump').find('.selectList').append(option);
+        });
+
+    } catch (ex) {
+        alert('Fatal Error getting all users');
+    }
     //switch between tabs on navbar
     //1. users
-    $('a.nav-item').click(function() {
+    $('a.nav-item').click(function () {
         const route = $(this).data('route');
         console.log('route', route);
         //underline tabs
-        $('a.nav-item').each(function(i,ele) { $(ele).removeClass('active');});
+        $('a.nav-item').each(function (i, ele) { $(ele).removeClass('active'); });
         $(this).addClass('active');
         //hide show rows
         $('.admin-row').hide();
         $(`.admin-${route}-row`).show();
     });
-
-    // $('.users').click(function() {
-    //     //underline tabs
-    //     $('a.nav-item').each(function(i,ele) { $(ele).removeClass('active');});
-    //     $(this).addClass('active');
-    //     //hide show rows
-    //     $('.admin-row').hide();
-    //     $('.user-admin-row').show();
-    // });
     //ADD MOVIE TO DB AJAX AND LOGIC///
     //*****************************/ */
     $('#add-movie').click(async function () {
@@ -126,9 +135,9 @@
         sessionStorage.clear();
         window.location.href = '/admin';
     });
-    
+
     function reindexArray(args) {
-       
+
         const reindexArray = [];
 
         $(args).find('option').each(function (index, element) {

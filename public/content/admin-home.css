@@ -12,7 +12,7 @@ form{
     border-radius: 5px;
     min-height: 275px;
     width:800px;
-    background-color: lightgrey;
+    background-color: #ededed;
     opacity: 1.0;
 }
 input.add-movie{

@@ -10,10 +10,11 @@ const movies = require("./routes/movies");
 const rentals = require("./routes/rentals");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
-const addMovies = require("./routes/viewRoutes/addMovies");
-const deleteMovie = require("./routes/viewRoutes/getDeleteMovie");
+const addMovies = require("./routes/viewRoutes/addMovies"); //admin pg
+const deleteMovie = require("./routes/viewRoutes/getDeleteMovie"); //admin pg
 const reviews = require('./routes/reviews');
 const carts = require('./routes/carts');
+const getUsers = require('./routes/viewRoutes/getUsers'); //get user view for admin pg
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -33,6 +34,7 @@ app.use("/api/addMovie", addMovies);
 app.use("/api/getDeleteMovie", deleteMovie);
 app.use('/api/reviews', reviews);
 app.use('/api/carts', carts);
+app.use('/api/getUsers', getUsers);
 const TEST_URI = "mongodb://localhost/vidly_node";
 
 mongoose
