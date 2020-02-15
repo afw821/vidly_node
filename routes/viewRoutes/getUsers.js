@@ -21,7 +21,7 @@ router.get('/', [ auth, admin ], ash(async function (req, res) {
         optionListArray.push(optionList);
     }
 
-    var genreSelectList = `                <form class="d-flex justify-content-center pt-4">
+    var genreSelectList = `                    <form class="d-flex justify-content-center pt-4">
     <div class="form-content-wrapper-div">
         <div class="row header-row d-flex justify-content-center">
             <h4>Select User</h4>
@@ -35,20 +35,34 @@ router.get('/', [ auth, admin ], ash(async function (req, res) {
         </div>
 
         <div class="form-row d-flex justify-content-center mt-3">
-        <div class="col">
-        <label class="user-label" id="user-name-label" style="border:none !important;">User Name</label>
-        <input  id="user-name-input" type="text" disabled class="form-control user-input">
-      </div>
-      <div class="col">
-      <label class="user-label" id="user-name-label" style="border:none !important;">Email</label>
-        <input  id="user-email-input" type="text" disabled class="form-control user-input">
-      </div>
-                           
-        </div>    
+            <div class="col">
+                <label class="user-label" id="user-name-label" style="border:none !important;">User Name</label>
+                <input id="user-name-input" type="text" disabled class="form-control user-input">
+            </div>
+            <div class="col">
+                <label class="user-label" id="user-name-label" style="border:none !important;">Email</label>
+                <input id="user-email-input" type="text" disabled class="form-control user-input">
+            </div>
+
+        </div>
+        <div class="row header-row d-flex justify-content-center mt-2">
+            <h4>Change Password</h4>
+        </div>
+        <div class="form-row d-flex justify-content-center mt-3">
+            <div class="col">
+                <label class="user-label" id="user-name-label" style="border:none !important;">New Password</label>
+                <input id="user-password-input" type="password" disabled class="form-control user-input">
+            </div>
+            <div class="col">
+                <label class="user-label" id="user-name-label" style="border:none !important;">Confirm</label>
+                <input id="user-confirm-password-input" type="password" disabled class="form-control user-input">
+            </div>
+
+        </div>
         <div class="form-row d-flex justify-content-center">
-        <button type="button" id="put-user" disabled class="btn btn-primary">Edit</button>  
-        </div>       
-    </div>            
+            <button type="button" id="put-user" disabled class="btn btn-primary">Update</button>
+        </div>
+    </div>
 </form>`
 
     res.send({ htmlString: genreSelectList, options: optionListArray});

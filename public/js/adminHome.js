@@ -66,10 +66,7 @@
 
         //onchange
         $('#user-selectList').on('change', function(e) {
-
-            console.log('changed', $(this).val());
             const val = $(this).val();
-            console.log($(this).children());
             $(this).children().each(function(i,ele){
                 if(val == $(ele).val()){
                     $('label').removeClass('active');
@@ -81,9 +78,10 @@
                     $('#user-name-input').val(userName);
                     $('#user-email-input').val(userEmail);
                     $('#put-user').prop('disabled', false);
+                    $('#put-user').attr('data-user-id', val);
                 }
             });
-        })
+        });
 
     } catch (ex) {
         alert('Fatal Error getting all users');
@@ -99,6 +97,42 @@
         $('.admin-row').hide();
         $(`.admin-${route}-row`).show();
     });
+    //UPDATE USER...................///
+    //*****************************/ */
+    $('#put-user').click(async function() {
+        const userId = $(this).data('user-id');
+        console.log('user id', userId);
+        const result = await $.ajax({
+            url: `/api/users/${userId}`,
+            method: 'PUT',
+            data: {
+                name: $('#user-name-input').val(),
+                email: $('#user-email-input').val(),
+                password: $('#user-confirm-password-input').val()
+            },
+            headers: { 'x-auth-token': token }
+        });
+        console.log('result', result);
+        if(result.status){
+            alert('User Updated!');
+            console.log(result.user);
+            $('.user-input').val(""); //clear input
+            //update list w / o refresh
+            const email = result.user.email;
+            const id = result.user._id;
+            const userName = result.user.name;
+            const optionElement = `<option class="option-user" data-email="${email}" value="${id}">${userName}</option>`;
+            //loop through option list and replace old with new
+            $('#user-selectList').children('option').each(function(i, ele) {
+                const val = $(ele).val();
+                console.log('this val', val);
+                if(val == id){
+                    $(ele).replaceWith(optionElement);
+                }
+            });
+        }
+    });
+
     //ADD MOVIE TO DB AJAX AND LOGIC///
     //*****************************/ */
     $('#add-movie').click(async function () {

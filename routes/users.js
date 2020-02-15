@@ -43,7 +43,9 @@ router.get('/', [auth, admin], ash(async function (req, res) {
     res.send(users);
 }));
 
-router.put('/:id', ash(async function (req, res) {
+router.put('/:id', [auth,admin], ash(async function (req, res) {
+    console.log('req body', req.body);
+    console.log('req params id', req.params.id);
     const result = validate(req.body);
     if (result.error) return res.status(400).send(result.error.details[0].message);
     const salt = await bcrypt.genSalt(10);
@@ -61,7 +63,7 @@ router.put('/:id', ash(async function (req, res) {
     );
 
     if (!user) return res.status(404).send("The user with the given ID was not found.");
-    res.send(user);
+    res.send({ status: true, user: user });
 }));
 
 module.exports = router;
