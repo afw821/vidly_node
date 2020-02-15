@@ -1,4 +1,3 @@
-
 (async function () {
 
     //Redirect if user isn't logged in
@@ -50,6 +49,27 @@
     } catch (ex) {
         alert('Fatal Error getting delete movie list');
     }
+    //switch between tabs on navbar
+    //1. users
+    $('a.nav-item').click(function() {
+        const route = $(this).data('route');
+        console.log('route', route);
+        //underline tabs
+        $('a.nav-item').each(function(i,ele) { $(ele).removeClass('active');});
+        $(this).addClass('active');
+        //hide show rows
+        $('.admin-row').hide();
+        $(`.admin-${route}-row`).show();
+    });
+
+    // $('.users').click(function() {
+    //     //underline tabs
+    //     $('a.nav-item').each(function(i,ele) { $(ele).removeClass('active');});
+    //     $(this).addClass('active');
+    //     //hide show rows
+    //     $('.admin-row').hide();
+    //     $('.user-admin-row').show();
+    // });
     //ADD MOVIE TO DB AJAX AND LOGIC///
     //*****************************/ */
     $('#add-movie').click(async function () {
