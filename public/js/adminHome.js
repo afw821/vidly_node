@@ -65,10 +65,10 @@
         });
 
         //onchange
-        $('#user-selectList').on('change', function(e) {
+        $('#user-selectList').on('change', function (e) {
             const val = $(this).val();
-            $(this).children().each(function(i,ele){
-                if(val == $(ele).val()){
+            $(this).children().each(function (i, ele) {
+                if (val == $(ele).val()) {
                     $('label').removeClass('active');
 
                     const userName = $(ele).text();
@@ -86,6 +86,22 @@
     } catch (ex) {
         alert('Fatal Error getting all users');
     }
+
+    //Get html string from server to Create Admin
+    try {
+        const data = await $.ajax({
+            url: '/api/getCreateAdmin',
+            method: 'GET',
+            headers: { 'x-auth-token': token }
+        });
+        $('.create-admin-dump').append(data.htmlString);
+
+    } catch (ex) {
+        alert('Fatal Error getting add adin');
+    }
+
+
+
     //switch between tabs on navbar
     //1. users
     $('a.nav-item').click(function () {
@@ -99,9 +115,9 @@
     });
     //UPDATE USER...................///
     //*****************************/ */
-    $('#put-user').click(async function() {
+    $('#put-user').click(async function () {
         const userId = $(this).data('user-id');
-        console.log('user id', userId);
+
         const result = await $.ajax({
             url: `/api/users/${userId}`,
             method: 'PUT',
@@ -112,10 +128,10 @@
             },
             headers: { 'x-auth-token': token }
         });
-        console.log('result', result);
-        if(result.status){
+
+        if (result.status) {
             alert('User Updated!');
-            console.log(result.user);
+
             $('.user-input').val(""); //clear input
             //update list w / o refresh
             const email = result.user.email;
@@ -123,10 +139,10 @@
             const userName = result.user.name;
             const optionElement = `<option class="option-user" data-email="${email}" value="${id}">${userName}</option>`;
             //loop through option list and replace old with new
-            $('#user-selectList').children('option').each(function(i, ele) {
+            $('#user-selectList').children('option').each(function (i, ele) {
                 const val = $(ele).val();
-                console.log('this val', val);
-                if(val == id){
+
+                if (val == id) {
                     $(ele).replaceWith(optionElement);
                 }
             });
@@ -152,7 +168,6 @@
                     dailyRentalRate: dailyRentalRate
                 },
                 headers: { 'x-auth-token': token }
-
             });
 
             if (result.result) {
@@ -168,7 +183,7 @@
         try {
             //get data from form
             const movieId = $('#movie-selectList').val();
-            console.log('movie id', movieId);
+
             const result = await $.ajax({
                 url: `/api/movies/${movieId}`,
                 method: 'DELETE',
@@ -177,7 +192,7 @@
 
             if (result.result) {
                 alert('Movie Sucessfully deleted!');
-                console.log('movie deleted', result.movieDeleted);
+
             }
         } catch (ex) {
             alert(`Fatal error for delete movie`);
