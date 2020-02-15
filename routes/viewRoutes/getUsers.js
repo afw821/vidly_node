@@ -36,15 +36,18 @@ router.get('/', [ auth, admin ], ash(async function (req, res) {
 
         <div class="form-row d-flex justify-content-center mt-3">
         <div class="col">
-        <label class="user-label" id="user-name-label">User Name</label>
-        <input  id="user-name-input" type="text" disabled class="form-control">
+        <label class="user-label" id="user-name-label" style="border:none !important;">User Name</label>
+        <input  id="user-name-input" type="text" disabled class="form-control user-input">
       </div>
       <div class="col">
-      <label class="user-label" id="user-name-label">Email</label>
-        <input  id="user-email-input" type="text" disabled class="form-control">
+      <label class="user-label" id="user-name-label" style="border:none !important;">Email</label>
+        <input  id="user-email-input" type="text" disabled class="form-control user-input">
       </div>
                            
-        </div>           
+        </div>    
+        <div class="form-row d-flex justify-content-center">
+        <button type="button" id="put-user" disabled class="btn btn-primary">Edit</button>  
+        </div>       
     </div>            
 </form>`
 

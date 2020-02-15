@@ -7,14 +7,14 @@ const admin = require('../middleware/admin');
 const ash = require('express-async-handler');
 
 router.get('/me', auth, ash(async function (req, res) {
-        const user = await User.findById(req.user._id).select('-password');
-        res.send(user);
+    const user = await User.findById(req.user._id).select('-password');
+    res.send(user);
 }));
 //register a user
 router.post('/', ash(async function (req, res) {
     console.log('req body', req.body);
     const result = validate(req.body);
-    if (result.error) return res.status(404).send(result.error.details[0].message);   
+    if (result.error) return res.status(404).send(result.error.details[0].message);
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('User already registered');
     //else create the new user
@@ -38,9 +38,30 @@ router.post('/', ash(async function (req, res) {
     res.send(user);
 }));
 
-router.get('/', [ auth, admin ], ash(async function (req, res) {
-        const users = await User.find();
-        res.send(users);
+router.get('/', [auth, admin], ash(async function (req, res) {
+    const users = await User.find();
+    res.send(users);
+}));
+
+router.put('/:id', ash(async function (req, res) {
+    const result = validate(req.body);
+    if (result.error) return res.status(400).send(result.error.details[0].message);
+    const salt = await bcrypt.genSalt(10);
+    const newPassword = await bcrypt.hash(req.body.password, salt);
+
+    const user = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+            name: req.body.name,
+            email: req.body.email,
+            password: newPassword,
+            isAdmin: false
+        },
+        { new: true }
+    );
+
+    if (!user) return res.status(404).send("The user with the given ID was not found.");
+    res.send(user);
 }));
 
 module.exports = router;

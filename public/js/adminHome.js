@@ -73,17 +73,16 @@
             $(this).children().each(function(i,ele){
                 if(val == $(ele).val()){
                     $('label').removeClass('active');
-                    console.log('elm', $(ele).text());
-                    console.log('email', $(ele).data('email'));
 
                     const userName = $(ele).text();
                     const userEmail = $(ele).data('email');
 
-                    $('input').prop('disabled', false).empty();
+                    $('.user-input').prop('disabled', false).empty();
                     $('#user-name-input').val(userName);
                     $('#user-email-input').val(userEmail);
+                    $('#put-user').prop('disabled', false);
                 }
-            })
+            });
         })
 
     } catch (ex) {
