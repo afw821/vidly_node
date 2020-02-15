@@ -64,6 +64,28 @@
             $('.user-dump').find('.selectList').append(option);
         });
 
+        //onchange
+        $('#user-selectList').on('change', function(e) {
+
+            console.log('changed', $(this).val());
+            const val = $(this).val();
+            console.log($(this).children());
+            $(this).children().each(function(i,ele){
+                if(val == $(ele).val()){
+                    $('label').removeClass('active');
+                    console.log('elm', $(ele).text());
+                    console.log('email', $(ele).data('email'));
+
+                    const userName = $(ele).text();
+                    const userEmail = $(ele).data('email');
+
+                    $('input').prop('disabled', false).empty();
+                    $('#user-name-input').val(userName);
+                    $('#user-email-input').val(userEmail);
+                }
+            })
+        })
+
     } catch (ex) {
         alert('Fatal Error getting all users');
     }
@@ -71,7 +93,6 @@
     //1. users
     $('a.nav-item').click(function () {
         const route = $(this).data('route');
-        console.log('route', route);
         //underline tabs
         $('a.nav-item').each(function (i, ele) { $(ele).removeClass('active'); });
         $(this).addClass('active');

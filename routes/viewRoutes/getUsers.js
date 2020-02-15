@@ -21,21 +21,28 @@ router.get('/', [ auth, admin ], ash(async function (req, res) {
         optionListArray.push(optionList);
     }
 
-    var genreSelectList = `                <form class="d-flex justify-content-center align-items-center">
+    var genreSelectList = `                <form class="d-flex justify-content-center pt-4">
     <div class="form-content-wrapper-div">
         <div class="row header-row d-flex justify-content-center">
             <h4>Select User</h4>
         </div>
         <div class="form-row select-user-form-row">
-            <div class="col">
+            <div class="col d-flex justify-content-center">
                 <select class="selectList" id="user-selectList">
 
                 </select>
             </div>
         </div>
 
-        <div class="form-row d-flex justify-content-center">
-            
+        <div class="form-row d-flex justify-content-center mt-3">
+        <div class="col">
+        <label class="user-label" id="user-name-label">User Name</label>
+        <input  id="user-name-input" type="text" disabled class="form-control">
+      </div>
+      <div class="col">
+      <label class="user-label" id="user-name-label">Email</label>
+        <input  id="user-email-input" type="text" disabled class="form-control">
+      </div>
                            
         </div>           
     </div>            
