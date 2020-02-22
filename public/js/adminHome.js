@@ -1,5 +1,4 @@
-(async function () {
-
+$(document).ready(async function () {
     //Redirect if user isn't logged in
     const token = sessionStorage.getItem('x-auth-token');
     if (!token) {
@@ -95,6 +94,27 @@
             headers: { 'x-auth-token': token }
         });
         $('.create-admin-dump').append(data.htmlString);
+
+        //create a new admin
+        $('#create-admin').click(function () {
+            const name = $('#User-Name').val();
+            const email = $('#User-Email').val();
+            const firstPassword = $('#First-Password').val().trim();
+            const password = $('#User-Password').val().trim();
+            const doesPasswordMatch = firstPassword === password;
+            if (name.length < 5)
+                return validation.reviewValidation('User-Name', 5, true);
+            if (email.length < 5)
+                return validation.reviewValidation('User-Email', 5, true);
+            if (firstPassword.length < 5)
+                return validation.reviewValidation('First-Password', 5, true);
+            if (password.length < 5)
+                return validation.reviewValidation('User-Password', 5, true);
+            if (!doesPasswordMatch)
+                return validation.match('First-Password', 'User-Password', true);
+
+
+        });
 
     } catch (ex) {
         alert('Fatal Error getting add adin');
@@ -240,4 +260,6 @@
             $(args).find('option').first().after(sortedElement);
         });
     }
-})();
+
+});
+
