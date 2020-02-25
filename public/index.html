@@ -45,23 +45,30 @@
     <!-- Register Form -->
     <div class="container d-flex justify-content-center mt-5">
         <form class="text-center p-5 account-register-form" style="width:600px; height:550px;">
-
-            <p style="color: black;" class="h4 mb-4 ff">Sign up</p>
-
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-5 d-flex align-items-center">
+                    <p style="color: black;" class="h4 ff">Alex's Movies</p>
+                        
+                </div>
+                <div class="col-3"><img src="content/assests/movie-magazine-video-logo-design (1).png" alt="movie_logo" style="max-height:90px;"></div>
+                
+            </div>
+            
             <div class="form-row mb-4">
                 <div class="col-12">
-                    <input type="text" id="User-Name" class="form-control" placeholder="Name">
+                    <input type="text" id="User-Name" class="form-control" placeholder="Name*">
                 </div>
             </div>
             <input type="email" id="User-Email" id="defaultRegisterFormEmail" class="form-control mb-4"
-                placeholder="E-mail">
-            <input type="password" id="First-Password" class="form-control mb-4" placeholder="Password"
+                placeholder="E-mail*">
+            <input type="password" id="First-Password" class="form-control mb-4" placeholder="Password*"
                 aria-describedby="defaultRegisterFormPasswordHelpBlock">
 
             <input type="password" id="User-Password" class="form-control verify-password"
-                placeholder="Re-Enter Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                placeholder="Re-Enter Password*" aria-describedby="defaultRegisterFormPasswordHelpBlock">
 
-            <button class="btn my-4 btn-block ff register-btn" type="button" id="register">Register</button>
+            <button class="btn btn-sm register-btn am-button" type="button" id="register">Register</button>
             <p class="h4" style="font-weight: bolder;">Already Have an Account?
                 <large class="login" style="cursor: pointer;">Login</large>
             </p>
