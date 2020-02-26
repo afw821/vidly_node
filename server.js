@@ -16,6 +16,7 @@ const reviews = require('./routes/reviews');
 const carts = require('./routes/carts');
 const getUsers = require('./routes/viewRoutes/getUsers'); //get user view for admin pg
 const getCreateAdmin = require('./routes/viewRoutes/getCreateAdmin'); //get user view for admin pg
+const nodemailer = require('./routes/NodeMailer/nodemailer');
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -37,6 +38,7 @@ app.use('/api/reviews', reviews);
 app.use('/api/carts', carts);
 app.use('/api/getUsers', getUsers);
 app.use('/api/getCreateAdmin', getCreateAdmin);
+app.use('/api/nodemailer', nodemailer);
 const TEST_URI = "mongodb://localhost/vidly_node";
 
 mongoose
