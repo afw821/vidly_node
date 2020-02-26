@@ -1,7 +1,7 @@
 
 body{
     width:100%; 
-    background-color: #fdf9f3;
+    background-color: whitesmoke;
 }
 .hide{
     display: none;
@@ -20,10 +20,10 @@ body{
   }
   a.navbar-brand{
     color: black;
-    border: 3px solid black;
-    border-radius: 10px;
+    /* border: 3px solid black;
+    border-radius: 10px; */
     padding:5px;
-    background-color: lightgray;
+    /* background-color: lightgray; */
   }
   a.nav-item{
     color: black !important;
@@ -36,7 +36,9 @@ body{
 .checked {
     color: orange;
 }
-
+nav.navbar{
+    background-color: #fdf9f3 !important;
+  }
 .pointer {
     cursor: pointer;
 }

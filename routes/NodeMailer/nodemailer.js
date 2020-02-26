@@ -1,7 +1,4 @@
 const nodemailer = require('nodemailer');
-// const express = require('express');
-// const router = express.Router();
-// const ash = require('express-async-handler');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -15,7 +12,7 @@ function sendEmail(email, name){
     }
   });
 
-  var mailOptions = {
+  const mailOptions = {
     from: process.env.EMAIL_ADDRESS,
     to: email,
     subject: 'Thanks',

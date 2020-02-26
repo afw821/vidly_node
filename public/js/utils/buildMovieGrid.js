@@ -10,13 +10,14 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
 
         const trBody = $('<tr>', {
             class: 'table-row-cart',
+            style: 'cursor:pointer;',
             id: `movie-table-row-${movieId}`,
             mouseenter: function () {
                 this.style.background = 'lightgray';
             },
             mouseleave: function () {
 
-                modal == 'home' || modal == 'checkout' ? this.style.background = '#fdf9f3' : this.style.background = 'white';
+                modal == 'home' || modal == 'checkout' ? this.style.background = 'whitesmoke' : this.style.background = 'white';
             }
         });
         const tdTitle = $('<td>', {
