@@ -1,13 +1,12 @@
 const nodemailer = require('nodemailer');
-const express = require('express');
-const router = express.Router();
-const ash = require('express-async-handler');
+// const express = require('express');
+// const router = express.Router();
+// const ash = require('express-async-handler');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-router.get('/sendmail', ash(async function (req, res) {
-
+function sendEmail(email, name){
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -18,9 +17,9 @@ router.get('/sendmail', ash(async function (req, res) {
 
   var mailOptions = {
     from: process.env.EMAIL_ADDRESS,
-    to: req.body.email,
+    to: email,
     subject: 'Thanks',
-    text: `Thanks for signing up for the site ${req.body.name}!`
+    text: `Thanks for signing up for the site ${name}!`
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
@@ -31,6 +30,6 @@ router.get('/sendmail', ash(async function (req, res) {
       res.send({ status: true, data: info.response })
     }
   });
-}));
+}
 
-module.exports = router;
+module.exports = sendEmail;

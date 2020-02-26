@@ -5,6 +5,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const ash = require('express-async-handler');
+const welcomeMessage = require('./NodeMailer/nodemailer');
 
 router.get('/me', auth, ash(async function (req, res) {
     const user = await User.findById(req.user._id).select('-password');
@@ -12,15 +13,16 @@ router.get('/me', auth, ash(async function (req, res) {
 }));
 //register a user
 router.post('/', ash(async function (req, res) {
-    console.log('req body', req.body);
     const result = validate(req.body);
+    const name = req.body.name;
+    const email = req.body.email;
     if (result.error) return res.status(404).send(result.error.details[0].message);
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('User already registered');
     //else create the new user
     user = new User({
-        name: req.body.name,
-        email: req.body.email,
+        name: name,
+        email: email,
         password: req.body.password,
         isAdmin: false,
         cartId: null
@@ -35,6 +37,8 @@ router.post('/', ash(async function (req, res) {
     //after generating the token set it to the response header
     //exclude the password from being sent
     //res.header('x-auth-token', token);
+    welcomeMessage(email, name);
+
     res.send(user);
 }));
 
