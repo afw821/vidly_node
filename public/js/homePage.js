@@ -211,4 +211,6 @@ $(document).ready(async function () {
       }
     }
   });
+  //fix for padding on body
+  $('#movie-search-closeBtn').click(function() { console.log('modal closed'); $('body').css('padding-right', '0px');})
 });

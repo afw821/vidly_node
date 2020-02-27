@@ -1,6 +1,8 @@
 
 body{
     width:100%; 
+    /* fix for when close modals and they add padding right for some reason */
+    padding-right: 0px !important; 
     background-color: whitesmoke;
 }
 .hide{

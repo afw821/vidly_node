@@ -62,7 +62,9 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
             const successfulAdd = $('<span>',{
                 class: 'badge badge-pill badge-success',
                 id: `success-alert-${movieId}`,
-                style: 'position:relative; left:120px; opacity:0.0;',
+                style: function(){
+                    return modal == 'home' ? 'position:relative; left:120px; opacity:0.0;' : 'position:relative; left:20px; opacity:0.0;';
+                }, 
                 text: 'Added to Cart!',
                 appendTo: tdStock
             });          
@@ -78,6 +80,7 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
                 class: 'fas fa-plus add-to-cart',
                 click: async function () {
                     try {
+                        console.log('clicked!')
                         const movieId = $(this).attr('data-movieid');
                         const result = await $.ajax({
                             url: '/api/carts',
