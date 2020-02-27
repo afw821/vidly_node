@@ -37,7 +37,8 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
         if (modal == 'checkout') {
             const tdStock = $('<td>', {
                 class: 'closest-td',
-                html: `<select id="select-${movieId}" class="qty-select-list">
+                style: 'padding-top:25px;',
+                html: `<select id="select-${movieId}" style="width:130px; height:35px; border-radius:5px;" class="qty-select-list">
                 <option selected>Select Qty</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -58,8 +59,14 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
                 "data-movie-id": movieId,
                 appendTo: trBody
             });
+            const successfulAdd = $('<span>',{
+                class: 'badge badge-pill badge-success',
+                id: `success-alert-${movieId}`,
+                style: 'position:relative; left:120px; opacity:0.0;',
+                text: 'Added to Cart!',
+                appendTo: tdStock
+            });          
         }
-
         if (modal == 'search' || modal == 'home') {
             const tdBtn = $('<td>', {
                 style: 'cursor: pointer;',
@@ -86,6 +93,8 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
                             //userCartId = result.cart._id;
                         } else if (result.status && result.updatedCart) { //else updating a cart
                             console.log('we successfully added a movie to an existing cart');
+                            $(`#success-alert-${movieId}`).css('opacity', '1.0');
+                            setTimeout(function() {$(`#success-alert-${movieId}`).css('opacity', '0.0');}, 2000);
                         }
                     } catch (ex) {
                         console.log(`Ex posting a cart: ${ex}`);
@@ -132,7 +141,7 @@ async function buildMovieGrid(array, container, userCartId, modal, userId) {
                 appendTo: trBody
             });
             const checkoutBtn = $('<button>', {
-                class: 'btn btn-primary btn-sm',
+                class: 'btn am-button btn-sm',
                 'data-user-id': userId,
                 'data-movieid': movieId,
                 'data-user-cart-id': userCartId,

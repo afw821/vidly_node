@@ -23,22 +23,19 @@ $(document).ready(async function () {
     const moviesArray = result.movies;
     buildMovieGrid(moviesArray, '.checkout-container', userCartId, 'checkout', userId);
   }
+  //---------------------------------------------------------//
+  //LOGOUT A USER
+  //--------------------------------------------------------//
 
-  // //click event for checking out movies
-  // $(`#checkout-btn-${getMovieForCheckoutId}`).click(async function () {
-  //   console.log('checkout button clicked', this);
-  //   const movieId = $(this).data('movieid');
-  //   const userId = $(this).data('user-id');
+  $(".logout-user").on("click", function () {
+    localStorage.removeItem("x-auth-token");
+    sessionStorage.clear();
+    window.location.href = "/login";
+  });
 
-  //   const rental = await $.ajax({
-  //     url: '/api/rentals',
-  //     method: 'POST',
-  //     data: {
-  //       userId: userId,
-  //       movieId: movieId
-  //     }
-  //   });
-  //   console.log('rental', rental);
-  // });
+  $(".movie-page-nav").on("click", function () {
+
+    window.location.href = "/homepage";
+  });
 
 });

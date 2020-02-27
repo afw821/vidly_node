@@ -120,8 +120,8 @@ $(document).ready(async function () {
   //---------------------------------------------------------//
   //Search Movie Logic
   //--------------------------------------------------------//
-  $('#btnSearchMovie').click(async function () {
-    try {
+  $('#btnSearchMovie').on('click', async function () {
+    try {       
       const movieName = $('#txtMovieName').val();
 
       const result = await $.ajax({
@@ -131,7 +131,6 @@ $(document).ready(async function () {
           title: movieName
         }
       });
-
       if (result.result) {
         $('#btnSearchResult').click();
         const resultArray = result.movie;

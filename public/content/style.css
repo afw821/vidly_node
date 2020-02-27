@@ -1,7 +1,7 @@
   
 body{
     width:100%; 
-    background-color: #fdf9f3;
+    background-color:whitesmoke;
 }
 .hide{
     display: none;
@@ -11,10 +11,10 @@ body{
   }
   a.navbar-brand{
     color: black;
-    border: 3px solid black;
-    border-radius: 10px;
+    /* border: 3px solid black;
+    border-radius: 10px; */
     padding:5px;
-    background-color: lightgray;
+    /* background-color: lightgray; */
   }
   a.nav-item{
     color: black !important;
@@ -22,4 +22,14 @@ body{
   }
   a.nav-item:hover{
     border-bottom: 2px solid black;
+  }
+  nav.navbar{
+    background-color: #fdf9f3 !important;
+  }
+  .am-button{
+    background-color: #8095cc !important;
+    color: white;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    font-family: "Times New Roman", Times, serif;
   }
