@@ -14,6 +14,7 @@ const carts = require('../routes/carts');
 const getUsers = require('../routes/viewRoutes/getUsers'); //get user view for admin pg
 const getCreateAdmin = require('../routes/viewRoutes/getCreateAdmin'); //get user view for admin pg
 const nodemailer = require('../routes/NodeMailer/nodemailer');
+const security = require('../routes/security');
 //const html = require('../routes/html');
 module.exports = function (app) { 
     app.use("/api/auth", auth);
@@ -29,4 +30,5 @@ module.exports = function (app) {
     app.use('/api/getUsers', getUsers);
     app.use('/api/getCreateAdmin', getCreateAdmin);
     app.use('/api/nodemailer', nodemailer);
+    app.use('/api/security', security);
 }

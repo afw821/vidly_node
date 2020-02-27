@@ -15,7 +15,6 @@ router.post('/', ash(async function (req, res) {
     const userId = req.body.userId;
     const movieId = req.body.movieId;
     var user = await User.findById(userId);
-console.log('req body', req.body);
 
     if (!user) return res.status(404).send("invalid User");
     //IF//if !user.cartId this means this user is creating a new crt for the first time
@@ -77,14 +76,13 @@ console.log('req body', req.body);
 router.get('/:id', ash(async function(req,res){ // get cart by cart id
     const moviesArray = [];
     const cart = await Cart.findById(req.params.id);
-    console.log('req params', req.params.id);
+
     if(!cart) return res.status(404).send("The cart with the given id was not found");
-    console.log('cart', cart);
+
     for(let i = 0; i < cart.movieId.length; i++) {
         var movies = await Movie.findById(cart.movieId[i]);
         moviesArray.push(movies);
     }   
-    console.log('movies array', moviesArray);
     res.send({ result: true, movies: moviesArray });
 }));
 
@@ -92,13 +90,11 @@ router.put('/:id', ash(async function(req,res) {
     //find the cart by the cart id
     const cartId = req.params.id;
     const movieId = req.body.movieId;
-    console.log(cartId);
-    console.log(movieId);
+
     const cart = await Cart.findById(cartId);
     if(!cart) return status(404).send('Unable to find cart');
     const updatedMovieIds = cart.movieId.filter(id => id !== movieId);
 
-    console.log(updatedMovieIds);
     let updatedCart = await Cart.findByIdAndUpdate(cartId, {
         movieId: updatedMovieIds
     }, { new: true });

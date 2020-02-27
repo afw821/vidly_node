@@ -11,7 +11,6 @@ router.post('/', ash(async function (req, res) {
     if (result.error) return res.status(404).send(result.error.details[0].message);  
 
     let user = await User.findOne({ email: req.body.email });
-    console.log(user);
     if (!user) return res.status(400).send('invalid email or password');
     //validate password, plain text PW, Hashed PW, Returns a boolean
     const validPassword = await bcrypt.compare(req.body.password, user.password);  
