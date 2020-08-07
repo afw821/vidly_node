@@ -36,7 +36,7 @@ userSchema.methods.generateAuthToken = function () {
   //THE SIGN METHOD IS WHAT IS GOING TO BE OUR PAYLOAD
   const token = jwt.sign(
     { _id: this._id, isAdmin: this.isAdmin },
-    "jwtPrivateKey"
+    process.env.JWT_PRIVATEKEY
   );
   return token;
 };

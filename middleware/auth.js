@@ -9,7 +9,7 @@ function auth(req, res, next) {
     //if the JWT doesn't exist send unauthorized
     if (!token) return res.status(401).send("Access denied. No token provided");
     // //id there is a token we need to verify it's a valid token
-    const decoded = jwt.verify(token, "jwtPrivateKey");
+    const decoded = jwt.verify(token, process.env.JWT_PRIVATEKEY);
     // //ABOVE WILL BE DECODED PAYLOAD
     //Decoded user object from Sign method
     req.user = decoded;
