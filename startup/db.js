@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const config = require("config");
 module.exports = function () {
-  if (process.env.MONGODB_URI) {
-    mongoose.connect(process.env.MONGODB_URI);
+  if (process.env.DB_URL) {
+    mongoose.connect(process.env.DB_URL);
   } else {
     //const db = config.get('db')
     console.log("Made it here--------------------");
