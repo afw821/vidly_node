@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/afw821/vidly_node#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "config": "^3.2.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
